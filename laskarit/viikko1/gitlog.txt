@@ -1,0 +1,110 @@
+commit 48740645f00cc2dd22bfcefa37f988ed42959689
+Author: Ilmari Heiskanen <ilmari_heiskanen@hotmail.com>
+Date:   Tue Mar 13 14:10:49 2018 +0200
+
+    asd
+
+ tiedostoja/file2 | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 12d613f0badc700c05dc832e24892ae9725ce8f2
+Author: Ilmari Heiskanen <ilmari_heiskanen@hotmail.com>
+Date:   Tue Mar 13 14:10:17 2018 +0200
+
+    done
+
+ tiedostoja/{file1 => file22} | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 26220a156e0d8872f7fc176d7c4d22347db4179e
+Author: Ilmari Heiskanen <ilmari_heiskanen@hotmail.com>
+Date:   Tue Mar 13 14:04:49 2018 +0200
+
+    asd
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 7f04f7faefd893ff06f506a309e65ac8e6ef7311
+Author: Ilmari Heiskanen <ilmari_heiskanen@hotmail.com>
+Date:   Tue Mar 13 13:58:51 2018 +0200
+
+    asfasf
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit e3313631510a2dde888e0c273c44f89412dba18c
+Author: Ilmari Heiskanen <ilmari_heiskanen@hotmail.com>
+Date:   Tue Mar 13 13:56:46 2018 +0200
+
+    asd
+
+ toinen.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 0ff43f41472436db729fc992d3d735b8e7bf4c7f
+Author: Ilmari Heiskanen <ilmari_heiskanen@hotmail.com>
+Date:   Tue Mar 13 13:53:50 2018 +0200
+
+    done
+
+ tiedosto.txt | 4 ----
+ 1 file changed, 4 deletions(-)
+
+commit bc94b45b7e8342f8a676f973ede18e9a9b38378c
+Author: Ilmari Heiskanen <ilmari_heiskanen@hotmail.com>
+Date:   Tue Mar 13 13:52:43 2018 +0200
+
+    kek
+
+ tiedosto.txt | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+commit 1ce102d6afcac10152f7bd97ca819f0c03bfc632
+Author: Ilmari Heiskanen <ilmari_heiskanen@hotmail.com>
+Date:   Tue Mar 13 13:44:53 2018 +0200
+
+    uusi kansio+tiedosto
+
+ stuff/example.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit b2c93bc744b29e834ea1833f5acc84f78fa8adcd
+Author: Ilmari Heiskanen <ilmari_heiskanen@hotmail.com>
+Date:   Tue Mar 13 13:43:58 2018 +0200
+
+    kolmas added
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 50af22dfa7ab2f0c713dbc3e1e91a0e2463c2532
+Author: Ilmari Heiskanen <ilmari_heiskanen@hotmail.com>
+Date:   Tue Mar 13 13:35:56 2018 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit 2f719317717ef4cc234d3322ce7d10c84646e71d
+Author: Ilmari Heiskanen <ilmari_heiskanen@hotmail.com>
+Date:   Tue Mar 13 13:33:57 2018 +0200
+
+    muutos ja lisäys
+
+ toinen.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit b7c0fca4a553fca7eee7151489824afe84d0a0dd
+Author: Ilmari Heiskanen <ilmari_heiskanen@hotmail.com>
+Date:   Tue Mar 13 13:30:10 2018 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
