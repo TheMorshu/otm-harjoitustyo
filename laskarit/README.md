@@ -1,8 +1,6 @@
 **Tervetuloa seuraamaan harjoitustyötäni!**
 
-Sample text 
+Sample text
 
 [Google.fi linkki](http://google.fi)
-
-
 
