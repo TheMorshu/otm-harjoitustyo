@@ -24,6 +24,11 @@ public class MaksukorttiTest {
     }
     
     @Test
+    public void testaaSaldonOikeellisuus() {
+        assertEquals(kortti.saldo(), 10);
+    }
+    
+    @Test
     public void rahanLataaminenKasvattaaSaldoaOikeinPosLisays() {
         kortti.lataaRahaa(500);
         assertEquals("saldo: 5.10", kortti.toString());
@@ -43,13 +48,19 @@ public class MaksukorttiTest {
     
     
     @Test
-    public void otaRahaaToimii() {
+    public void otaRahaaToimiiKunRiittaa() {
         if (kortti.otaRahaa(1)) {
             assertEquals("saldo: 0.09", kortti.toString());
-        } else if (!kortti.otaRahaa(100)) {
+        }
+    }
+    @Test
+    public void otaRahaaToimiiKunEiRiita() {
+        if (kortti.otaRahaa(1000000)) {
             assertEquals("saldo: 0.10", kortti.toString());
         }
     }
+    
+    
     
     
     
