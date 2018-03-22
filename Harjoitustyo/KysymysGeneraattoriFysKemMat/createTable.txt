@@ -1,0 +1,10 @@
+DROP TABLE users;
+CREATE TABLE users (
+id integer PRIMARY KEY,
+name varchar(200),
+password varchar (200),
+questions integer,
+right integer
+);
+
+INSERT INTO users (name, password, questions, right) VALUES ('admin', 'admin', 0, 0);
