@@ -26,7 +26,7 @@ public class UsersDao implements Dao {
     }
 
     @Override
-    public List findAll() throws SQLException {
+    public List findAll() throws SQLException { //palauta Usereina!
         PreparedStatement statement = database.getConnection().prepareStatement("SELECT name FROM Users");
         ResultSet resultSet = statement.executeQuery();
         ArrayList lista = new ArrayList<>();
@@ -39,7 +39,9 @@ public class UsersDao implements Dao {
 
     @Override
     public Object saveOrUpdate(Object object) throws SQLException { //kesken
-        PreparedStatement statement = database.getConnection().prepareStatement("INSERT INTO users....;");
+        PreparedStatement statement = database.getConnection().prepareStatement("INSERT INTO Users (name, passowrd, questions, right) VALUES ('?', '?', 0, 0);");
+        statement.setString(1, "asd");
+        statement.setString(2, "asd");
         int changes = statement.executeUpdate();
         return null;
     }

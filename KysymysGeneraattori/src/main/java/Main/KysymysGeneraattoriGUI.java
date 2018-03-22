@@ -6,6 +6,8 @@
 package Main;
 
 import Dao.Database;
+import Dao.UsersDao;
+import Logiikka.User;
 import UI.Login;
 import UI.LoginForGUI;
 import java.sql.SQLException;
@@ -24,17 +26,15 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-/**
- *
- * @author ilmar
- */
+
 public class KysymysGeneraattoriGUI extends Application{
 
     
     @Override
     public void start(Stage ikkuna) throws ClassNotFoundException, SQLException {
         Database users = new Database("jdbc:sqlite:users.db");
-        LoginForGUI kirjautuminen = new LoginForGUI(users);
+        //LoginForGUI kirjautuminen = new LoginForGUI(users);
+        UsersDao usersDao = new UsersDao(users);
         
         
         //Teksielementit ja kentät
@@ -74,18 +74,24 @@ public class KysymysGeneraattoriGUI extends Application{
         loginGUI.setHgap(10);
         loginGUI.setVgap(10);
         loginGUI.setPadding(new Insets(10, 10, 10, 10));
+        hiScoreGUI.setHgap(10);
+        hiScoreGUI.setVgap(10);
+        hiScoreGUI.setPadding(new Insets(10, 10, 10, 10));
+        adminGUI.setHgap(10);
+        adminGUI.setVgap(10);
+        adminGUI.setPadding(new Insets(10, 10, 10, 10));
         
         //hiscoresLoad
-        ArrayList lista = (ArrayList) kirjautuminen.getUserNames();
+        ArrayList lista = (ArrayList) usersDao.findAll();
         for (int i=0; i<lista.size(); i++) {
             Label name = new Label((String) lista.get(i));
             hiScoreGUI.add(name, 0, i+1);
         }
         
         //Näkymät
-        Scene hiScoreNakyma = new Scene(hiScoreGUI);
-        Scene loginNakyma = new Scene(loginGUI);
-        Scene adminNakyma = new Scene(adminGUI);
+        Scene hiScoreNakyma = new Scene(hiScoreGUI, 640, 640);
+        Scene loginNakyma = new Scene(loginGUI, 640, 640);
+        Scene adminNakyma = new Scene(adminGUI, 640, 640);
         
         
         quit.setOnAction((event) -> {
@@ -96,7 +102,12 @@ public class KysymysGeneraattoriGUI extends Application{
             ikkuna.setScene(hiScoreNakyma);
         });
         newUser.setOnAction((event) -> {
-            
+            User user = new User(nameInput.getText(), passInput.getText(), 0, 0);
+            try {
+                usersDao.saveOrUpdate(user);
+            } catch (SQLException ex) {
+                Logger.getLogger(KysymysGeneraattoriGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         existingUser.setOnAction((event) -> {
             if (nameInput.getText().equals("admin") && passInput.getText().equals("admin")) {
@@ -108,7 +119,7 @@ public class KysymysGeneraattoriGUI extends Application{
         });
         clearDatabase.setOnAction((event) -> {
             try {
-                kirjautuminen.clearDatabase();
+                usersDao.clearDatabase();
                 ikkuna.setScene(loginNakyma);
             } catch (SQLException ex) {
                 System.out.println("DATABASE ERROR!");
