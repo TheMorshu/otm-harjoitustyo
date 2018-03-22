@@ -1,6 +1,10 @@
 **Tervetuloa seuraamaan harjoitustyötäni!**
 
 
+[Tuntikirjanpito](https://github.com/TheMorshu/otm-harjoitustyo/blob/master/tuntikirjanpito.md)
+
+
+
 **TEHTÄVÄT**
 
 muuutos
