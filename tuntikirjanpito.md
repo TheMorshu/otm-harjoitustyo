@@ -7,6 +7,6 @@ kuleen yhteenlasketun ajan (kaikkien sovellusten konfigurointeineen) karkeasti 2
 
 | päivä  | aika | mitä tein  |
 | :-----:|:-----| :-----|
-| 5-22.3.| 20    | Viikkotehtävät 1-2 + gitin, debian GNU/Linuxin asentaminen windowsille + NetBeanssiin ja aineistoon tutustumista|
+| 5-22.3.| 20   | Viikkotehtävät 1-2 + gitin, debian GNU/Linuxin asentaminen windowsille + NetBeanssiin ja aineistoon tutustumista|
 | 22.2.  | 0    | - |
 | yht    | 28   |   | 
