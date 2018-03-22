@@ -1,18 +1,12 @@
-**Tervetuloa seuraamaan harjoitustyöni eistymistä!**
+## Tervetuloa seuraamaan harjoitustyöni eistymistä!
 
 
 [Tuntikirjanpito](https://github.com/TheMorshu/otm-harjoitustyo/blob/master/tuntikirjanpito.md)
 
 
 
-**TEHTÄVÄT**
+## TEHTÄVÄT
 
-muuutos
-
-
-
-
-muutos via github
 
 **Viikko 1**
 
