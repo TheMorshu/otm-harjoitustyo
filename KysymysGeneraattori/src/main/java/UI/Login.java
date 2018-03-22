@@ -45,6 +45,8 @@ public class Login {
         System.out.println("3. Tulosta pisteet");
         System.out.println("4. Lopeta");
         System.out.println("5. GUI");
+        System.out.println("");
+        System.out.print("Valinta: ");
         int valinta = Integer.parseInt(lukija.nextLine());
         if (valinta == 1) {
             login();
@@ -54,6 +56,8 @@ public class Login {
         }
         if (valinta == 5) {
             launch(KysymysGeneraattoriGUI.class);
+        } else {
+            System.out.println("Kesken tai virhe!");
         }
     }
     

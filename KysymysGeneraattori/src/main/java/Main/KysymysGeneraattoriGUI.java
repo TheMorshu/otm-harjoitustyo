@@ -9,6 +9,9 @@ import Dao.Database;
 import UI.Login;
 import UI.LoginForGUI;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.geometry.Insets;
@@ -29,24 +32,31 @@ public class KysymysGeneraattoriGUI extends Application{
 
     
     @Override
-    public void start(Stage ikkuna) throws ClassNotFoundException {
+    public void start(Stage ikkuna) throws ClassNotFoundException, SQLException {
         Database users = new Database("jdbc:sqlite:users.db");
         LoginForGUI kirjautuminen = new LoginForGUI(users);
         
+        
+        //Teksielementit ja kentät
         Label nameText = new Label("Nimi: ");
         TextField nameInput = new TextField();
         Label passText = new Label("Salasana: ");
         TextField passInput = new TextField();
         
+        //Napit
         Button newUser = new Button("Uusi käyttäjä");
         Button existingUser = new Button("Vanha käyttäjä");
         Button hiScores = new Button("Tuloslista");
         Button quit = new Button("Lopeta");
         Button backToLogin = new Button("Kirjautumiseen");
+        Button clearDatabase = new Button("Clear database");
         
+        //Asettelut
         GridPane loginGUI = new GridPane();
         GridPane hiScoreGUI = new GridPane();
+        GridPane adminGUI = new GridPane();
         
+        //Asettelujen määrittely
         loginGUI.add(nameText, 0, 0);
         loginGUI.add(nameInput, 1, 0);
         loginGUI.add(passText, 0, 1);
@@ -55,16 +65,27 @@ public class KysymysGeneraattoriGUI extends Application{
         loginGUI.add(existingUser, 1, 2);
         loginGUI.add(hiScores, 0, 3);
         loginGUI.add(quit, 1, 3);
+        
         hiScoreGUI.add(backToLogin, 0, 0);
         
+        adminGUI.add(clearDatabase, 0, 0);
+        
+        //Asettelun hienosäätö
         loginGUI.setHgap(10);
         loginGUI.setVgap(10);
         loginGUI.setPadding(new Insets(10, 10, 10, 10));
         
+        //hiscoresLoad
+        ArrayList lista = (ArrayList) kirjautuminen.getUserNames();
+        for (int i=0; i<lista.size(); i++) {
+            Label name = new Label((String) lista.get(i));
+            hiScoreGUI.add(name, 0, i+1);
+        }
         
+        //Näkymät
         Scene hiScoreNakyma = new Scene(hiScoreGUI);
         Scene loginNakyma = new Scene(loginGUI);
-        
+        Scene adminNakyma = new Scene(adminGUI);
         
         
         quit.setOnAction((event) -> {
@@ -78,12 +99,21 @@ public class KysymysGeneraattoriGUI extends Application{
             
         });
         existingUser.setOnAction((event) -> {
-            
+            if (nameInput.getText().equals("admin") && passInput.getText().equals("admin")) {
+                ikkuna.setScene(adminNakyma);
+            }
         });
         backToLogin.setOnAction((event) -> {
             ikkuna.setScene(loginNakyma);
         });
-        
+        clearDatabase.setOnAction((event) -> {
+            try {
+                kirjautuminen.clearDatabase();
+                ikkuna.setScene(loginNakyma);
+            } catch (SQLException ex) {
+                System.out.println("DATABASE ERROR!");
+            }
+        });
 
         
         ikkuna.setTitle("Login");
@@ -92,10 +122,7 @@ public class KysymysGeneraattoriGUI extends Application{
         
     }
     
-    
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         launch(KysymysGeneraattoriGUI.class);
     }

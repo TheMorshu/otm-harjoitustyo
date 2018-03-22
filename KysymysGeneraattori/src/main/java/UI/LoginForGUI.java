@@ -11,6 +11,7 @@ import Main.KysymysGeneraattoriGUI;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 import static javafx.application.Application.launch;
 
@@ -35,52 +36,15 @@ public class LoginForGUI {
     
     public void tulostaUsers() throws SQLException {
         this.usersDao.printUsers();
-        this.aloita();
     }
     
-    public void aloita() throws SQLException {
-        System.out.println("Login: ");
-        System.out.println("1. Vanha käyttäjä");
-        System.out.println("2. Uusi käyttäjä");
-        System.out.println("3. Tulosta pisteet");
-        System.out.println("4. Lopeta");
-        System.out.println("5. GUI");
-        int valinta = Integer.parseInt(lukija.nextLine());
-        if (valinta == 1) {
-            login();
-        }
-        if (valinta == 3) {
-            tulostaUsers();
-        }
-        if (valinta == 5) {
-            launch(KysymysGeneraattoriGUI.class);
-        }
-    }
-    
-    public void login() throws SQLException { //logiikka sisäänkirjautumiseen, tarkistaa databasesta tiedot
-        System.out.print("Käyttäjänimi: ");
-        String username = lukija.nextLine();
-        System.out.print("Salasana: ");
-        String password = lukija.nextLine();
-        if (username.equals("admin") && password.equals("admin")) { //HUOM! Tämä if looppi vain kehitysvaiheessa! Poistetaan lopullsesta
-            System.out.println("ADMIN COMMANDS: ");
-            System.out.println("1. Clear database");
-            System.out.println("2. Back to login");
-            int valinta = Integer.parseInt(lukija.nextLine());
-            if (valinta == 2) {
-                aloita();
-            } if (valinta == 1) {
-                clearDatabase();
-            }
-        } else {
-            System.out.println("KESKEN"); //Tähän varsinainen sisäänkirjautuminen
-        }   
+    public List getUserNames() throws SQLException {
+        return this.usersDao.findAll();
     }
     
     
-    public void clearDatabase() throws SQLException {
+    public void clearDatabase() throws SQLException { //valmis
         this.usersDao.clearDatabase();
-        aloita();
     }
     
 

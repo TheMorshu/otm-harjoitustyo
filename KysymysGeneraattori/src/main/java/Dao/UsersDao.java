@@ -8,6 +8,7 @@ package Dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,17 +27,27 @@ public class UsersDao implements Dao {
 
     @Override
     public List findAll() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement statement = database.getConnection().prepareStatement("SELECT name FROM Users");
+        ResultSet resultSet = statement.executeQuery();
+        ArrayList lista = new ArrayList<>();
+        while (resultSet.next()){
+            String nimi = resultSet.getString("name");
+            lista.add(nimi);
+        }
+        return lista;
     }
 
     @Override
-    public Object saveOrUpdate(Object object) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object saveOrUpdate(Object object) throws SQLException { //kesken
+        PreparedStatement statement = database.getConnection().prepareStatement("INSERT INTO users....;");
+        int changes = statement.executeUpdate();
+        return null;
     }
 
     @Override
-    public void delete(Object key) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void delete(Object key) throws SQLException { //kesken
+        PreparedStatement statement = database.getConnection().prepareStatement("INSERT INTO users....;");
+        int changes = statement.executeUpdate();
     }
     
     public void clearDatabase() throws SQLException {
