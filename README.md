@@ -1,4 +1,4 @@
-**Tervetuloa seuraamaan harjoitustyötäni!**
+**Tervetuloa seuraamaan harjoitustyöni eistymistä!**
 
 
 [Tuntikirjanpito](https://github.com/TheMorshu/otm-harjoitustyo/blob/master/tuntikirjanpito.md)
