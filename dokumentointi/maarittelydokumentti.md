@@ -1,4 +1,4 @@
-##Määrittelydokumentti##
+## Määrittelydokumentti
 
 **Sovelluksen tarkoitus**
 
@@ -9,10 +9,16 @@ näistä.
 
 
 **Käyttäjät**
+-asd
+-asd
+-asd
 
 
 **Toiminnallisuudet**
+- asd
+- asd
+- asd
 
 
-##HUOM! KESKEN!##
+## HUOM! KESKEN!
 
