@@ -7,10 +7,12 @@ package UI;
 
 import Dao.Database;
 import Dao.UsersDao;
+import Main.KysymysGeneraattoriGUI;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+import static javafx.application.Application.launch;
 
 /**
  *
@@ -42,13 +44,17 @@ public class Login {
         System.out.println("2. Uusi käyttäjä");
         System.out.println("3. Tulosta pisteet");
         System.out.println("4. Lopeta");
+        System.out.println("5. GUI");
         int valinta = Integer.parseInt(lukija.nextLine());
         if (valinta == 1) {
             login();
         }
         if (valinta == 3) {
             tulostaUsers();
-        }   
+        }
+        if (valinta == 5) {
+            launch(KysymysGeneraattoriGUI.class);
+        }
     }
     
     public void login() throws SQLException { //logiikka sisäänkirjautumiseen, tarkistaa databasesta tiedot

@@ -21,12 +21,31 @@ import javafx.stage.Stage;
  *
  * @author ilmar
  */
-public class KysymysGeneraattori {
+public class KysymysGeneraattoriGUI extends Application{
 
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        Database users = new Database("jdbc:sqlite:users.db");
-        Login kirjautuminen = new Login(users);
-        kirjautuminen.aloita();
+    
+    @Override
+    public void start(Stage ikkuna) {
+        
+        Button nappi = new Button("Tämä on nappi");
+
+        BorderPane komponenttiryhma = new BorderPane();
+        komponenttiryhma.setLeft(nappi);
+        //komponenttiryhma.setRight(taulu);
+
+        Scene nakyma = new Scene(komponenttiryhma, 640, 480);
+        
+        ikkuna.setScene(nakyma);
+        ikkuna.show();
+        
     }
-
+    
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        launch(KysymysGeneraattoriGUI.class);
+    }
+    
 }
