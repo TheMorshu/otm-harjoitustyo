@@ -21,12 +21,12 @@ muutos via github
 
 **Harjoitustyö**
 
-[Harjoitustyön hakemisto](https://github.com/TheMorshu/otm-harjoitustyo/)
+[Harjoitustyön hakemisto](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/KysymysGeneraattori)
 
 
 **Harjoitustyön dokumentointi**
 
-[Alusatava määrittelydokumentti](https://github.com/TheMorshu/otm-harjoitustyo/)
+[Alusatava määrittelydokumentti](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/dokumentointi/maarittelydokumentti.md)
 
 
 
