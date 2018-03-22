@@ -6,6 +6,7 @@
 package UI;
 
 import Dao.Database;
+import Dao.UsersDao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,22 +20,20 @@ public class Login {
     
     Database database;
     Scanner lukija;
+    UsersDao usersDao;
     
     
 
     public Login(Database users) {
         this.database = users;
         this.lukija = new Scanner(System.in);
+        this.usersDao = new UsersDao(this.database);
     }
 
     
     public void tulostaUsers() throws SQLException {
-        PreparedStatement statement = database.getConnection().prepareStatement("SELECT name FROM Users");
-        ResultSet resultSet = statement.executeQuery();
-        while (resultSet.next()){
-            String nimi = resultSet.getString("name");
-            System.out.println(nimi);
-        }
+        this.usersDao.printUsers();
+        this.aloita();
     }
     
     public void aloita() throws SQLException {
@@ -44,11 +43,40 @@ public class Login {
         System.out.println("3. Tulosta pisteet");
         System.out.println("4. Lopeta");
         int valinta = Integer.parseInt(lukija.nextLine());
+        if (valinta == 1) {
+            login();
+        }
         if (valinta == 3) {
             tulostaUsers();
-        }
-        
+        }   
     }
+    
+    public void login() throws SQLException { //logiikka sisäänkirjautumiseen, tarkistaa databasesta tiedot
+        System.out.print("Käyttäjänimi: ");
+        String username = lukija.nextLine();
+        System.out.print("Salasana: ");
+        String password = lukija.nextLine();
+        if (username.equals("admin") && password.equals("admin")) { //HUOM! Tämä if looppi vain kehitysvaiheessa! Poistetaan lopullsesta
+            System.out.println("ADMIN COMMANDS: ");
+            System.out.println("1. Clear database");
+            System.out.println("2. Back to login");
+            int valinta = Integer.parseInt(lukija.nextLine());
+            if (valinta == 2) {
+                aloita();
+            } if (valinta == 1) {
+                clearDatabase();
+            }
+        } else {
+            System.out.println("KESKEN"); //Tähän varsinainen sisäänkirjautuminen
+        }   
+    }
+    
+    
+    public void clearDatabase() throws SQLException {
+        this.usersDao.clearDatabase();
+        aloita();
+    }
+    
 
     
 }

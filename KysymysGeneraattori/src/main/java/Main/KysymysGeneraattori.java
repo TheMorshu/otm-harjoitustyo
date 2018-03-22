@@ -2,6 +2,7 @@
 package Main;
 
 import Dao.Database;
+import Dao.UsersDao;
 import UI.Login;
 import java.sql.SQLException;
 
