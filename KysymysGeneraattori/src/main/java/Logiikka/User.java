@@ -23,6 +23,9 @@ public class User {
         this.oikein = oikein;
     }
 
+    
+    
+
     public String getNimi() {
         return nimi;
     }
