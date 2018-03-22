@@ -18,3 +18,16 @@ muutos via github
 
 
 
+
+**Harjoitustyö**
+
+[Harjoitustyön hakemisto](https://github.com/TheMorshu/otm-harjoitustyo/)
+
+
+**Harjoitustyön dokumentointi**
+
+[Alusatava määrittelydokumentti](https://github.com/TheMorshu/otm-harjoitustyo/)
+
+
+
+
