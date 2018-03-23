@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 
+import Dao.Database;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,28 +22,63 @@ import static org.junit.Assert.*;
  */
 public class DatabaseTest {
     
+    Database database;
+    
     public DatabaseTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
-    public void setUp() {
+    public void setUp() throws ClassNotFoundException, SQLException {
+        database = new Database("jdbc:sqlite:test.db");
+        PreparedStatement statement = database.getConnection().prepareStatement("DROP TABLE Henkilo;");
+        int changes = statement.executeUpdate();
+        statement.close();
+        database.closeConnection();
+        statement = database.getConnection().prepareStatement("CREATE TABLE Henkilo (\n" +
+        "    syntymavuosi integer,\n" +
+        "    nimi varchar(200)\n" +
+        ")");
+        changes = statement.executeUpdate();
+        statement.close();
+        database.closeConnection();
     }
     
     @After
-    public void tearDown() {
+    public void tearDown() throws SQLException {
+        database.closeConnection();
     }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    
+    @Test
+    public void databaseEiSisallaMitaan() throws SQLException {
+        PreparedStatement statement = database.getConnection().prepareStatement("SELECT * FROM Henkilo;");
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            statement.close();
+            database.closeConnection();
+            assertEquals(true, false);
+        }
+        statement.close();
+        database.closeConnection();
+        assertEquals(true, true);
+    }
+    
+    @Test
+    public void dataBaseenVoiVuorovaikuttaa() throws SQLException {
+        PreparedStatement statement = database.getConnection().prepareStatement("INSERT INTO Henkilo (syntymavuosi, nimi) VALUES (1900, 'test');");
+        int changes = statement.executeUpdate();
+        statement.close();
+        database.closeConnection();
+        statement = database.getConnection().prepareStatement("SELECT * FROM Henkilo;");
+        ResultSet resultSet = statement.executeQuery();
+        if (!resultSet.next()) {
+            statement.close();
+            database.closeConnection();
+            assertEquals(true, false);
+        }
+        statement.close();
+        database.closeConnection();
+        assertEquals(true, true);
+    }
+    
+    
 }
