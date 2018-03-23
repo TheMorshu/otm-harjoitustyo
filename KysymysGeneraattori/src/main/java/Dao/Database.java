@@ -8,13 +8,21 @@ import java.sql.SQLException;
 public class Database {
 
     private String databaseAddress;
+    private Connection connection; //extra
 
-    public Database(String databaseAddress) throws ClassNotFoundException {
+    public Database(String databaseAddress) throws ClassNotFoundException, SQLException {
         this.databaseAddress = databaseAddress;
     }
 
     public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(databaseAddress);
+        this.connection = DriverManager.getConnection(this.databaseAddress);
+        //return DriverManager.getConnection(databaseAddress);
+        return this.connection;
+    }
+    
+    
+    public void closeConnection() throws SQLException {
+        this.connection.close();
     }
 
 }

@@ -33,18 +33,19 @@ public class UsersDao implements Dao<User, Integer> {
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
             statement.close();
+            this.database.closeConnection();
             return true;
         }
         statement.close();
+        this.database.closeConnection();
         return false;
     }
 
     @Override
-    public List<User> findAll() throws SQLException { //palauta Usereina!
+    public List<User> findAll() throws SQLException {
         List<User> userLista = new ArrayList<>();
         PreparedStatement statement = database.getConnection().prepareStatement("SELECT name, password, questions, right FROM Users;");
         ResultSet resultSet = statement.executeQuery();
-        //ArrayList lista = new ArrayList<>();
         while (resultSet.next()){
             String nimi = resultSet.getString("name");
             String salasana = resultSet.getString("password");
@@ -53,6 +54,7 @@ public class UsersDao implements Dao<User, Integer> {
             userLista.add(new User(nimi, salasana, kysymykset, oikein));
         }
         statement.close();
+        this.database.closeConnection();
         return userLista;
     }
 
@@ -69,6 +71,7 @@ public class UsersDao implements Dao<User, Integer> {
         statement.setString(2, salasana);
         int changes = statement.executeUpdate();
         statement.close();
+        this.database.closeConnection();
         return new User(nimi, salasana, 0, 0);
     }
 
@@ -77,6 +80,7 @@ public class UsersDao implements Dao<User, Integer> {
         PreparedStatement statement = database.getConnection().prepareStatement("INSERT INTO users....;");
         int changes = statement.executeUpdate();
         statement.close();
+        this.database.closeConnection();
     }
     
     public void clearDatabase() throws SQLException {
@@ -93,6 +97,7 @@ public class UsersDao implements Dao<User, Integer> {
         statement = database.getConnection().prepareStatement("INSERT INTO users (name, password, questions, right) VALUES ('admin', 'admin', 0, 0);");
         changes = statement.executeUpdate();
         statement.close();
+        this.database.closeConnection();
     }
     
     public void printUsers() throws SQLException {
@@ -103,6 +108,7 @@ public class UsersDao implements Dao<User, Integer> {
             System.out.println(nimi);
         }
         statement.close();
+        this.database.closeConnection();
     }
     
     public User verifyLogin(String username, String password) throws SQLException {
@@ -116,9 +122,11 @@ public class UsersDao implements Dao<User, Integer> {
             int kysymykset = resultSet.getInt("questions");
             int oikein = resultSet.getInt("right");
             statement.close();
+            this.database.closeConnection();
             return new User(nimi, salasana, kysymykset, oikein);
         }
         statement.close();
+        this.database.closeConnection();
         return null;
     }
     
@@ -127,12 +135,16 @@ public class UsersDao implements Dao<User, Integer> {
         PreparedStatement statement = database.getConnection().prepareStatement("UPDATE Users SET questions = questions + 1 WHERE name = ?;");
         statement.setString(1, nimi);
         int changes = statement.executeUpdate();
+        statement.close();
+        this.database.closeConnection();
     }
     
     public void addRightForUser(String nimi) throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("UPDATE Users SET right = right + 1 WHERE name = ?;");
         statement.setString(1, nimi);
         int changes = statement.executeUpdate();
+        statement.close();
+        this.database.closeConnection();
     }
     
     
