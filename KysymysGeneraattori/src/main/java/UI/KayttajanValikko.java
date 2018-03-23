@@ -15,23 +15,23 @@ import javafx.stage.Stage;
  *
  * @author ilmar
  */
-public class KayttajanValikko extends Application {
+//public class KayttajanValikko extends Application {
     
-    @Override
-    public void start(Stage ikkuna) throws ClassNotFoundException, SQLException {
-        
-        
-        
-        
-        
-    }
+//    @Override
+//    public void start(Stage ikkuna) throws ClassNotFoundException, SQLException {
+//        
+//        
+//        
+//        
+//        
+//    }
+//    
+//    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+//        launch(KayttajanValikko.class);
+//    }
+//    
     
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        launch(KayttajanValikko.class);
-    }
-    
-    
-}
+//}
 
 
 

@@ -4,13 +4,14 @@ package Dao;
 import java.sql.*;
 import java.util.*;
 
-public interface Dao<T, K> {
+public interface Dao<Type> {
 
-    T findOne(K key) throws SQLException;
+    Type findOne(String username) throws SQLException;
 
-    List<T> findAll() throws SQLException;
+    List<Type> findAll() throws SQLException;
 
-    T saveOrUpdate(T object) throws SQLException;
+    Type saveOrUpdate(Type object, String oldUserName) throws SQLException;
 
-    void delete(K key) throws SQLException;
+    void delete(String username) throws SQLException;
+
 }

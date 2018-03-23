@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class UsersDao implements Dao<User, Integer> {
+public class UsersDao implements Dao<User> {
     
     Database database;
 
@@ -22,8 +22,21 @@ public class UsersDao implements Dao<User, Integer> {
     }
     
     @Override
-    public User findOne(Integer key) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public User findOne(String username) throws SQLException {
+        PreparedStatement statement = database.getConnection().prepareStatement("SELECT name, password, questions, right FROM Users WHERE name = ?");
+        statement.setString(1, username);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            statement.close();
+            this.database.closeConnection();
+            String nimi = resultSet.getString("name");
+            String salasana = resultSet.getString("password");
+            int kysymykset = resultSet.getInt("questions");
+            int oikein = resultSet.getInt("right");
+            return new User(nimi, salasana, kysymykset, oikein);
+        } else {
+            return null;
+        }
     }
     
     //extra
@@ -57,18 +70,36 @@ public class UsersDao implements Dao<User, Integer> {
         this.database.closeConnection();
         return userLista;
     }
+    
+    
+
+    
 
     @Override
-    public User saveOrUpdate(User user) throws SQLException { //kesken
-        if (checkContainsName(user.getNimi())) {
-            return null;
-        }
-        int id = 0;
+    public User saveOrUpdate(User user, String oldUserName) throws SQLException {
+        if (checkContainsName(oldUserName)) { //päivittää vanhan päälle
+            System.out.println("1");
+            String nimi = user.getNimi();
+            String salasana = user.getSalasana();
+            int kysymykset = user.getTehtavat();
+            int oikein = user.getOikein();
+            System.out.println(nimi+salasana+kysymykset+oikein);
+            PreparedStatement statement = database.getConnection().prepareStatement("DELETE FROM Users WHERE name = ?;");
+            statement.setString(1, oldUserName);
+            int changes = statement.executeUpdate();
+            statement.close();
+            this.database.closeConnection();
+            return saveOrUpdate(user, "");
+        } //jos ei ole olemassa suoritta vain tämän
         String nimi = user.getNimi();
         String salasana = user.getSalasana();
-        PreparedStatement statement = database.getConnection().prepareStatement("INSERT INTO Users (name, password, questions, right) VALUES (?, ?, 0, 0);");
+        int questions = user.getTehtavat();
+        int right = user.getOikein();
+        PreparedStatement statement = database.getConnection().prepareStatement("INSERT INTO Users (name, password, questions, right) VALUES (?, ?, ?, ?);");
         statement.setString(1, nimi);
         statement.setString(2, salasana);
+        statement.setInt(3, questions);
+        statement.setInt(4, right);
         int changes = statement.executeUpdate();
         statement.close();
         this.database.closeConnection();
@@ -76,8 +107,8 @@ public class UsersDao implements Dao<User, Integer> {
     }
 
     @Override
-    public void delete(Integer key) throws SQLException { //kesken
-        PreparedStatement statement = database.getConnection().prepareStatement("INSERT INTO users....;");
+    public void delete(String username) throws SQLException { //kesken
+        PreparedStatement statement = database.getConnection().prepareStatement("DELETE ......;");
         int changes = statement.executeUpdate();
         statement.close();
         this.database.closeConnection();

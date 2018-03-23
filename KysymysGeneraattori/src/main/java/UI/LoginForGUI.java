@@ -21,32 +21,32 @@ import static javafx.application.Application.launch;
  */
 public class LoginForGUI {
     
-    Database database;
-    Scanner lukija;
-    UsersDao usersDao;
-    
-    
-
-    public LoginForGUI(Database users) {
-        this.database = users;
-        this.lukija = new Scanner(System.in);
-        this.usersDao = new UsersDao(this.database);
-    }
-
-    
-    public void tulostaUsers() throws SQLException {
-        this.usersDao.printUsers();
-    }
-    
-    public List getUserNames() throws SQLException {
-        return this.usersDao.findAll();
-    }
-    
-    
-    public void clearDatabase() throws SQLException { //valmis
-        this.usersDao.clearDatabase();
-    }
-    
+//    Database database;
+//    Scanner lukija;
+//    UsersDao usersDao;
+//    
+//    
+//
+//    public LoginForGUI(Database users) {
+//        this.database = users;
+//        this.lukija = new Scanner(System.in);
+//        this.usersDao = new UsersDao(this.database);
+//    }
+//
+//    
+//    public void tulostaUsers() throws SQLException {
+//        this.usersDao.printUsers();
+//    }
+//    
+//    public List getUserNames() throws SQLException {
+//        return this.usersDao.findAll();
+//    }
+//    
+//    
+//    public void clearDatabase() throws SQLException { //valmis
+//        this.usersDao.clearDatabase();
+//    }
+//    
 
     
 }

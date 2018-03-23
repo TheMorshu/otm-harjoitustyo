@@ -9,7 +9,7 @@ import Dao.Database;
 import Dao.UsersDao;
 import Logiikka.Generator;
 import Logiikka.User;
-import UI.KayttajanValikko;
+//import UI.KayttajanValikko;
 import UI.Login;
 import UI.LoginForGUI;
 import java.sql.SQLException;
@@ -56,6 +56,7 @@ public class KysymysGeneraattoriGUI extends Application{
         Button hiScores = new Button("Tuloslista");
         Button quit = new Button("Lopeta");
         Button backToLogin = new Button("Kirjautumiseen");
+        Button backToLogin2 = new Button("Kirjautumiseen");
         Button tallennaJaLopeta = new Button("Tallenna ja lopeta");
         Button clearDatabase = new Button("Clear database");
         Button maths = new Button("Tee matikan tehtäviä!");
@@ -63,6 +64,8 @@ public class KysymysGeneraattoriGUI extends Application{
         Button chem = new Button("Tee kemian tehtäviä!");
         Button all = new Button("Tee kaikkia tehtäviä sekaisin!");
         Button sendAnswer = new Button("Lähetä vastaus!");
+        Button lisaaSUPER = new Button("LISÄÄ SUPER!");
+        Button korvaaAsdwSUPER = new Button("Korvaa asd SUPER:illa!");
         
         //Asettelut
         GridPane loginGUI = new GridPane();
@@ -86,6 +89,9 @@ public class KysymysGeneraattoriGUI extends Application{
         hiScoreGUI.add(backToLogin, 0, 0);
         
         adminGUI.add(clearDatabase, 0, 0);
+        adminGUI.add(lisaaSUPER, 0, 1);
+        adminGUI.add(backToLogin2, 0, 2);
+        adminGUI.add(korvaaAsdwSUPER, 0, 3);
         
         questionGUI.add(question, 0, 0);
         questionGUI.add(answer, 0, 1);
@@ -118,6 +124,25 @@ public class KysymysGeneraattoriGUI extends Application{
             ikkuna.close();
         });
         
+        
+        korvaaAsdwSUPER.setOnAction((event) -> {
+            User SUPER = new User("SUPER", "SUPER", 1000, 1000);
+            try {
+                usersDao.saveOrUpdate(SUPER, "asd");
+            } catch (SQLException ex) {
+                Logger.getLogger(KysymysGeneraattoriGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        lisaaSUPER.setOnAction((event) -> {
+            User SUPER = new User("SUPER", "SUPER", 1000, 1000);
+            try {
+                usersDao.saveOrUpdate(SUPER, "");
+            } catch (SQLException ex) {
+                Logger.getLogger(KysymysGeneraattoriGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
         hiScores.setOnAction((event) -> {
             try {
                 usersDao.addRightForUser("testi");
@@ -148,12 +173,12 @@ public class KysymysGeneraattoriGUI extends Application{
             if (!nameInput.getText().equals("") && !passInput.getText().equals("")) {
                 User user = new User(nameInput.getText(), passInput.getText(), 0, 0);
                 try {
-                    User kayttaja = usersDao.saveOrUpdate(user);
                     nameInput.clear();
                     passInput.clear();
-                    if (kayttaja == null) {
+                    if (usersDao.checkContainsName(user.getNimi())) {
                         message.setText("Käyttäjänimi on jo käytössä!");
                     } else {
+                        usersDao.saveOrUpdate(user, "");
                         message.setText("Käyttäjä lisätty! Voit nyt kirjautua sisään tiedoilla.");
                     }
                 } catch (SQLException ex) {
@@ -164,6 +189,7 @@ public class KysymysGeneraattoriGUI extends Application{
                 message.setText("Kirjoita kunnolliset tiedot!");
             }    
         });
+        
         
         existingUser.setOnAction((event) -> {
             message.setText("");
@@ -192,6 +218,10 @@ public class KysymysGeneraattoriGUI extends Application{
         });
         
         backToLogin.setOnAction((event) -> {
+            message.setText("");
+            ikkuna.setScene(loginNakyma);
+        });
+        backToLogin2.setOnAction((event) -> {
             message.setText("");
             ikkuna.setScene(loginNakyma);
         });
