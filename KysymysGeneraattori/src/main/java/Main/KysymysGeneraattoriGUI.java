@@ -119,6 +119,11 @@ public class KysymysGeneraattoriGUI extends Application{
         });
         
         hiScores.setOnAction((event) -> {
+            try {
+                usersDao.addRightForUser("testi");
+            } catch (SQLException ex) {
+                Logger.getLogger(KysymysGeneraattoriGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
             message.setText("");
             hiScoreGUI.getChildren().clear();
             hiScoreGUI.add(backToLogin, 0, 0);
@@ -229,19 +234,22 @@ public class KysymysGeneraattoriGUI extends Application{
             ikkuna.setScene(questionNakyma);
         });
         sendAnswer.setOnAction((event) -> {
-//            if (gene.sendAnswer(answer.getText())) {
-//                try {
-//                    usersDao.addRightForUser(userNameLogged, 0);
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(KysymysGeneraattoriGUI.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
+            if (gene.sendAnswer(answer.getText())) {
+                try {
+                    usersDao.addRightForUser(userNameLogged);
+                    System.out.println("Oikein!");
+                } catch (SQLException ex) {
+                    Logger.getLogger(KysymysGeneraattoriGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                System.out.println("väärin! Oikea vastaus: "+gene.getAnswer());
+            }
             try {
-                usersDao.addRightForUser("testi");
+                usersDao.addQuestionsForUser(userNameLogged);
             } catch (SQLException ex) {
                 Logger.getLogger(KysymysGeneraattoriGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-            //question.setText(gene.getQuestion());
+            question.setText(gene.getQuestion());
         });
         
         

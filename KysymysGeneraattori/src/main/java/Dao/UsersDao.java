@@ -115,6 +115,7 @@ public class UsersDao implements Dao<User, Integer> {
             String salasana = resultSet.getString("password");
             int kysymykset = resultSet.getInt("questions");
             int oikein = resultSet.getInt("right");
+            statement.close();
             return new User(nimi, salasana, kysymykset, oikein);
         }
         statement.close();
