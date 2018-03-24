@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Logiikka;
+package Logic;
 
 /**
  *
  * @author ilmar
  */
-public class Vakiot {
+public interface Gen {
+    
+    public String question();
+    public String answer();
+    
     
 }

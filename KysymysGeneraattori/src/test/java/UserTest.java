@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-import Logiikka.User;
+import Logic.User;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -30,52 +30,52 @@ public class UserTest {
     
     @Test
     public void nimiSama() {
-        assertEquals("nimi", user.getNimi());
+        assertEquals("nimi", user.getUsername());
     }
     
     @Test
     public void salasanaSama() {
-        assertEquals("salasana", user.getSalasana());
+        assertEquals("salasana", user.getPassword());
     }
     
     @Test
     public void salasananSetterToimii() {
-        user.setSalasana("testi");
-        assertEquals("testi", user.getSalasana());
+        user.setPassword("testi");
+        assertEquals("testi", user.getPassword());
     }
     
     @Test
     public void nimenSetterToimii() {
-        user.setNimi("nimi2");
-        assertEquals("nimi2", user.getNimi());
+        user.setUsername("nimi2");
+        assertEquals("nimi2", user.getUsername());
     }
     
     @Test
     public void tehtavatAsettuuOikein() {
-        assertEquals(0, user.getTehtavat());
+        assertEquals(0, user.getQuestions());
     }
     
     
     @Test
     public void oikeinAsettuuOikein() {
-        assertEquals(0, user.getOikein());
+        assertEquals(0, user.getRight());
     }
     
     @Test
     public void tehtavatSetterToimii() {
-        user.setTehtavat(10);
-        assertEquals(10, user.getTehtavat());
+        user.setQuestions(10);
+        assertEquals(10, user.getQuestions());
     }
     
     @Test
     public void oikeinSetterToimii() {
-        user.setOikein(10);
-        assertEquals(10, user.getOikein());
+        user.setRight(10);
+        assertEquals(10, user.getRight());
     }
     
     @Test
     public void toStringToimiiOikeinNykyisillaTiedoilla() {
-        assertEquals(user.toString(), user.getNimi()+", "+user.getTehtavat()+" tehtävää tehty joista "+user.getOikein()+" on vastattu oikein.");
+        assertEquals(user.toString(), user.getUsername()+", "+user.getQuestions()+" tehtävää tehty joista "+user.getRight()+" on vastattu oikein.");
     }
 
     

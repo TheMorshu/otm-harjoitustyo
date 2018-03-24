@@ -3,18 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Main;
+package MainUI;
 
 import Dao.Database;
 import Dao.UsersDao;
-import Logiikka.Generator;
-import Logiikka.User;
-//import UI.KayttajanValikko;
-import UI.Login;
-import UI.LoginForGUI;
+import Logic.Generator;
+import Logic.User;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -24,13 +20,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 
-public class KysymysGeneraattoriGUI extends Application{
+public class QuestionGeneratorGUI extends Application{
 
     String userNameLogged;
     
@@ -130,7 +124,7 @@ public class KysymysGeneraattoriGUI extends Application{
             try {
                 usersDao.saveOrUpdate(SUPER, "asd");
             } catch (SQLException ex) {
-                Logger.getLogger(KysymysGeneraattoriGUI.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(QuestionGeneratorGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
         
@@ -139,7 +133,7 @@ public class KysymysGeneraattoriGUI extends Application{
             try {
                 usersDao.saveOrUpdate(SUPER, "");
             } catch (SQLException ex) {
-                Logger.getLogger(KysymysGeneraattoriGUI.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(QuestionGeneratorGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
         
@@ -147,7 +141,7 @@ public class KysymysGeneraattoriGUI extends Application{
             try {
                 usersDao.addRightForUser("testi");
             } catch (SQLException ex) {
-                Logger.getLogger(KysymysGeneraattoriGUI.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(QuestionGeneratorGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
             message.setText("");
             hiScoreGUI.getChildren().clear();
@@ -175,7 +169,7 @@ public class KysymysGeneraattoriGUI extends Application{
                 try {
                     nameInput.clear();
                     passInput.clear();
-                    if (usersDao.checkContainsName(user.getNimi())) {
+                    if (usersDao.checkContainsName(user.getUsername())) {
                         message.setText("Käyttäjänimi on jo käytössä!");
                     } else {
                         usersDao.saveOrUpdate(user, "");
@@ -183,7 +177,7 @@ public class KysymysGeneraattoriGUI extends Application{
                     }
                 } catch (SQLException ex) {
                     System.out.println("ERROR!!");
-                    Logger.getLogger(KysymysGeneraattoriGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(QuestionGeneratorGUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
                 message.setText("Kirjoita kunnolliset tiedot!");
@@ -200,13 +194,13 @@ public class KysymysGeneraattoriGUI extends Application{
                 try {
                     loggedUser = usersDao.verifyLogin(nameInput.getText(), passInput.getText());
                 } catch (SQLException ex) {
-                    Logger.getLogger(KysymysGeneraattoriGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(QuestionGeneratorGUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 if (loggedUser == null) {
                     message.setText("Käyttäjänimi ja salasana eivät täsmää!");
                 } else {
                     System.out.println("Sisäänkirjaus onnistui!");
-                    userNameLogged = loggedUser.getNimi();
+                    userNameLogged = loggedUser.getUsername();
                     loginGUI.add(maths, 0, 5);
                     loginGUI.add(phys, 1, 5);
                     loginGUI.add(chem, 2, 5);
@@ -269,7 +263,7 @@ public class KysymysGeneraattoriGUI extends Application{
                     usersDao.addRightForUser(userNameLogged);
                     System.out.println("Oikein!");
                 } catch (SQLException ex) {
-                    Logger.getLogger(KysymysGeneraattoriGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(QuestionGeneratorGUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
                 System.out.println("väärin! Oikea vastaus: "+gene.getAnswer());
@@ -277,7 +271,7 @@ public class KysymysGeneraattoriGUI extends Application{
             try {
                 usersDao.addQuestionsForUser(userNameLogged);
             } catch (SQLException ex) {
-                Logger.getLogger(KysymysGeneraattoriGUI.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(QuestionGeneratorGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
             question.setText(gene.getQuestion());
         });
@@ -295,7 +289,7 @@ public class KysymysGeneraattoriGUI extends Application{
     
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        launch(KysymysGeneraattoriGUI.class);
+        launch(QuestionGeneratorGUI.class);
     }
     
 }

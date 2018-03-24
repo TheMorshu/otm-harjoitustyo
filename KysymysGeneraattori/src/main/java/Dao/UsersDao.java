@@ -1,3 +1,5 @@
+//OK!
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,7 +7,7 @@
  */
 package Dao;
 
-import Logiikka.User;
+import Logic.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,20 +31,20 @@ public class UsersDao implements Dao<User> {
         if (resultSet.next()) {
             statement.close();
             this.database.closeConnection();
-            String nimi = resultSet.getString("name");
-            String salasana = resultSet.getString("password");
-            int kysymykset = resultSet.getInt("questions");
-            int oikein = resultSet.getInt("right");
-            return new User(nimi, salasana, kysymykset, oikein);
+            String name = resultSet.getString("name");
+            String password = resultSet.getString("password");
+            int questions = resultSet.getInt("questions");
+            int right = resultSet.getInt("right");
+            return new User(name, password, questions, right);
         } else {
             return null;
         }
     }
     
     //extra
-    public Boolean checkContainsName(String nimi) throws SQLException {
+    public Boolean checkContainsName(String name) throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("SELECT name FROM Users WHERE name = ?");
-        statement.setString(1, nimi);
+        statement.setString(1, name);
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
             statement.close();
@@ -56,19 +58,19 @@ public class UsersDao implements Dao<User> {
 
     @Override
     public List<User> findAll() throws SQLException {
-        List<User> userLista = new ArrayList<>();
+        List<User> userList = new ArrayList<>();
         PreparedStatement statement = database.getConnection().prepareStatement("SELECT name, password, questions, right FROM Users;");
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()){
-            String nimi = resultSet.getString("name");
-            String salasana = resultSet.getString("password");
-            int kysymykset = resultSet.getInt("questions");
-            int oikein = resultSet.getInt("right");
-            userLista.add(new User(nimi, salasana, kysymykset, oikein));
+            String name = resultSet.getString("name");
+            String password = resultSet.getString("password");
+            int questions = resultSet.getInt("questions");
+            int right = resultSet.getInt("right");
+            userList.add(new User(name, password, questions, right));
         }
         statement.close();
         this.database.closeConnection();
-        return userLista;
+        return userList;
     }
     
     
@@ -76,14 +78,14 @@ public class UsersDao implements Dao<User> {
     
 
     @Override
-    public User saveOrUpdate(User user, String oldUserName) throws SQLException {
+    public User saveOrUpdate(User user, String oldUserName) throws SQLException { //HIOTTAVAAA!
         if (checkContainsName(oldUserName)) { //päivittää vanhan päälle
             System.out.println("1");
-            String nimi = user.getNimi();
-            String salasana = user.getSalasana();
-            int kysymykset = user.getTehtavat();
-            int oikein = user.getOikein();
-            System.out.println(nimi+salasana+kysymykset+oikein);
+            String name = user.getUsername();
+            String password = user.getPassword();
+            int questions = user.getQuestions();
+            int right = user.getRight();
+            System.out.println(name+password+questions+right);
             PreparedStatement statement = database.getConnection().prepareStatement("DELETE FROM Users WHERE name = ?;");
             statement.setString(1, oldUserName);
             int changes = statement.executeUpdate();
@@ -91,19 +93,19 @@ public class UsersDao implements Dao<User> {
             this.database.closeConnection();
             return saveOrUpdate(user, "");
         } //jos ei ole olemassa suoritta vain tämän
-        String nimi = user.getNimi();
-        String salasana = user.getSalasana();
-        int questions = user.getTehtavat();
-        int right = user.getOikein();
+        String name = user.getUsername();
+        String password = user.getPassword();
+        int questions = user.getQuestions();
+        int right = user.getRight();
         PreparedStatement statement = database.getConnection().prepareStatement("INSERT INTO Users (name, password, questions, right) VALUES (?, ?, ?, ?);");
-        statement.setString(1, nimi);
-        statement.setString(2, salasana);
+        statement.setString(1, name);
+        statement.setString(2, password);
         statement.setInt(3, questions);
         statement.setInt(4, right);
         int changes = statement.executeUpdate();
         statement.close();
         this.database.closeConnection();
-        return new User(nimi, salasana, 0, 0);
+        return new User(name, password, 0, 0);
     }
 
     @Override
@@ -135,8 +137,8 @@ public class UsersDao implements Dao<User> {
         PreparedStatement statement = database.getConnection().prepareStatement("SELECT name FROM Users");
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()){
-            String nimi = resultSet.getString("name");
-            System.out.println(nimi);
+            String name = resultSet.getString("name");
+            System.out.println(name);
         }
         statement.close();
         this.database.closeConnection();
@@ -148,13 +150,11 @@ public class UsersDao implements Dao<User> {
         statement.setString(2, password);
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()){
-            String nimi = resultSet.getString("name");
-            String salasana = resultSet.getString("password");
-            int kysymykset = resultSet.getInt("questions");
-            int oikein = resultSet.getInt("right");
+            int questions = resultSet.getInt("questions");
+            int right = resultSet.getInt("right");
             statement.close();
             this.database.closeConnection();
-            return new User(nimi, salasana, kysymykset, oikein);
+            return new User(username, password, questions, right);
         }
         statement.close();
         this.database.closeConnection();
@@ -162,17 +162,17 @@ public class UsersDao implements Dao<User> {
     }
     
     
-    public void addQuestionsForUser(String nimi) throws SQLException {
+    public void addQuestionsForUser(String name) throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("UPDATE Users SET questions = questions + 1 WHERE name = ?;");
-        statement.setString(1, nimi);
+        statement.setString(1, name);
         int changes = statement.executeUpdate();
         statement.close();
         this.database.closeConnection();
     }
     
-    public void addRightForUser(String nimi) throws SQLException {
+    public void addRightForUser(String name) throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("UPDATE Users SET right = right + 1 WHERE name = ?;");
-        statement.setString(1, nimi);
+        statement.setString(1, name);
         int changes = statement.executeUpdate();
         statement.close();
         this.database.closeConnection();

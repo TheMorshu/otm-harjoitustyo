@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Logiikka;
+package Logic;
 
 import java.util.Random;
 
@@ -11,13 +11,12 @@ import java.util.Random;
  *
  * @author ilmar
  */
-public class chemGen implements Gen {
-    
+public class PhysGen implements Gen {
     String vastaus;
     String kyssari;
     Random random;
 
-    public chemGen(Random random) {
+    public PhysGen(Random random) {
         this.random = random;
     }
 
@@ -30,5 +29,6 @@ public class chemGen implements Gen {
     public String answer() {
         return "vastaus";
     }
+    
     
 }
