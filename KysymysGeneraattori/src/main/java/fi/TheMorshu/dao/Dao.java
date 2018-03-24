@@ -15,5 +15,6 @@ public interface Dao<Type> {
     Type update(Type object, String oldUserName) throws SQLException;
     
     void delete(String username) throws SQLException;
+    
 
 }

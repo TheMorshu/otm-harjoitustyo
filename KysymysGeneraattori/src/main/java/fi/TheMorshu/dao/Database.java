@@ -21,7 +21,7 @@ public class Database {
         //return DriverManager.getConnection(databaseAddress);
         return this.connection;
     }
-    
+
     
     public void closeConnection() throws SQLException {
         this.connection.close();

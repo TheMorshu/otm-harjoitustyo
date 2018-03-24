@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class UsersDao implements Dao<User> {
@@ -81,6 +83,24 @@ public class UsersDao implements Dao<User> {
         this.database.closeConnection();
     }
     
+    public void setUpUsersTableOnDatabase() {
+        PreparedStatement statement;
+        try {
+            statement = database.getConnection().prepareStatement("CREATE TABLE users (\n" +
+                    "id integer PRIMARY KEY,\n" +
+                    "name varchar(200),\n" +
+                    "password varchar (200),\n" +
+                    "questions integer,\n" +
+                    "right integer\n" +
+                    ");");
+            int changes = statement.executeUpdate();
+            statement.close();
+            this.database.closeConnection();
+        } catch (SQLException ex) {
+        }
+    }
+    
+    
     public void clearDatabase() throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("DROP TABLE Users;");
         int changes = statement.executeUpdate();
@@ -91,8 +111,6 @@ public class UsersDao implements Dao<User> {
         "questions integer,\n" +
         "right integer\n" +
         ");");
-        changes = statement.executeUpdate();
-        statement = database.getConnection().prepareStatement("INSERT INTO users (name, password, questions, right) VALUES ('admin', 'admin', 0, 0);");
         changes = statement.executeUpdate();
         statement.close();
         this.database.closeConnection();

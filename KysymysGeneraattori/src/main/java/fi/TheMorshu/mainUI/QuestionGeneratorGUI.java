@@ -27,14 +27,18 @@ import javafx.stage.Stage;
 public class QuestionGeneratorGUI extends Application{
 
     String userNameLogged;
+    Boolean neverLogged;
     
     @Override
-    public void start(Stage ikkuna) throws ClassNotFoundException, SQLException {
+    public void start(Stage window) throws ClassNotFoundException, SQLException {
         Database users = new Database("jdbc:sqlite:users.db");
         UsersDao usersDao = new UsersDao(users);
         userNameLogged = "";
         Generator gene = new Generator("", usersDao);
         
+        //Luo Users tablen databaseen, jos sitä ei jo ole (välttämätön, jso ohjelam käynnistetään 1. kertaa!)
+        usersDao.setUpUsersTableOnDatabase();
+         
         //Teksielementit ja kentät
         Label nameText = new Label("Nimi: ");
         TextField nameInput = new TextField();
@@ -51,21 +55,22 @@ public class QuestionGeneratorGUI extends Application{
         Button quit = new Button("Lopeta");
         Button backToLogin = new Button("Kirjautumiseen");
         Button backToLogin2 = new Button("Kirjautumiseen");
-        Button tallennaJaLopeta = new Button("Tallenna ja lopeta");
+        Button saveAndQuit = new Button("Tallenna ja lopeta");
         Button clearDatabase = new Button("Clear database");
         Button maths = new Button("Tee matikan tehtäviä!");
         Button phys = new Button("Tee fysiikan tehtäviä!");
         Button chem = new Button("Tee kemian tehtäviä!");
         Button all = new Button("Tee kaikkia tehtäviä sekaisin!");
         Button sendAnswer = new Button("Lähetä vastaus!");
-        Button lisaaSUPER = new Button("LISÄÄ SUPER!");
-        Button korvaaAsdwSUPER = new Button("Korvaa asd SUPER:illa!");
+        Button addSUPER = new Button("LISÄÄ SUPER!");
+        Button replaceAsdWithSUPER = new Button("Korvaa asd SUPER:illa!");
         
         //Asettelut
         GridPane loginGUI = new GridPane();
         GridPane hiScoreGUI = new GridPane();
         GridPane adminGUI = new GridPane();
         GridPane questionGUI = new GridPane();
+        
         
         //Asettelujen määrittely
         loginGUI.add(nameText, 0, 0);
@@ -83,14 +88,14 @@ public class QuestionGeneratorGUI extends Application{
         hiScoreGUI.add(backToLogin, 0, 0);
         
         adminGUI.add(clearDatabase, 0, 0);
-        adminGUI.add(lisaaSUPER, 0, 1);
+        adminGUI.add(addSUPER, 0, 1);
         adminGUI.add(backToLogin2, 0, 2);
-        adminGUI.add(korvaaAsdwSUPER, 0, 3);
+        adminGUI.add(replaceAsdWithSUPER, 0, 3);
         
         questionGUI.add(question, 0, 0);
         questionGUI.add(answer, 0, 1);
         questionGUI.add(sendAnswer, 0, 2);
-        questionGUI.add(tallennaJaLopeta, 0, 3);
+        questionGUI.add(saveAndQuit, 0, 3);
         
         //Asettelun hienosäätö
         loginGUI.setHgap(10);
@@ -108,18 +113,18 @@ public class QuestionGeneratorGUI extends Application{
         
         
         //Näkymät
-        Scene hiScoreNakyma = new Scene(hiScoreGUI, 640, 640);
-        Scene loginNakyma = new Scene(loginGUI, 640, 640);
-        Scene adminNakyma = new Scene(adminGUI, 640, 640);
-        Scene questionNakyma = new Scene(questionGUI, 640, 640);
+        Scene hiScoreScene = new Scene(hiScoreGUI, 640, 640);
+        Scene loginScene = new Scene(loginGUI, 640, 640);
+        Scene adminScene = new Scene(adminGUI, 640, 640);
+        Scene questionScene = new Scene(questionGUI, 640, 640);
         
         
         quit.setOnAction((event) -> {
-            ikkuna.close();
+            window.close();
         });
         
         
-        korvaaAsdwSUPER.setOnAction((event) -> {
+        replaceAsdWithSUPER.setOnAction((event) -> {
             User SUPER = new User("SUPER", "SUPER", 1000, 1000);
             try {
                 usersDao.update(SUPER, "asd");
@@ -128,7 +133,7 @@ public class QuestionGeneratorGUI extends Application{
             }
         });
         
-        lisaaSUPER.setOnAction((event) -> {
+        addSUPER.setOnAction((event) -> {
             User SUPER = new User("SUPER", "SUPER", 1000, 1000);
             try {
                 usersDao.save(SUPER);
@@ -159,7 +164,7 @@ public class QuestionGeneratorGUI extends Application{
             } catch (SQLException ex) {
                 System.out.println("ERROR!");
             }
-            ikkuna.setScene(hiScoreNakyma);
+            window.setScene(hiScoreScene);
         });
         
         newUser.setOnAction((event) -> {
@@ -188,7 +193,7 @@ public class QuestionGeneratorGUI extends Application{
         existingUser.setOnAction((event) -> {
             message.setText("");
             if (nameInput.getText().equals("admin") && passInput.getText().equals("admin")) {
-                ikkuna.setScene(adminNakyma);
+                window.setScene(adminScene);
             } else {
                 User loggedUser = null;
                 try {
@@ -199,63 +204,64 @@ public class QuestionGeneratorGUI extends Application{
                 if (loggedUser == null) {
                     message.setText("Käyttäjänimi ja salasana eivät täsmää!");
                 } else {
-                    System.out.println("Sisäänkirjaus onnistui!");
                     userNameLogged = loggedUser.getUsername();
-                    loginGUI.add(maths, 0, 5);
-                    loginGUI.add(phys, 1, 5);
-                    loginGUI.add(chem, 2, 5);
-                    loginGUI.add(all, 3, 5);
-                    ikkuna.setTitle("Kirjautuneena sisään: " + userNameLogged);
-                    
+                    if (neverLogged == null || neverLogged == true) {
+                        loginGUI.add(maths, 0, 5);
+                        loginGUI.add(phys, 1, 5);
+                        loginGUI.add(chem, 2, 5);
+                        loginGUI.add(all, 3, 5);
+                        neverLogged = false;
+                    }
+                    window.setTitle("Kirjautuneena sisään: " + userNameLogged);
                 }
             }
         });
         
         backToLogin.setOnAction((event) -> {
             message.setText("");
-            ikkuna.setScene(loginNakyma);
+            window.setScene(loginScene);
         });
         backToLogin2.setOnAction((event) -> {
             message.setText("");
-            ikkuna.setScene(loginNakyma);
+            window.setScene(loginScene);
         });
-        tallennaJaLopeta.setOnAction((event) -> {
-            ikkuna.close();
+        saveAndQuit.setOnAction((event) -> {
+            window.close();
         });
         
         clearDatabase.setOnAction((event) -> {
             message.setText("");
             try {
                 usersDao.clearDatabase();
-                ikkuna.setScene(loginNakyma);
+                window.setScene(loginScene);
             } catch (SQLException ex) {
                 System.out.println("DATABASE ERROR!");
-                ikkuna.setScene(loginNakyma);
+                window.setScene(loginScene);
             }
         });
         maths.setOnAction((event) -> {
             gene.setUserName(userNameLogged);
             gene.setMode("maths");
             question.setText(gene.getQuestion());
-            ikkuna.setScene(questionNakyma);
+            window.setScene(questionScene);
         });
         phys.setOnAction((event) -> {
             gene.setUserName(userNameLogged);
             gene.setMode("chem");
             question.setText(gene.getQuestion());
-            ikkuna.setScene(questionNakyma);
+            window.setScene(questionScene);
         });
         chem.setOnAction((event) -> {
             gene.setUserName(userNameLogged);
             gene.setMode("phys");
             question.setText(gene.getQuestion());
-            ikkuna.setScene(questionNakyma);
+            window.setScene(questionScene);
         });
         all.setOnAction((event) -> {
             gene.setUserName(userNameLogged);
             gene.setMode("all");
             question.setText(gene.getQuestion());
-            ikkuna.setScene(questionNakyma);
+            window.setScene(questionScene);
         });
         sendAnswer.setOnAction((event) -> {
             if (gene.sendAnswer(answer.getText())) {
@@ -277,18 +283,12 @@ public class QuestionGeneratorGUI extends Application{
             answer.clear();
         });
         
-        
-        
-        
 
-        
-        ikkuna.setTitle("Login");
-        ikkuna.setScene(loginNakyma);
-        ikkuna.show();
-        
+        window.setTitle("Login");
+        window.setScene(loginScene);
+        window.show();
     }
     
-
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         launch(QuestionGeneratorGUI.class);
     }
