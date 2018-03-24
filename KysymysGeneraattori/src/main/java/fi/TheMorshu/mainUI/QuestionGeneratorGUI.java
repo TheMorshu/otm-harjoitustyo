@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mainUI;
+package fi.TheMorshu.mainUI;
 
-import dao.Database;
-import dao.UsersDao;
-import logic.Generator;
-import logic.User;
+import fi.TheMorshu.dao.Database;
+import fi.TheMorshu.dao.UsersDao;
+import fi.TheMorshu.logic.Generator;
+import fi.TheMorshu.logic.User;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;

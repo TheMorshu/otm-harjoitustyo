@@ -1,5 +1,5 @@
 //OK!
-package dao;
+package fi.TheMorshu.dao;
 
 import java.sql.*;
 import java.util.*;

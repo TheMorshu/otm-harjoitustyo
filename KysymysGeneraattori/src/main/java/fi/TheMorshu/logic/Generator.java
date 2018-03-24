@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logic;
+package fi.TheMorshu.logic;
 
-import dao.UsersDao;
+import fi.TheMorshu.dao.UsersDao;
 import java.util.Random;
 
 /**
