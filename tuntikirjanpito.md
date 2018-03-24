@@ -11,5 +11,4 @@ kuleen yhteenlasketun ajan (kaikkien sovellusten konfigurointeineen) karkeasti 2
 | 22.3.  | 6    | Harjoitustyön runkoa "räitty" kasaan ja perustoiminnallisuuksia laitettu toimimaan |
 | 23.3.  | 3  | Harjoitustyön rungon vika korjattu, matikkakysymysgeneraattoriin lisätty ensimmäinen kysymystyyppi (hiottavaa). +Alustava määrittelydokumentti tehty. Illalla lisätty ja aloitettu testit. DAO luokkia laajennettu ja paranneltu |
 | 24.3   | 2,5  | Koodin ulkoasua ja nimeämisiä parannettu/hiottu. DAO luokkia paranneltu + bugfixes + maven konfiguraatiota | 
-
 | yht    | 31,5  |   | 
