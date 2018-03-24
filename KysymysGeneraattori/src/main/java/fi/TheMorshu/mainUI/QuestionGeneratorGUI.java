@@ -37,7 +37,7 @@ public class QuestionGeneratorGUI extends Application{
         Generator gene = new Generator("", usersDao);
         
         //Luo Users tablen databaseen, jos sitä ei jo ole (välttämätön, jso ohjelam käynnistetään 1. kertaa!)
-        usersDao.setUpUsersTableOnDatabase();
+        usersDao.setUpTableOnDatabase();
          
         //Teksielementit ja kentät
         Label nameText = new Label("Nimi: ");
@@ -181,7 +181,6 @@ public class QuestionGeneratorGUI extends Application{
                         message.setText("Käyttäjä lisätty! Voit nyt kirjautua sisään tiedoilla.");
                     }
                 } catch (SQLException ex) {
-                    System.out.println("ERROR!!");
                     Logger.getLogger(QuestionGeneratorGUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
@@ -235,7 +234,6 @@ public class QuestionGeneratorGUI extends Application{
                 usersDao.clearDatabase();
                 window.setScene(loginScene);
             } catch (SQLException ex) {
-                System.out.println("DATABASE ERROR!");
                 window.setScene(loginScene);
             }
         });

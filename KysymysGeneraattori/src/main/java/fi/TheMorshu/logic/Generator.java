@@ -61,25 +61,31 @@ public class Generator {
             return this.question;
         }
         if (mode.equals("all")) {
-            int n = random.nextInt(3)+1;
-            if (n==1) {
-                this.question = math.question();
-                this.answer = math.answer();
+            if (selectRandomQuestionType()) {
                 return this.question;
-            } if (n==2) {
-                this.question = phys.question();
-                this.answer = phys.answer();
-                return this.question;
-            } if (n==3) {
-                this.question = chem.question();
-                this.answer = chem.answer();
-                return this.question;
-            }
-        } else {
-            System.out.println("else");
-            return null;
-        }
+            }         
+        } 
         return null;
+    }
+
+    public boolean selectRandomQuestionType() {
+        int n = random.nextInt(3)+1;
+        if (n==1) {
+            this.question = math.question();
+            this.answer = math.answer();
+            return true;
+        }
+        if (n==2) {
+            this.question = phys.question();
+            this.answer = phys.answer();
+            return true;
+        }
+        if (n==3) {
+            this.question = chem.question();
+            this.answer = chem.answer();
+            return true;
+        }
+        return false;
     }
     
 

@@ -1,6 +1,7 @@
 //OK!
 package fi.TheMorshu.dao;
 
+import fi.TheMorshu.logic.User;
 import java.sql.*;
 import java.util.*;
 
@@ -15,6 +16,12 @@ public interface Dao<Type> {
     Type update(Type object, String oldUserName) throws SQLException;
     
     void delete(String username) throws SQLException;
+    
+    void setUpTableOnDatabase();
+    
+    void clearDatabase() throws SQLException;
+    
+    public void directInsertToDatabase(Type object) throws SQLException;
     
 
 }

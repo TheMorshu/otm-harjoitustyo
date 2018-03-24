@@ -18,7 +18,6 @@ public class Database {
 
     public Connection getConnection() throws SQLException {
         this.connection = DriverManager.getConnection(this.databaseAddress);
-        //return DriverManager.getConnection(databaseAddress);
         return this.connection;
     }
 
