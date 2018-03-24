@@ -15,9 +15,9 @@ import static org.junit.Assert.*;
  *
  * @author ilmar
  */
-public class mathGenTest {
+public class MathGenTest {
     
-    public mathGenTest() {
+    public MathGenTest() {
     }
     
     @BeforeClass
