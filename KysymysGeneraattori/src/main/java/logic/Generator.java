@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Logic;
+package logic;
 
-import Dao.UsersDao;
+import dao.UsersDao;
 import java.util.Random;
 
 /**

@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package MainUI;
+package mainUI;
 
-import Dao.Database;
-import Dao.UsersDao;
-import Logic.Generator;
-import Logic.User;
+import dao.Database;
+import dao.UsersDao;
+import logic.Generator;
+import logic.User;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;

@@ -1,7 +1,7 @@
 //OK!
 
 
-package Dao;
+package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

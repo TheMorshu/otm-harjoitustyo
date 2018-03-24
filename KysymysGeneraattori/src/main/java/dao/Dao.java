@@ -1,5 +1,5 @@
 //OK!
-package Dao;
+package dao;
 
 import java.sql.*;
 import java.util.*;
