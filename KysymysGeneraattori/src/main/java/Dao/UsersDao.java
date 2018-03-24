@@ -73,41 +73,6 @@ public class UsersDao implements Dao<User> {
         return userList;
     }
     
-    
-
-    
-
-    @Override
-    public User saveOrUpdate(User user, String oldUserName) throws SQLException { //HIOTTAVAAA!
-        if (checkContainsName(oldUserName)) { //päivittää vanhan päälle
-            System.out.println("1");
-            String name = user.getUsername();
-            String password = user.getPassword();
-            int questions = user.getQuestions();
-            int right = user.getRight();
-            System.out.println(name+password+questions+right);
-            PreparedStatement statement = database.getConnection().prepareStatement("DELETE FROM Users WHERE name = ?;");
-            statement.setString(1, oldUserName);
-            int changes = statement.executeUpdate();
-            statement.close();
-            this.database.closeConnection();
-            return saveOrUpdate(user, "");
-        } //jos ei ole olemassa suoritta vain tämän
-        String name = user.getUsername();
-        String password = user.getPassword();
-        int questions = user.getQuestions();
-        int right = user.getRight();
-        PreparedStatement statement = database.getConnection().prepareStatement("INSERT INTO Users (name, password, questions, right) VALUES (?, ?, ?, ?);");
-        statement.setString(1, name);
-        statement.setString(2, password);
-        statement.setInt(3, questions);
-        statement.setInt(4, right);
-        int changes = statement.executeUpdate();
-        statement.close();
-        this.database.closeConnection();
-        return new User(name, password, 0, 0);
-    }
-
     @Override
     public void delete(String username) throws SQLException { //kesken
         PreparedStatement statement = database.getConnection().prepareStatement("DELETE ......;");
@@ -161,7 +126,6 @@ public class UsersDao implements Dao<User> {
         return null;
     }
     
-    
     public void addQuestionsForUser(String name) throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("UPDATE Users SET questions = questions + 1 WHERE name = ?;");
         statement.setString(1, name);
@@ -176,6 +140,54 @@ public class UsersDao implements Dao<User> {
         int changes = statement.executeUpdate();
         statement.close();
         this.database.closeConnection();
+    }
+
+    @Override
+    public User save(User user) throws SQLException {
+        if (!checkContainsName(user.getUsername())) { //Jos ei sisällä haluttua nimeä, luo tilin
+            String name = user.getUsername();
+            String password = user.getPassword();
+            int questions = user.getQuestions();
+            int right = user.getRight();
+            PreparedStatement statement = database.getConnection().prepareStatement("INSERT INTO Users (name, password, questions, right) VALUES (?, ?, ?, ?);");
+            statement.setString(1, name);
+            statement.setString(2, password);
+            statement.setInt(3, questions);
+            statement.setInt(4, right);
+            int changes = statement.executeUpdate();
+            statement.close();
+            this.database.closeConnection();
+            return user;
+        } else { //jos nimi on jo varattu ei tee mitään ja palauuttaa null
+            return null;
+        }
+    }
+
+    @Override
+    public User update(User user, String usernameOfPreviousVersion) throws SQLException {
+        if (checkContainsName(usernameOfPreviousVersion) && !checkContainsName(user.getUsername())) { //jos databasesta löytyy kohdehenkilö, jonak tiedot päivitetään
+            String name = user.getUsername();
+            String password = user.getPassword();
+            int questions = user.getQuestions();
+            int right = user.getRight();
+            PreparedStatement statement = database.getConnection().prepareStatement("DELETE FROM Users WHERE name = ?;");
+            statement.setString(1, usernameOfPreviousVersion);
+            int changes = statement.executeUpdate();
+            statement.close();
+            this.database.closeConnection();
+            
+            statement = database.getConnection().prepareStatement("INSERT INTO Users (name, password, questions, right) VALUES (?, ?, ?, ?);");
+            statement.setString(1, name);
+            statement.setString(2, password);
+            statement.setInt(3, questions);
+            statement.setInt(4, right);
+            changes = statement.executeUpdate();
+            statement.close();
+            this.database.closeConnection();
+            return user;
+        } else { //jos ei löydy usernameOfPreviousVersion nimistä käyttäjää databasesta palauttaa null
+            return null;
+        }
     }
     
     

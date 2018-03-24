@@ -122,7 +122,7 @@ public class QuestionGeneratorGUI extends Application{
         korvaaAsdwSUPER.setOnAction((event) -> {
             User SUPER = new User("SUPER", "SUPER", 1000, 1000);
             try {
-                usersDao.saveOrUpdate(SUPER, "asd");
+                usersDao.update(SUPER, "asd");
             } catch (SQLException ex) {
                 Logger.getLogger(QuestionGeneratorGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -131,7 +131,7 @@ public class QuestionGeneratorGUI extends Application{
         lisaaSUPER.setOnAction((event) -> {
             User SUPER = new User("SUPER", "SUPER", 1000, 1000);
             try {
-                usersDao.saveOrUpdate(SUPER, "");
+                usersDao.save(SUPER);
             } catch (SQLException ex) {
                 Logger.getLogger(QuestionGeneratorGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -172,7 +172,7 @@ public class QuestionGeneratorGUI extends Application{
                     if (usersDao.checkContainsName(user.getUsername())) {
                         message.setText("Käyttäjänimi on jo käytössä!");
                     } else {
-                        usersDao.saveOrUpdate(user, "");
+                        usersDao.save(user);
                         message.setText("Käyttäjä lisätty! Voit nyt kirjautua sisään tiedoilla.");
                     }
                 } catch (SQLException ex) {
