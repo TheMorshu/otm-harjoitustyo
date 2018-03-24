@@ -274,6 +274,7 @@ public class QuestionGeneratorGUI extends Application{
                 Logger.getLogger(QuestionGeneratorGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
             question.setText(gene.getQuestion());
+            answer.clear();
         });
         
         
