@@ -1,0 +1,9 @@
+
+[Pelaaja|-String: nimi;-int: rahaa]
+[Pelilauta (Peli)]
+[Pelaaja]2..8-1[Pelilauta (Peli)]
+[Pelilauta (Peli)]1-2[Noppa]
+[Ruutu|-int:id;-int:seuraavanRuudunId]
+[Ruutu]40-1[Pelilauta (Peli)]
+[Pelinappula]1-1[Pelaaja]
+[Pelinappula]-sijaitsee yhdessä ruudussa-[Ruutu]
