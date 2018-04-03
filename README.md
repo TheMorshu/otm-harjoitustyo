@@ -31,7 +31,7 @@ Testikattavuusraportti luodaan komennolla
 mvn jacoco:report
 ```
 
-Kattavuusraporttia voidaan tarkastella avaamalla tiedosto _OSOITE_
+Kattavuusraporttia voidaan tarkastella avaamalla tiedosto _target/site/jacoco/index.html_
 
 
 ### Jarin generointi
