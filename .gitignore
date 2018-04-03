@@ -4,6 +4,6 @@
 /laskarit/viikko2/Unicafe/nbproject/
 /KysymysGeneraattori/target/
 /KysymysGeneraattori/nbproject/
-/KysymysGeneraattori/users.db/
-/KysymysGeneraattori/test.db/
-/KysymysGeneraattori/createTable.txt/
+/KysymysGeneraattori/users.db
+/KysymysGeneraattori/test.db
+/KysymysGeneraattori/createTable.txt
