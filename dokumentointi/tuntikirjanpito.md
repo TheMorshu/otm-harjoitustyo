@@ -11,5 +11,5 @@ kuleen yhteenlasketun ajan (kaikkien sovellusten konfigurointeineen) karkeasti 4
 | 22.3.  | 6    | Harjoitustyön runkoa "räitty" kasaan ja perustoiminnallisuuksia laitettu toimimaan |
 | 23.3.  | 3  | Harjoitustyön rungon vika korjattu, matikkakysymysgeneraattoriin lisätty ensimmäinen kysymystyyppi (hiottavaa). +Alustava määrittelydokumentti tehty. Illalla lisätty ja aloitettu testit. DAO luokkia laajennettu ja paranneltu |
 | 24.3   | 3,5  | Koodin ulkoasua ja nimeämisiä parannettu/hiottu. DAO luokkia paranneltu + bugfixes + maven konfiguraatiota + koodia lyhennelty ja jaettu metodeja osiin| 
-| 3.4    | 0,5  | README:n päivittelyä ja satunnaista testailua javalla  | 
-| yht    | 17  |   | 
+| 3.4    | 1   | README:n päivittelyä ja satunnaista testailua javalla. DatabaseTest luokka päivitetty toimimaan ilman valmiiksi alustettua test.db:tä (koko ohjelma toimii nyt siis ilman, että mukana täytyy ladata mitään valmiiksi määriteltyjä tietokantoja)  | 
+| yht    | 17,5  |   | 
