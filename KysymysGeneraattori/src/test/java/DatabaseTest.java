@@ -30,17 +30,28 @@ public class DatabaseTest {
     @Before
     public void setUp() throws ClassNotFoundException, SQLException {
         database = new Database("jdbc:sqlite:test.db");
-        PreparedStatement statement = database.getConnection().prepareStatement("DROP TABLE Henkilo;");
-        int changes = statement.executeUpdate();
-        statement.close();
-        database.closeConnection();
+        PreparedStatement statement;
+        try {
+            statement = database.getConnection().prepareStatement("DROP TABLE Henkilo;");
+            int changes = statement.executeUpdate();
+            statement.close();
+            database.closeConnection();
+            statement = database.getConnection().prepareStatement("CREATE TABLE Henkilo (\n" +
+            "    syntymavuosi integer,\n" +
+            "    nimi varchar(200)\n" +
+            ")");
+            changes = statement.executeUpdate();
+            statement.close();
+            database.closeConnection();
+        } catch (SQLException ex) {
         statement = database.getConnection().prepareStatement("CREATE TABLE Henkilo (\n" +
         "    syntymavuosi integer,\n" +
         "    nimi varchar(200)\n" +
         ")");
-        changes = statement.executeUpdate();
+        int changes = statement.executeUpdate();
         statement.close();
         database.closeConnection();
+        }
     }
     
     @After
