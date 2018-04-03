@@ -8,7 +8,7 @@ Kysymysgeneraattori generoi automaattisesti lukiotason kysymyksiä matematiikast
 
 **Tuntikirjanpito**
 
-[Tuntikirjanpito](https://github.com/TheMorshu/otm-harjoitustyo/blob/master/tuntikirjanpito.md)
+[Tuntikirjanpito](https://github.com/TheMorshu/otm-harjoitustyo/blob/master/dokumentointi/tuntikirjanpito.md)
 
 **Dokumentaatio**
 
