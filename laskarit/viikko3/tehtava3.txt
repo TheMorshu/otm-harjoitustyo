@@ -1,0 +1,15 @@
+title tehtävä 3
+
+
+main->*masiina: new Machine()
+masiina->*tankki: new FuelTank()
+masiina->tankki: tank.fill(40)
+masiina->*kone: new Engine(tankki)
+
+main->+masiina: drive()
+masiina->kone: start()
+kone->tankki: consume(5)
+masiina->kone: isRunning()
+kone-->masiina: true
+masiina->kone: useEnergy()
+kone->tankki: consume(10)
