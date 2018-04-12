@@ -1,5 +1,8 @@
 ## Kysymys generaattori!
 
+## HUOM! Muutin työni kansiorakennetta fi.TheMorshu.... --> fi.themorshu
+## Tämän vuoksi ennen 10.4 tehdyt viikon 3 palautukset poistuivat, ja uudet tulivat kansioon fi.themorshu... (pvm 12.4)
+
 Kysymysgeneraattori generoi automaattisesti lukiotason kysymyksiä matematiikasta, fysiikasta ja kemiasta käyttäjälleen. Käyttäjiä on useita ja jokaisen käyttäjän tulee rekisteröityä palveluun. Tehdyistä tehtävistä saa pisteitä ohjelmassa.
 
 **Hakemisto**
