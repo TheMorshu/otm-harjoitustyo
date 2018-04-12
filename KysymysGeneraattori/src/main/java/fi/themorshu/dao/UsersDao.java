@@ -30,14 +30,16 @@ public class UsersDao implements Dao<User> {
         statement.setString(1, username);
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
-            statement.close();
-            this.database.closeConnection();
             String name = resultSet.getString("name");
             String password = resultSet.getString("password");
             int questions = resultSet.getInt("questions");
             int right = resultSet.getInt("right");
+            statement.close();
+            this.database.closeConnection();
             return new User(name, password, questions, right);
         } else {
+            statement.close();
+            this.database.closeConnection();
             return null;
         }
     }

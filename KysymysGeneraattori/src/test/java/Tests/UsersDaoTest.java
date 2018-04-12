@@ -55,10 +55,13 @@ public class UsersDaoTest {
             statement.close();
             database.closeConnection();
         } catch (SQLException ex) {
-        statement = database.getConnection().prepareStatement("CREATE TABLE Users (\n" +
-        "    syntymavuosi integer,\n" +
-        "    nimi varchar(200)\n" +
-        ")");
+        statement = database.getConnection().prepareStatement("CREATE TABLE users (\n" +
+                    "id integer PRIMARY KEY,\n" +
+                    "name varchar(200),\n" +
+                    "password varchar (200),\n" +
+                    "questions integer,\n" +
+                    "right integer\n" +
+                    ");");
         int changes = statement.executeUpdate();
         statement.close();
         database.closeConnection();
@@ -74,15 +77,47 @@ public class UsersDaoTest {
     public void saveToimiiLuokassa() throws SQLException {
         User user = new User("testi2", "password", 0, 0);
         User returningUser = this.dao.save(user);
+        database.closeConnection();
         assertEquals(user, returningUser);
     }
     
     @Test
-    public void asd() throws SQLException {
-        User user = new User("testi2", "password", 0, 0);
+    public void saveEiTeeMitaanJosNimiOlemassa() throws SQLException {
+        User user = new User("test", "password", 0, 0);
         User returningUser = this.dao.save(user);
-        assertEquals(user, returningUser);
+        database.closeConnection();
+        assertEquals(returningUser, null);
     }
+    
+    @Test
+    public void loytaaDatabasestaHalutunHenkilon() throws SQLException {
+        assertEquals(true, this.dao.checkContainsName("test"));
+    }
+    
+    @Test
+    public void deletePoistaaUserinDatabasesta() throws SQLException {
+        User user = new User("poistettava", "password", 0, 0);
+        User returningUser = this.dao.save(user);
+        this.dao.delete("poistettava");
+        database.closeConnection();
+        assertEquals(false, this.dao.checkContainsName("poistettava"));
+    }
+    
+    @Test
+    public void findOnePalauttaaVastaavanOlion() throws SQLException { //KESKEN 
+        User foundOne = this.dao.findOne("test");
+        database.closeConnection();
+        System.out.println(foundOne.getUsername());
+        if (foundOne.getUsername().equals("test") && foundOne.getPassword().equals("password") && foundOne.getQuestions() == 100 && foundOne.getRight() == 50) {
+            assertEquals(true, true);
+        } else {
+            assertEquals(true, false);
+        }
+    }
+    
+    
+    
+    
     
     
 

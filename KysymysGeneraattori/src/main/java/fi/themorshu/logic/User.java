@@ -63,9 +63,5 @@ public class User {
         return this.username + ", " + this.questions + " tehtävää tehty joista " + this.right + " on vastattu oikein.";
     }
 
-    
-    
-    
-    
-    
+
 }
