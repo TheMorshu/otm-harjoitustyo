@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-import fi.TheMorshu.dao.Database;
+import fi.themorshu.dao.Database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
