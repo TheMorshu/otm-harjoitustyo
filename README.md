@@ -36,6 +36,14 @@ mvn jacoco:report
 
 Kattavuusraporttia voidaan tarkastella avaamalla tiedosto _target/site/jacoco/index.html_
 
+Huom! Joskus testikattavuuden generoinnissa on ongelmia. Tällöin kannattaa suorittaa terminaalissa seuraavat komennot annetussa järjestyksessä:
+
+```
+mvn clean
+mvn package
+mvn jacoco:report
+```
+
 
 ### Jarin generointi
 
