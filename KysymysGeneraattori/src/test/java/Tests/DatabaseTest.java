@@ -34,22 +34,28 @@ public class DatabaseTest {
         database = new Database("jdbc:sqlite:test.db");
         PreparedStatement statement;
         try {
-            statement = database.getConnection().prepareStatement("DROP TABLE Henkilo;");
+            statement = database.getConnection().prepareStatement("DROP TABLE Users;");
             int changes = statement.executeUpdate();
             statement.close();
             database.closeConnection();
-            statement = database.getConnection().prepareStatement("CREATE TABLE Henkilo (\n" +
-            "    syntymavuosi integer,\n" +
-            "    nimi varchar(200)\n" +
-            ")");
+            statement = database.getConnection().prepareStatement("CREATE TABLE users (\n" +
+                    "id integer PRIMARY KEY,\n" +
+                    "name varchar(200),\n" +
+                    "password varchar (200),\n" +
+                    "questions integer,\n" +
+                    "right integer\n" +
+                    ");");
             changes = statement.executeUpdate();
             statement.close();
             database.closeConnection();
         } catch (SQLException ex) {
-        statement = database.getConnection().prepareStatement("CREATE TABLE Henkilo (\n" +
-        "    syntymavuosi integer,\n" +
-        "    nimi varchar(200)\n" +
-        ")");
+        statement = database.getConnection().prepareStatement("CREATE TABLE users (\n" +
+                    "id integer PRIMARY KEY,\n" +
+                    "name varchar(200),\n" +
+                    "password varchar (200),\n" +
+                    "questions integer,\n" +
+                    "right integer\n" +
+                    ");");
         int changes = statement.executeUpdate();
         statement.close();
         database.closeConnection();
@@ -63,7 +69,7 @@ public class DatabaseTest {
     
     @Test
     public void databaseEiSisallaMitaan() throws SQLException {
-        PreparedStatement statement = database.getConnection().prepareStatement("SELECT * FROM Henkilo;");
+        PreparedStatement statement = database.getConnection().prepareStatement("SELECT * FROM Users;");
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
             statement.close();
@@ -77,11 +83,11 @@ public class DatabaseTest {
     
     @Test
     public void dataBaseenVoiVuorovaikuttaa() throws SQLException {
-        PreparedStatement statement = database.getConnection().prepareStatement("INSERT INTO Henkilo (syntymavuosi, nimi) VALUES (1900, 'test');");
+        PreparedStatement statement = database.getConnection().prepareStatement("INSERT INTO Users (name, password, questions, right) VALUES ('test', 'password', 0, 0);");
         int changes = statement.executeUpdate();
         statement.close();
         database.closeConnection();
-        statement = database.getConnection().prepareStatement("SELECT * FROM Henkilo;");
+        statement = database.getConnection().prepareStatement("SELECT * FROM Users;");
         ResultSet resultSet = statement.executeQuery();
         if (!resultSet.next()) {
             statement.close();

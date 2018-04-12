@@ -27,6 +27,7 @@ public class MathGen implements Gen {
     public String question() {
         return rootsOfFunction(); //yksi monista, jatkossa randomilla
     }
+
     
     public String rootsOfFunction() {
         root1 = this.random.nextInt(21) - 10; //luku väliltä -10 - 10

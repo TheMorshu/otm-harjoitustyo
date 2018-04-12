@@ -22,13 +22,12 @@ public class MathGenTest {
     MathGen gen;
     
     public MathGenTest() {
-        this.gen = new MathGen(new Random());
     }
     
     
     @Before
     public void setUp() {
-        
+        this.gen = new MathGen(new Random());
     }
     
     @After
@@ -48,6 +47,12 @@ public class MathGenTest {
         } else {
             assertEquals(this.gen.answer(), "" + this.gen.getRoot2() + " ja " + this.gen.getRoot1());
         }
+    }
+    
+    
+    @Test
+    public void questionPalauttaaMerkkijonon() {
+        assertEquals(this.gen.question().length() > 0, true);
     }
     
 

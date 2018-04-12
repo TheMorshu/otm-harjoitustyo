@@ -156,6 +156,7 @@ public class UsersDao implements Dao<User> {
 
     @Override
     public User save(User user) throws SQLException {
+        System.out.println("1");
         if (!checkContainsName(user.getUsername())) { //Jos ei sisällä haluttua nimeä, luo tilin
             directInsertToDatabase(user);
             return user;
@@ -176,10 +177,9 @@ public class UsersDao implements Dao<User> {
     }
 
     @Override
-    public void delete(String usernameOfPreviousVersion) throws SQLException {
-        //jos databasesta löytyy kohdehenkilö, jonak tiedot päivitetään
+    public void delete(String username) throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("DELETE FROM Users WHERE name = ?;");
-        statement.setString(1, usernameOfPreviousVersion);
+        statement.setString(1, username);
         int changes = statement.executeUpdate();
         statement.close();
         this.database.closeConnection();

@@ -44,22 +44,28 @@ public class GeneratorTest {
         database = new Database("jdbc:sqlite:test.db");
         PreparedStatement statement;
         try {
-            statement = database.getConnection().prepareStatement("DROP TABLE Henkilo;");
+            statement = database.getConnection().prepareStatement("DROP TABLE Users;");
             int changes = statement.executeUpdate();
             statement.close();
             database.closeConnection();
-            statement = database.getConnection().prepareStatement("CREATE TABLE Henkilo (\n" +
-                    "    syntymavuosi integer,\n" +
-                    "    nimi varchar(200)\n" +
-                    ")");
+            statement = database.getConnection().prepareStatement("CREATE TABLE users (\n" +
+                    "id integer PRIMARY KEY,\n" +
+                    "name varchar(200),\n" +
+                    "password varchar (200),\n" +
+                    "questions integer,\n" +
+                    "right integer\n" +
+                    ");");
             changes = statement.executeUpdate();
             statement.close();
             database.closeConnection();
         } catch (SQLException ex) {
-            statement = database.getConnection().prepareStatement("CREATE TABLE Henkilo (\n" +
-                    "    syntymavuosi integer,\n" +
-                    "    nimi varchar(200)\n" +
-                    ")");
+            statement = database.getConnection().prepareStatement("CREATE TABLE users (\n" +
+                    "id integer PRIMARY KEY,\n" +
+                    "name varchar(200),\n" +
+                    "password varchar (200),\n" +
+                    "questions integer,\n" +
+                    "right integer\n" +
+                    ");");
             int changes = statement.executeUpdate();
             statement.close();
             database.closeConnection();
