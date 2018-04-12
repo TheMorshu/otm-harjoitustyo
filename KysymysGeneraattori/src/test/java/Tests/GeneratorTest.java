@@ -86,12 +86,29 @@ public class GeneratorTest {
         assertEquals(mode, gen.getMode());
     }
     
+    @Test
+    public void setUserNameToimii() {
+        gen.setUserName("uusiNimi");
+        assertEquals("uusiNimi", gen.getUserName());
+    }
+    
+    
+    @Test
+    public void sendAnswerToimiiOikeallaVastauksellaMatikka() throws SQLException {
+        gen.setMode("maths");
+        String kysymys = gen.getQuestion();
+        String vastaus = gen.getAnswer();
+        assertEquals(true, gen.sendAnswer(vastaus));
+    }
     
     
     @After
     public void tearDown() throws SQLException {
         database.closeConnection();
     }
+    
+    
+    
 
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:

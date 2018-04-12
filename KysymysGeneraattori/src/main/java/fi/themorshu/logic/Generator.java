@@ -50,6 +50,10 @@ public class Generator {
         this.userName = userName;
     }
     
+    public String getUserName() {
+        return this.userName;
+    }
+    
     public String getQuestion() {
         if (mode.equals("maths")) {
             this.question = math.question();
