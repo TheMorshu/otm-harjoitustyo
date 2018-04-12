@@ -250,18 +250,8 @@ public class QuestionGeneratorGUI extends Application{
             window.setScene(questionScene);
         });
         sendAnswer.setOnAction((event) -> {
-            if (gene.sendAnswer(answer.getText())) {
-                try {
-                    usersDao.addRightForUser(userNameLogged);
-                    System.out.println("Oikein!");
-                } catch (SQLException ex) {
-                    Logger.getLogger(QuestionGeneratorGUI.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } else {
-                System.out.println("väärin! Oikea vastaus: "+gene.getAnswer());
-            }
             try {
-                usersDao.addQuestionsForUser(userNameLogged);
+                gene.sendAnswer(answer.getText());
             } catch (SQLException ex) {
                 Logger.getLogger(QuestionGeneratorGUI.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -16,6 +16,8 @@ public class MathGen implements Gen {
     String answer;
     String question;
     Random random;
+    int root1;
+    int root2;
 
     public MathGen(Random random) {
         this.random = random;
@@ -27,8 +29,8 @@ public class MathGen implements Gen {
     }
     
     public String rootsOfFunction() {
-        int root1 = this.random.nextInt(21) - 10; //luku väliltä -10 - 10
-        int root2 = this.random.nextInt(21) - 10;
+        root1 = this.random.nextInt(21) - 10; //luku väliltä -10 - 10
+        root2 = this.random.nextInt(21) - 10;
         int xAmount = -root2 - root1;
         int x2Amount = 1;
         int cTerm = root1 * root2;
@@ -38,6 +40,14 @@ public class MathGen implements Gen {
             this.answer = root2 + " ja " + root1;
         }
         return "Laske nollakohdat: " + "X^2+" + xAmount + "X+" + cTerm + ". Ilmoita vastaus muodossa: " + "n ja n, siten, että pienempi luku aluksi";
+    }
+
+    public int getRoot1() {
+        return root1;
+    }
+
+    public int getRoot2() {
+        return root2;
     }
     
 

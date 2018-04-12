@@ -6,6 +6,9 @@ package Tests;
  * and open the template in the editor.
  */
 
+import fi.themorshu.dao.Database;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -19,19 +22,36 @@ import static org.junit.Assert.*;
  */
 public class UsersDaoTest {
     
+    Database database;
+    
     public UsersDaoTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
-    public void setUp() {
+    public void setUp() throws ClassNotFoundException, SQLException {
+        database = new Database("jdbc:sqlite:test.db");
+        PreparedStatement statement;
+        try {
+            statement = database.getConnection().prepareStatement("DROP TABLE Henkilo;");
+            int changes = statement.executeUpdate();
+            statement.close();
+            database.closeConnection();
+            statement = database.getConnection().prepareStatement("CREATE TABLE Henkilo (\n" +
+            "    syntymavuosi integer,\n" +
+            "    nimi varchar(200)\n" +
+            ")");
+            changes = statement.executeUpdate();
+            statement.close();
+            database.closeConnection();
+        } catch (SQLException ex) {
+        statement = database.getConnection().prepareStatement("CREATE TABLE Henkilo (\n" +
+        "    syntymavuosi integer,\n" +
+        "    nimi varchar(200)\n" +
+        ")");
+        int changes = statement.executeUpdate();
+        statement.close();
+        database.closeConnection();
+        }
     }
     
     @After

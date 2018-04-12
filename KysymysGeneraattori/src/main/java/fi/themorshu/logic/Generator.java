@@ -6,6 +6,7 @@
 package fi.themorshu.logic;
 
 import fi.themorshu.dao.UsersDao;
+import java.sql.SQLException;
 import java.util.Random;
 
 /**
@@ -38,7 +39,12 @@ public class Generator {
         this.mode = mode;
     }
 
-
+    public String getMode() {
+        return mode;
+    }
+    
+    
+    
     
     public void setUserName(String userName) {
         this.userName = userName;
@@ -93,10 +99,13 @@ public class Generator {
         return this.answer;
     }
 
-    public boolean sendAnswer(String vastaus) {
+    public boolean sendAnswer(String vastaus) throws SQLException {
         if (vastaus.equals(this.answer)) {
+            this.userDao.addRightForUser(this.userName);
+            this.userDao.addQuestionsForUser(this.userName);
             return true;
         }
+        this.userDao.addQuestionsForUser(this.userName);
         return false;
     }
     

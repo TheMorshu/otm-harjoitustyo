@@ -6,6 +6,12 @@ package Tests;
  * and open the template in the editor.
  */
 
+import fi.themorshu.dao.Database;
+import fi.themorshu.dao.UsersDao;
+import fi.themorshu.logic.Generator;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -19,23 +25,66 @@ import static org.junit.Assert.*;
  */
 public class GeneratorTest {
     
+    Generator gen;
+    UsersDao userDao;
+    Database database;
+    
     public GeneratorTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
     
     @Before
-    public void setUp() {
+    public void setUp() throws ClassNotFoundException, SQLException {
+        prepareDatabase();
+        this.userDao = new UsersDao(this.database);
+        this.gen = new Generator("testi", this.userDao);
+    }
+
+    public void prepareDatabase() throws SQLException, ClassNotFoundException {
+        database = new Database("jdbc:sqlite:test.db");
+        PreparedStatement statement;
+        try {
+            statement = database.getConnection().prepareStatement("DROP TABLE Henkilo;");
+            int changes = statement.executeUpdate();
+            statement.close();
+            database.closeConnection();
+            statement = database.getConnection().prepareStatement("CREATE TABLE Henkilo (\n" +
+                    "    syntymavuosi integer,\n" +
+                    "    nimi varchar(200)\n" +
+                    ")");
+            changes = statement.executeUpdate();
+            statement.close();
+            database.closeConnection();
+        } catch (SQLException ex) {
+            statement = database.getConnection().prepareStatement("CREATE TABLE Henkilo (\n" +
+                    "    syntymavuosi integer,\n" +
+                    "    nimi varchar(200)\n" +
+                    ")");
+            int changes = statement.executeUpdate();
+            statement.close();
+            database.closeConnection();
+        }
     }
     
+    
+    @Test
+    public void vastausOnNullAlussa() throws SQLException {
+        assertEquals(this.gen.getAnswer(), null);
+    }
+    
+    
+    @Test
+    public void setModeJaGetModeToimii() {
+        String mode = "testi";
+        gen.setMode(mode);
+        assertEquals(mode, gen.getMode());
+    }
+    
+    
+    
     @After
-    public void tearDown() {
+    public void tearDown() throws SQLException {
+        database.closeConnection();
     }
 
     // TODO add test methods here.

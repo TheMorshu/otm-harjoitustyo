@@ -6,10 +6,10 @@ package Tests;
  * and open the template in the editor.
  */
 
+import fi.themorshu.logic.MathGen;
+import java.util.Random;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -19,24 +19,37 @@ import static org.junit.Assert.*;
  */
 public class MathGenTest {
     
+    MathGen gen;
+    
     public MathGenTest() {
+        this.gen = new MathGen(new Random());
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
     
     @Before
     public void setUp() {
+        
     }
     
     @After
     public void tearDown() {
     }
+    
+    @Test
+    public void answerOnNullJosEiKysymystä() {
+        assertEquals(this.gen.answer(), null);
+    }
+    
+    @Test
+    public void rootsOfFunctionToimii() { //jokin vialla välillä
+        String kysymys = this.gen.rootsOfFunction();
+        if (this.gen.getRoot1() <= this.gen.getRoot2()) {
+            assertEquals(this.gen.answer(), "" + this.gen.getRoot1() + " ja " + this.gen.getRoot2());
+        } else {
+            assertEquals(this.gen.answer(), "" + this.gen.getRoot2() + " ja " + this.gen.getRoot1());
+        }
+    }
+    
 
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
