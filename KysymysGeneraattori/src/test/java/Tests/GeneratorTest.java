@@ -1,3 +1,5 @@
+package Tests;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,9 +17,9 @@ import static org.junit.Assert.*;
  *
  * @author ilmar
  */
-public class UsersDaoTest {
+public class GeneratorTest {
     
-    public UsersDaoTest() {
+    public GeneratorTest() {
     }
     
     @BeforeClass
