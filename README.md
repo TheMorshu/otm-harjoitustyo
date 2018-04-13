@@ -34,7 +34,7 @@ Testikattavuusraportti luodaan komennolla
 mvn jacoco:report
 ```
 
-Kattavuusraporttia voidaan tarkastella avaamalla tiedosto _target/site/jacoco/index.html_
+Kattavuusraporttia voidaan tarkastella avaamalla tiedosto _/target/site/jacoco/index.html_
 
 Huom! Joskus testikattavuuden generoinnissa on ongelmia. Tällöin kannattaa suorittaa terminaalissa seuraavat komennot annetussa järjestyksessä:
 
@@ -63,8 +63,12 @@ Kesken!
 
 ### Checkstyle
 
-Kesken!
+CheckStyle raportti luodaan suorittamalla seuraava komento terminaalissa:
 
+```
+mvn jxr:jxr checkstyle:checkstyle
+```
+Raporttia voidaan tarkastella avaamalla tiedosto _/target/site/checkstyle.html_
 
 
 
