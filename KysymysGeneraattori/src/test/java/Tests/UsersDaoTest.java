@@ -8,7 +8,7 @@ package Tests;
 
 import fi.themorshu.dao.Database;
 import fi.themorshu.dao.UsersDao;
-import fi.themorshu.logic.User;
+import fi.themorshu.dao.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

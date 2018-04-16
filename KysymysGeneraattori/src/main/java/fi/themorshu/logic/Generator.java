@@ -7,6 +7,7 @@ package fi.themorshu.logic;
 
 import fi.themorshu.dao.UsersDao;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -24,6 +25,7 @@ public class Generator {
     MathGen math;
     PhysGen phys;
     ChemGen chem;
+    ArrayList<Gen> genLista;
 
     public Generator(String userName, UsersDao userDao) {
         this.userName = userName;
@@ -33,6 +35,10 @@ public class Generator {
         this.math = new MathGen(this.random);
         this.phys = new PhysGen(this.random);
         this.chem = new ChemGen(this.random);
+        this.genLista = new ArrayList<>();
+        this.genLista.add(this.math);
+        this.genLista.add(this.phys);
+        this.genLista.add(this.chem);
     }
 
     public void setMode(String mode) {
@@ -79,23 +85,26 @@ public class Generator {
     }
 
     public boolean selectRandomQuestionType() {
-        int n = random.nextInt(3) + 1;
-        if (n == 1) {
-            this.question = math.question();
-            this.answer = math.answer();
-            return true;
-        }
-        if (n == 2) {
-            this.question = phys.question();
-            this.answer = phys.answer();
-            return true;
-        }
-        if (n == 3) {
-            this.question = chem.question();
-            this.answer = chem.answer();
-            return true;
-        }
-        return false;
+        int n = random.nextInt(3);
+        this.question = this.genLista.get(n).question();
+        this.answer = this.genLista.get(n).answer();
+        return true;
+//        if (n == 1) {
+//            this.question = math.question();
+//            this.answer = math.answer();
+//            return true;
+//        }
+//        if (n == 2) {
+//            this.question = phys.question();
+//            this.answer = phys.answer();
+//            return true;
+//        }
+//        if (n == 3) {
+//            this.question = chem.question();
+//            this.answer = chem.answer();
+//            return true;
+//        }
+//        return false;
     }
     
 

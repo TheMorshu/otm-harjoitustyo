@@ -1,7 +1,6 @@
 //OK!
 package fi.themorshu.dao;
 
-import fi.themorshu.logic.User;
 import java.sql.*;
 import java.util.*;
 

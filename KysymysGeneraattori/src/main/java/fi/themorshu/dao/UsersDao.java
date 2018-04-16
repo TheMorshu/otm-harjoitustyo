@@ -7,7 +7,6 @@
  */
 package fi.themorshu.dao;
 
-import fi.themorshu.logic.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
