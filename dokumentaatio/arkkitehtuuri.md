@@ -1,1 +1,1 @@
-[Luokka/pakkauskaavio](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/dokumentaatio/luokkakaavio.png)
+<img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/luokkakaavio.png" width="400">
