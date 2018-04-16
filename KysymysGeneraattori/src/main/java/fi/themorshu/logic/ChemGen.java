@@ -23,7 +23,7 @@ public class ChemGen implements Gen {
 
     @Override
     public String question() {
-        return "kyssäri";
+        return "kyssäri KEMIA";
     }
 
     @Override

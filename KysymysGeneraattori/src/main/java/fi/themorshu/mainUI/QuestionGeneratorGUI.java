@@ -233,13 +233,13 @@ public class QuestionGeneratorGUI extends Application{
         });
         phys.setOnAction((event) -> {
             gene.setUserName(userNameLogged);
-            gene.setMode("chem");
+            gene.setMode("phys");
             question.setText(gene.getQuestion());
             window.setScene(questionScene);
         });
         chem.setOnAction((event) -> {
             gene.setUserName(userNameLogged);
-            gene.setMode("phys");
+            gene.setMode("chem");
             question.setText(gene.getQuestion());
             window.setScene(questionScene);
         });
