@@ -17,7 +17,7 @@ Kysymysgeneraattori generoi automaattisesti lukiotason kysymyksiä matematiikast
 
 [Alusatava määrittelydokumentti](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/dokumentaatio/maarittelydokumentti.md)
 
-[Luokka/pakkauskaavio](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/dokumentaatio/luokkakaavio.png)
+[Arkkitehtuuri](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/dokumentaatio/arkkitehtuuri.md)
 
 
 ## Komentorivitoiminnot
