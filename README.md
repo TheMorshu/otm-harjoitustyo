@@ -11,11 +11,12 @@ Kysymysgeneraattori generoi automaattisesti lukiotason kysymyksiä matematiikast
 
 **Tuntikirjanpito**
 
-[Tuntikirjanpito](https://github.com/TheMorshu/otm-harjoitustyo/blob/master/dokumentointi/tuntikirjanpito.md)
+[Tuntikirjanpito](https://github.com/TheMorshu/otm-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
 
 **Dokumentaatio**
 
-[Alusatava määrittelydokumentti](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/dokumentointi/maarittelydokumentti.md)
+[Alusatava määrittelydokumentti](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/dokumentaatio/maarittelydokumentti.md)
+[Luokka/pakkauskaavio](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/dokumentaatio/luokkakaavio.png)
 
 
 ## Komentorivitoiminnot
