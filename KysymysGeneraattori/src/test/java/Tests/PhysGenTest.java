@@ -35,17 +35,7 @@ public class PhysGenTest {
     public void tearDown() {
     }
     
-    
-    @Test
-    public void tyhjaKyssari() {
-        assertEquals(this.gen.question(), "kyssäri");
-    }
-    
-    
-    @Test
-    public void tyhjaVastaus() {
-        assertEquals(this.gen.answer(), "vastaus");
-    }
+
 
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:

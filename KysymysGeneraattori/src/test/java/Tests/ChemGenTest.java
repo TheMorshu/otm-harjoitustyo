@@ -39,7 +39,7 @@ public class ChemGenTest {
     
     @Test
     public void tyhjaKyssari() {
-        assertEquals(this.gen.question(), "kyssäri");
+        assertEquals(this.gen.question(), "kyssäri KEMIA");
     }
     
     
