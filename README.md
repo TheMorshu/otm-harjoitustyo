@@ -19,6 +19,21 @@ Kysymysgeneraattori generoi automaattisesti lukiotason kysymyksiä matematiikast
 
 [Arkkitehtuuri](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/dokumentaatio/arkkitehtuuri.md)
 
+## Ohjelman suoritus
+
+### NetBeans
+
+ohje
+
+### Jar tiedoston suoritus
+
+ohje
+
+
+### Maven
+
+ohje
+
 
 ## Komentorivitoiminnot
 
