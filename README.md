@@ -39,7 +39,7 @@ java -jar KysymysGeneraattori-1.0-SNAPSHOT.jar
 
 Ohjelma voidaan myös suorittaa suorittamalla seuraava komento terminaalissa:
 ```
-mvn compile exec:java -Dexec.mainClass=fi.themorshu.mainUI.QuestiongeneratorGUI
+mvn compile exec:java -Dexec.mainClass=fi.themorshu.mainUI.QuestionGeneratorGUI
 ```
 
 ## Komentorivitoiminnot
