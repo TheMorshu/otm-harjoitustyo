@@ -27,9 +27,8 @@ Lataa projektsi ja avaa projekti NetBeanssissa. Ohjelma voidaan suorittaa painam
 
 ### Jar tiedoston suoritus
 
-Jarin generoinnin (lue ohjeet alempana) voidaan jar tiedosto suorittaa suoraan sellaisenaan tuplaklikkaamalla sitä. Vaihtoehtoisesti jar voidaan suorittaa kirjoittamalla komentoriville
+Jarin generoinnin jälkeen (lue ohjeet alempana) voidaan jar tiedosto suorittaa suoraan sellaisenaan tuplaklikkaamalla sitä. Vaihtoehtoisesti jar voidaan suorittaa kirjoittamalla komentoriville
 
-Windowsilla:
 ```
 java -jar KysymysGeneraattori-1.0-SNAPSHOT.jar
 ```
@@ -41,8 +40,11 @@ Ohjelma voidaan myös suorittaa suorittamalla seuraava komento terminaalissa:
 ```
 mvn compile exec:java -Dexec.mainClass=fi.themorshu.mainUI.QuestionGeneratorGUI
 ```
+Huom! Komento tulee suorittaa KysymysGeneraattori hakemistossa.
 
 ## Komentorivitoiminnot
+
+Huom! Komennot tulee suorittaa KysymysGeneraattori hakemistossa.
 
 ### Testaus
 
