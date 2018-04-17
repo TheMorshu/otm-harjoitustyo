@@ -15,4 +15,5 @@ kuleen yhteenlasketun ajan (kaikkien sovellusten konfigurointeineen) karkeasti 4
 | 12.4    | 1,5  | CheckStyle lisätty. Koodia korjailtu sen mukaisesti.  HUOM! Muutin työni kansiorakennetta fi.TheMorshu.... --> fi.themorshu Tämän vuoksi ennen 10.4 tehdyt viikon 3 palautukset poistuivat, ja uudet tulivat kansioon fi.themorshu... (pvm 12.4) | 
 | 12.4    | 2  | koodia parannettu, tstejä laajennettu, koodia siistitty  | 
 | 12.4    | 2,5  | koodia parannettu järkevämmäksi, luokkakaavio tehty, koodin hiontaa, uusi tehtävätyyppi lisätty (auton alkunopeus jarrutuksessa), checkstyle fixes | 
-| yht    | 22,5  |   | 
+| 17.4   | 2  | Käyttöliittymäkoodin parantelu ja järkevöinti (lisää tätä myöhemmin vielä!) Määrittelydokumentissa olevien toiminnallisuuksien lisäämistä (mm. yksittäienn käyttäjä voi nyt nollata tuloksensa tai vaihtaa salasanansa). Lisäksi pieniä lisäyksiä UsersDaoon  | 
+| yht    | 24,5  |   | 
