@@ -23,17 +23,24 @@ Kysymysgeneraattori generoi automaattisesti lukiotason kysymyksiä matematiikast
 
 ### NetBeans
 
-ohje
+Lataa projektsi ja avaa projekti NetBeanssissa. Ohjelma voidaan suorittaa painamalla play nappia (tai F6) NetBeanssissa.
 
 ### Jar tiedoston suoritus
 
-ohje
+Jarin generoinnin (lue ohjeet alempana) voidaan jar tiedosto suorittaa suoraan sellaisenaan tuplaklikkaamalla sitä. Vaihtoehtoisesti jar voidaan suorittaa kirjoittamalla komentoriville
+
+Windowsilla:
+```
+java -jar KysymysGeneraattori-1.0-SNAPSHOT.jar
+```
 
 
 ### Maven
 
-ohje
-
+Ohjelma voidaan myös suorittaa suorittamalla seuraava komento terminaalissa:
+```
+mvn compile exec:java -Dexec.mainClass=fi.themorshu.mainUI.QuestiongeneratorGUI
+```
 
 ## Komentorivitoiminnot
 
@@ -74,10 +81,6 @@ Jolloin hakemistoon _target_ generoituu jar tiedosto _KysymysGeneraattori-1.0-SN
 
 
 
-### JavaDoc
-
-Kesken!
-
 ### Checkstyle
 
 CheckStyle raportti luodaan suorittamalla seuraava komento terminaalissa:
@@ -86,6 +89,11 @@ CheckStyle raportti luodaan suorittamalla seuraava komento terminaalissa:
 mvn jxr:jxr checkstyle:checkstyle
 ```
 Raporttia voidaan tarkastella avaamalla tiedosto _/target/site/checkstyle.html_
+
+
+### JavaDoc
+
+Kesken!
 
 
 
