@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,21 +17,22 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class QuestionGeneratorGUI extends Application{
-
+public class QuestionGeneratorGUI extends Application {
     String userNameLogged;
     Boolean neverLogged;
-    
+    UsersDao usersDao;
+    Generator gene;
+
+    @Override
+    public void init() throws ClassNotFoundException, SQLException {
+        usersDao = new UsersDao(new Database("jdbc:sqlite:users.db"));
+        userNameLogged = "";
+        gene = new Generator("", usersDao);
+        usersDao.setUpTableOnDatabase(); //Luo Users tablen databaseen, jos sitä ei jo ole (välttämätön, jso ohjelam käynnistetään 1. kertaa!)
+    }
+
     @Override
     public void start(Stage window) throws ClassNotFoundException, SQLException {
-        //Database users = new Database("jdbc:sqlite:users.db");
-        UsersDao usersDao = new UsersDao(new Database("jdbc:sqlite:users.db"));
-        userNameLogged = "";
-        Generator gene = new Generator("", usersDao);
-        
-        //Luo Users tablen databaseen, jos sitä ei jo ole (välttämätön, jso ohjelam käynnistetään 1. kertaa!)
-        usersDao.setUpTableOnDatabase();
-         
         //Teksielementit ja kentät
         Label nameText = new Label("Nimi: ");
         TextField nameInput = new TextField();
@@ -41,6 +41,10 @@ public class QuestionGeneratorGUI extends Application{
         Label message = new Label("");
         Label question = new Label("Kysymys: ");
         TextField answer = new TextField();
+        Label newPassText = new Label("Uusi salasana: ");
+        TextField newPassInput = new TextField();
+        Label userToBeRemovedText = new Label("Poistettava käyttäjä: ");
+        TextField userToBeRemovedLabel = new TextField();
         
         //Napit
         Button newUser = new Button("Uusi käyttäjä");
@@ -49,6 +53,7 @@ public class QuestionGeneratorGUI extends Application{
         Button quit = new Button("Lopeta");
         Button backToLogin = new Button("Kirjautumiseen");
         Button backToLogin2 = new Button("Kirjautumiseen");
+        Button backToLogin3 = new Button("Kirjautumiseen");
         Button saveAndQuit = new Button("Tallenna ja lopeta");
         Button clearDatabase = new Button("Clear database");
         Button maths = new Button("Tee matikan tehtäviä!");
@@ -56,14 +61,18 @@ public class QuestionGeneratorGUI extends Application{
         Button chem = new Button("Tee kemian tehtäviä!");
         Button all = new Button("Tee kaikkia tehtäviä sekaisin!");
         Button sendAnswer = new Button("Lähetä vastaus!");
-        Button addSUPER = new Button("LISÄÄ SUPER!");
-        Button replaceAsdWithSUPER = new Button("Korvaa asd SUPER:illa!");
+        Button userSettings = new Button("Käyttäjän asetukset");
+        Button deleteAccount = new Button("Poista tili");
+        Button resetScore = new Button("Nollaa tulokset");
+        Button changePassword = new Button("Vaihda salasana");
+        Button removeUser = new Button("Poista käyttäjä!");
         
         //Asettelut
         GridPane loginGUI = new GridPane();
         GridPane hiScoreGUI = new GridPane();
         GridPane adminGUI = new GridPane();
         GridPane questionGUI = new GridPane();
+        GridPane userSettingsGUI = new GridPane();
         
         //Asettelujen määrittely
         loginGUI.add(nameText, 0, 0);
@@ -75,73 +84,37 @@ public class QuestionGeneratorGUI extends Application{
         loginGUI.add(hiScores, 0, 3);
         loginGUI.add(quit, 1, 3);
         loginGUI.add(message, 0, 4);
-        
         hiScoreGUI.add(backToLogin, 0, 0);
-        
         adminGUI.add(clearDatabase, 0, 0);
-        adminGUI.add(addSUPER, 0, 1);
-        adminGUI.add(backToLogin2, 0, 2);
-        adminGUI.add(replaceAsdWithSUPER, 0, 3);
-        
+        adminGUI.add(backToLogin2, 0, 1);
+        adminGUI.add(removeUser, 0, 2);
+        adminGUI.add(userToBeRemovedText, 1, 2);
+        adminGUI.add(userToBeRemovedLabel, 2, 2);
         questionGUI.add(question, 0, 0);
         questionGUI.add(answer, 0, 1);
         questionGUI.add(sendAnswer, 0, 2);
         questionGUI.add(saveAndQuit, 0, 3);
-        
-        //Asettelun hienosäätö
-        loginGUI.setHgap(10);
-        loginGUI.setVgap(10);
-        loginGUI.setPadding(new Insets(10, 10, 10, 10));
-        hiScoreGUI.setHgap(10);
-        hiScoreGUI.setVgap(10);
-        hiScoreGUI.setPadding(new Insets(10, 10, 10, 10));
-        adminGUI.setHgap(10);
-        adminGUI.setVgap(10);
-        adminGUI.setPadding(new Insets(10, 10, 10, 10));
-        questionGUI.setHgap(10);
-        questionGUI.setVgap(10);
-        questionGUI.setPadding(new Insets(10, 10, 10, 10));
-        
+        userSettingsGUI.add(deleteAccount, 0, 0);
+        userSettingsGUI.add(resetScore, 1, 0);
+        userSettingsGUI.add(changePassword, 2, 0);
+        userSettingsGUI.add(newPassText, 2, 1);
+        userSettingsGUI.add(newPassInput, 2, 2);
+        userSettingsGUI.add(backToLogin3, 0, 3);
+
         //Näkymät
-        Scene hiScoreScene = new Scene(hiScoreGUI, 640, 640);
-        Scene loginScene = new Scene(loginGUI, 640, 640);
-        Scene adminScene = new Scene(adminGUI, 640, 640);
-        Scene questionScene = new Scene(questionGUI, 640, 640);
+        Scene hiScoreScene = new Scene(hiScoreGUI, 640, 320);
+        Scene loginScene = new Scene(loginGUI, 640, 320);
+        Scene adminScene = new Scene(adminGUI, 640, 320);
+        Scene questionScene = new Scene(questionGUI, 640, 320);
+        Scene userSettingsScene = new Scene(userSettingsGUI, 640, 320);
         
         quit.setOnAction((event) -> {
             window.close();
         });
-         
-        replaceAsdWithSUPER.setOnAction((event) -> {
-            User SUPER = new User("SUPER", "SUPER", 1000, 1000);
-            try {
-                usersDao.update(SUPER, "asd");
-            } catch (SQLException ex) {
-                Logger.getLogger(QuestionGeneratorGUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-        
-        addSUPER.setOnAction((event) -> {
-            User SUPER = new User("SUPER", "SUPER", 1000, 1000);
-            try {
-                usersDao.save(SUPER);
-            } catch (SQLException ex) {
-                Logger.getLogger(QuestionGeneratorGUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-        
         hiScores.setOnAction((event) -> {
-            try {
-                usersDao.addRightForUser("testi");
-            } catch (SQLException ex) {
-                Logger.getLogger(QuestionGeneratorGUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
             message.setText("");
             hiScoreGUI.getChildren().clear();
             hiScoreGUI.add(backToLogin, 0, 0);
-            hiScoreGUI.setHgap(10);
-            hiScoreGUI.setVgap(10);
-            hiScoreGUI.setPadding(new Insets(10, 10, 10, 10));
             try {
                 ArrayList lista = (ArrayList) usersDao.findAll();
                 for (int i=0; i<lista.size(); i++) {
@@ -149,12 +122,9 @@ public class QuestionGeneratorGUI extends Application{
                     Label name = new Label(kayttaja.toString());
                     hiScoreGUI.add(name, 0, i+1);
                 }
-            } catch (SQLException ex) {
-                System.out.println("ERROR!");
-            }
+            } catch (SQLException ex) {}
             window.setScene(hiScoreScene);
         });
-        
         newUser.setOnAction((event) -> {
             message.setText("");
             if (!nameInput.getText().equals("") && !passInput.getText().equals("")) {
@@ -168,15 +138,11 @@ public class QuestionGeneratorGUI extends Application{
                         usersDao.save(user);
                         message.setText("Käyttäjä lisätty! Voit nyt kirjautua sisään tiedoilla.");
                     }
-                } catch (SQLException ex) {
-                    Logger.getLogger(QuestionGeneratorGUI.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                } catch (SQLException ex) {}
             } else {
                 message.setText("Kirjoita kunnolliset tiedot!");
             }    
         });
-        
-        
         existingUser.setOnAction((event) -> {
             message.setText("");
             if (nameInput.getText().equals("admin") && passInput.getText().equals("admin")) {
@@ -185,9 +151,7 @@ public class QuestionGeneratorGUI extends Application{
                 User loggedUser = null;
                 try {
                     loggedUser = usersDao.verifyLogin(nameInput.getText(), passInput.getText());
-                } catch (SQLException ex) {
-                    Logger.getLogger(QuestionGeneratorGUI.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                } catch (SQLException ex) {}
                 if (loggedUser == null) {
                     message.setText("Käyttäjänimi ja salasana eivät täsmää!");
                 } else {
@@ -197,13 +161,13 @@ public class QuestionGeneratorGUI extends Application{
                         loginGUI.add(phys, 1, 5);
                         loginGUI.add(chem, 2, 5);
                         loginGUI.add(all, 3, 5);
+                        loginGUI.add(userSettings, 3, 0);
                         neverLogged = false;
                     }
                     window.setTitle("Kirjautuneena sisään: " + userNameLogged);
                 }
             }
         });
-        
         backToLogin.setOnAction((event) -> {
             message.setText("");
             window.setScene(loginScene);
@@ -212,18 +176,12 @@ public class QuestionGeneratorGUI extends Application{
             message.setText("");
             window.setScene(loginScene);
         });
+        backToLogin3.setOnAction((event) -> {
+            message.setText("");
+            window.setScene(loginScene);
+        });
         saveAndQuit.setOnAction((event) -> {
             window.close();
-        });
-        
-        clearDatabase.setOnAction((event) -> {
-            message.setText("");
-            try {
-                usersDao.clearDatabase();
-                window.setScene(loginScene);
-            } catch (SQLException ex) {
-                window.setScene(loginScene);
-            }
         });
         maths.setOnAction((event) -> {
             gene.setUserName(userNameLogged);
@@ -258,13 +216,67 @@ public class QuestionGeneratorGUI extends Application{
             question.setText(gene.getQuestion());
             answer.clear();
         });
+        
+        //USER SETTINGS BUTTONS
+        userSettings.setOnAction((event) -> {
+            window.setScene(userSettingsScene);
+        });
+        deleteAccount.setOnAction((event) -> {
+            try {
+                usersDao.delete(userNameLogged);
+            } catch (SQLException ex) {}
+                userNameLogged = "";
+                window.setTitle("Login");
+                window.setScene(loginScene);
+                loginGUI.getChildren().remove(9, 14);
+        });
+        resetScore.setOnAction((event) -> {
+            try {
+                usersDao.resetScore(userNameLogged);
+            } catch (SQLException ex) {}
+                userNameLogged = "";
+                window.setTitle("Login");
+                window.setScene(loginScene);
+                loginGUI.getChildren().remove(9, 14);
+        });
+        changePassword.setOnAction((event) -> {
+            if (!newPassInput.getText().equals("")) {
+                try {
+                    usersDao.changePassword(userNameLogged, newPassInput.getText());
+                    userNameLogged = "";
+                    window.setTitle("Login");
+                    window.setScene(loginScene);
+                    loginGUI.getChildren().remove(9, 14);
+                } catch (SQLException ex) {}   
+            }
+        });
+        
+        //TÄSTÄ ALASPÄIN NAPPEJA ADMIN KÄYTTÄJÄLLE! (DATABASEN CLEARAAMISEEN, DEBUGGAAMISEEN YMS)
+
+        clearDatabase.setOnAction((event) -> {
+            message.setText("");
+            try {
+                usersDao.clearDatabase();
+                window.setScene(loginScene);
+            } catch (SQLException ex) {
+                window.setScene(loginScene);
+            }
+        });
+        removeUser.setOnAction((event) -> {
+            try {
+                usersDao.delete(userToBeRemovedLabel.getText());
+            } catch (SQLException ex) {}
+                userNameLogged = "";
+                window.setTitle("Login");
+                window.setScene(loginScene);
+        });
+
         window.setTitle("Login");
         window.setScene(loginScene);
         window.show();
     }
-    
+
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         launch(QuestionGeneratorGUI.class);
     }
-    
 }

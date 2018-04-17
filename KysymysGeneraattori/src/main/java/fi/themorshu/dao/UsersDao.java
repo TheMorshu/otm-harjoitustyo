@@ -75,7 +75,6 @@ public class UsersDao implements Dao<User> {
         return userList;
     }
     
-    
     @Override
     public void setUpTableOnDatabase() {
         PreparedStatement statement;
@@ -93,7 +92,6 @@ public class UsersDao implements Dao<User> {
         } catch (SQLException ex) {
         }
     }
-    
     
     @Override
     public void clearDatabase() throws SQLException {
@@ -150,6 +148,23 @@ public class UsersDao implements Dao<User> {
     public void addRightForUser(String name) throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("UPDATE Users SET right = right + 1 WHERE name = ?;");
         statement.setString(1, name);
+        int changes = statement.executeUpdate();
+        statement.close();
+        this.database.closeConnection();
+    }
+    
+    public void resetScore(String name) throws SQLException {
+        PreparedStatement statement = database.getConnection().prepareStatement("UPDATE Users SET right = 0, questions = 0 WHERE name = ?;");
+        statement.setString(1, name);
+        int changes = statement.executeUpdate();
+        statement.close();
+        this.database.closeConnection();
+    }
+    
+    public void changePassword(String name, String newpass) throws SQLException {
+        PreparedStatement statement = database.getConnection().prepareStatement("UPDATE Users SET password = ? WHERE name = ?;");
+        statement.setString(1, newpass);
+        statement.setString(2, name);
         int changes = statement.executeUpdate();
         statement.close();
         this.database.closeConnection();
