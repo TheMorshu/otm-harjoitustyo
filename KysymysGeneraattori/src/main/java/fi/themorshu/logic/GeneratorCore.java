@@ -14,7 +14,7 @@ import java.util.Random;
  *
  * @author ilmar
  */
-public class Generator {
+public class GeneratorCore {
     
     String userName;
     UsersDao userDao;
@@ -27,7 +27,7 @@ public class Generator {
     ChemGen chem;
     ArrayList<Gen> genLista;
 
-    public Generator(String userName, UsersDao userDao) {
+    public GeneratorCore(String userName, UsersDao userDao) {
         this.userName = userName;
         this.userDao = userDao;
         this.mode = "";

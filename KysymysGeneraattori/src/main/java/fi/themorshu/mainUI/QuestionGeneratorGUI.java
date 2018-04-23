@@ -2,7 +2,7 @@ package fi.themorshu.mainUI;
 
 import fi.themorshu.dao.Database;
 import fi.themorshu.dao.UsersDao;
-import fi.themorshu.logic.Generator;
+import fi.themorshu.logic.GeneratorCore;
 import fi.themorshu.dao.User;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,13 +21,13 @@ public class QuestionGeneratorGUI extends Application {
     String userNameLogged;
     Boolean neverLogged;
     UsersDao usersDao;
-    Generator gene;
+    GeneratorCore gene;
 
     @Override
     public void init() throws ClassNotFoundException, SQLException {
         usersDao = new UsersDao(new Database("jdbc:sqlite:users.db"));
         userNameLogged = "";
-        gene = new Generator("", usersDao);
+        gene = new GeneratorCore("", usersDao);
         usersDao.setUpTableOnDatabase(); //Luo Users tablen databaseen, jos sitä ei jo ole (välttämätön, jso ohjelam käynnistetään 1. kertaa!)
     }
 
