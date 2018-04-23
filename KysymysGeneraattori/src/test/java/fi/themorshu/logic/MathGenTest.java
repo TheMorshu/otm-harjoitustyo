@@ -1,4 +1,4 @@
-package Tests;
+package fi.themorshu.logic;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

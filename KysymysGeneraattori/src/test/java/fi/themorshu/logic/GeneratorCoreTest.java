@@ -1,4 +1,4 @@
-package Tests;
+package fi.themorshu.logic;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -7,7 +7,8 @@ package Tests;
  */
 
 import fi.themorshu.dao.Database;
-import java.sql.Connection;
+import fi.themorshu.dao.UsersDao;
+import fi.themorshu.logic.GeneratorCore;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,15 +23,24 @@ import static org.junit.Assert.*;
  *
  * @author ilmar
  */
-public class DatabaseTest {
+public class GeneratorCoreTest {
     
+    GeneratorCore gen;
+    UsersDao userDao;
     Database database;
     
-    public DatabaseTest() {
+    public GeneratorCoreTest() {
     }
+    
     
     @Before
     public void setUp() throws ClassNotFoundException, SQLException {
+        prepareDatabase();
+        this.userDao = new UsersDao(this.database);
+        this.gen = new GeneratorCore("testi", this.userDao);
+    }
+
+    public void prepareDatabase() throws SQLException, ClassNotFoundException {
         database = new Database("jdbc:sqlite:test.db");
         PreparedStatement statement;
         try {
@@ -49,55 +59,60 @@ public class DatabaseTest {
             statement.close();
             database.closeConnection();
         } catch (SQLException ex) {
-        statement = database.getConnection().prepareStatement("CREATE TABLE users (\n" +
+            statement = database.getConnection().prepareStatement("CREATE TABLE users (\n" +
                     "id integer PRIMARY KEY,\n" +
                     "name varchar(200),\n" +
                     "password varchar (200),\n" +
                     "questions integer,\n" +
                     "right integer\n" +
                     ");");
-        int changes = statement.executeUpdate();
-        statement.close();
-        database.closeConnection();
+            int changes = statement.executeUpdate();
+            statement.close();
+            database.closeConnection();
         }
     }
+    
+    
+    @Test
+    public void vastausOnNullAlussa() throws SQLException {
+        assertEquals(this.gen.getAnswer(), null);
+    }
+    
+    
+    @Test
+    public void setModeJaGetModeToimii() {
+        String mode = "testi";
+        gen.setMode(mode);
+        assertEquals(mode, gen.getMode());
+    }
+    
+    @Test
+    public void setUserNameToimii() {
+        gen.setUserName("uusiNimi");
+        assertEquals("uusiNimi", gen.getUserName());
+    }
+    
+    
+    @Test
+    public void sendAnswerToimiiOikeallaVastauksellaMatikka() throws SQLException {
+        gen.setMode("maths");
+        String kysymys = gen.getQuestion();
+        String vastaus = gen.getAnswer();
+        assertEquals(true, gen.sendAnswer(vastaus));
+    }
+    
     
     @After
     public void tearDown() throws SQLException {
         database.closeConnection();
     }
     
-    @Test
-    public void databaseEiSisallaMitaan() throws SQLException {
-        PreparedStatement statement = database.getConnection().prepareStatement("SELECT * FROM Users;");
-        ResultSet resultSet = statement.executeQuery();
-        if (resultSet.next()) {
-            statement.close();
-            database.closeConnection();
-            assertEquals(true, false);
-        }
-        statement.close();
-        database.closeConnection();
-        assertEquals(true, true);
-    }
-    
-    @Test
-    public void dataBaseenVoiVuorovaikuttaa() throws SQLException {
-        PreparedStatement statement = database.getConnection().prepareStatement("INSERT INTO Users (name, password, questions, right) VALUES ('test', 'password', 0, 0);");
-        int changes = statement.executeUpdate();
-        statement.close();
-        database.closeConnection();
-        statement = database.getConnection().prepareStatement("SELECT * FROM Users;");
-        ResultSet resultSet = statement.executeQuery();
-        if (!resultSet.next()) {
-            statement.close();
-            database.closeConnection();
-            assertEquals(true, false);
-        }
-        statement.close();
-        database.closeConnection();
-        assertEquals(true, true);
-    }
     
     
+
+    // TODO add test methods here.
+    // The methods must be annotated with annotation @Test. For example:
+    //
+    // @Test
+    // public void hello() {}
 }
