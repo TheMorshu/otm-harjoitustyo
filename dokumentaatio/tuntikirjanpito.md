@@ -16,4 +16,5 @@ kuleen yhteenlasketun ajan (kaikkien sovellusten konfigurointeineen) karkeasti 4
 | 12.4    | 2  | koodia parannettu, tstejä laajennettu, koodia siistitty  | 
 | 12.4    | 2,5  | koodia parannettu järkevämmäksi, luokkakaavio tehty, koodin hiontaa, uusi tehtävätyyppi lisätty (auton alkunopeus jarrutuksessa), checkstyle fixes | 
 | 17.4   | 2  | Käyttöliittymäkoodin parantelu ja järkevöinti (lisää tätä myöhemmin vielä!) Määrittelydokumentissa olevien toiminnallisuuksien lisäämistä (mm. yksittäienn käyttäjä voi nyt nollata tuloksensa tai vaihtaa salasanansa). Lisäksi pieniä lisäyksiä UsersDaoon  | 
-| yht    | 24,5  |   | 
+| 23.4    | 0,5  | Testien kansiorakenne korjattu. Ongelma generator luokan yhteensopivuuden kanssa (duplicate class parien sovellusasennuksien jälkeen) korjattu --> Generator --> GeneratorCore. Muutenkin paljon kuvaavampi nimi  | 
+| yht    | 25  |   | 
