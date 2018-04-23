@@ -13,6 +13,7 @@ import static javafx.application.Application.launch;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -37,7 +38,7 @@ public class QuestionGeneratorGUI extends Application {
         Label nameText = new Label("Nimi: ");
         TextField nameInput = new TextField();
         Label passText = new Label("Salasana: ");
-        TextField passInput = new TextField();
+        PasswordField passInput = new PasswordField();
         Label message = new Label("");
         Label question = new Label("Kysymys: ");
         TextField answer = new TextField();
@@ -45,6 +46,7 @@ public class QuestionGeneratorGUI extends Application {
         TextField newPassInput = new TextField();
         Label userToBeRemovedText = new Label("Poistettava käyttäjä: ");
         TextField userToBeRemovedLabel = new TextField();
+        Label feedbackText = new Label("");
         
         //Napit
         Button newUser = new Button("Uusi käyttäjä");
@@ -94,6 +96,7 @@ public class QuestionGeneratorGUI extends Application {
         questionGUI.add(answer, 0, 1);
         questionGUI.add(sendAnswer, 0, 2);
         questionGUI.add(saveAndQuit, 0, 3);
+        questionGUI.add(feedbackText, 0, 4);
         userSettingsGUI.add(deleteAccount, 0, 0);
         userSettingsGUI.add(resetScore, 1, 0);
         userSettingsGUI.add(changePassword, 2, 0);
@@ -105,7 +108,7 @@ public class QuestionGeneratorGUI extends Application {
         Scene hiScoreScene = new Scene(hiScoreGUI, 640, 320);
         Scene loginScene = new Scene(loginGUI, 640, 320);
         Scene adminScene = new Scene(adminGUI, 640, 320);
-        Scene questionScene = new Scene(questionGUI, 640, 320);
+        Scene questionScene = new Scene(questionGUI, 900, 320);
         Scene userSettingsScene = new Scene(userSettingsGUI, 640, 320);
         
         quit.setOnAction((event) -> {
@@ -209,10 +212,12 @@ public class QuestionGeneratorGUI extends Application {
         });
         sendAnswer.setOnAction((event) -> {
             try {
-                gene.sendAnswer(answer.getText());
-            } catch (SQLException ex) {
-                Logger.getLogger(QuestionGeneratorGUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                if (gene.sendAnswer(answer.getText())) {
+                    feedbackText.setText("Vastaus oikein! Sait pisteen!");
+                } else {
+                    feedbackText.setText("Väärin! Oikea vastaus oli: " + gene.getAnswer());
+                }
+            } catch (SQLException ex) {}
             question.setText(gene.getQuestion());
             answer.clear();
         });

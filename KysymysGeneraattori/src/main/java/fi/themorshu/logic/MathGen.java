@@ -18,6 +18,7 @@ public class MathGen implements Gen {
     Random random;
     int root1;
     int root2;
+    int multipier;
 
     public MathGen(Random random) {
         this.random = random;
@@ -32,15 +33,45 @@ public class MathGen implements Gen {
     public String rootsOfFunction() {
         root1 = this.random.nextInt(21) - 10; //luku väliltä -10 - 10
         root2 = this.random.nextInt(21) - 10;
-        int xAmount = -root2 - root1;
-        int x2Amount = 1;
-        int cTerm = root1 * root2;
+        multipier = this.random.nextInt(5) - 2;
+        while (multipier == 0) {
+            multipier = this.random.nextInt(5) - 2;
+        }
+        System.out.println(multipier);
+        int xAmount = multipier * (-root2 - root1);
+        int x2Amount = multipier;
+        int cTerm = multipier * root1 * root2;
         if (root1 <= root2) {
             this.answer = root1 + " ja " + root2;
         } else {
             this.answer = root2 + " ja " + root1;
         }
-        return "Laske nollakohdat: " + "X^2+" + xAmount + "X+" + cTerm + ". Ilmoita vastaus muodossa: " + "n ja n, siten, että pienempi luku aluksi";
+        return trimRootsQuestion(x2Amount, xAmount, cTerm);
+//        return "Laske nollakohdat: " + x2Amount + "X^2+" + xAmount + "X+" + cTerm + ". Ilmoita vastaus muodossa: " + "n ja n, siten, että pienempi luku aluksi";
+    }
+
+    public String trimRootsQuestion(int x2Amount, int xAmount, int cTerm) {
+        String string = "Laske nollakohdat: ";
+        if (x2Amount != 1 && x2Amount != -1) {
+            string += x2Amount + "X^2";
+        } else {
+            if (x2Amount == 1) {
+                string += "X^2";
+            } else {
+                string += "-X^2";
+            }
+        }
+        if (xAmount > 0) {
+            string += "+" + xAmount + "X";
+        } if (xAmount < 0) {
+            string += xAmount + "X";
+        } if (cTerm > 0) {
+            string += "+" + cTerm;
+        } if (cTerm < 0) {
+            string += cTerm;
+        }
+        string += ". Ilmoita vastaus muodossa: " + "n ja n, siten, että pienempi luku aluksi";
+        return string;
     }
 
     public int getRoot1() {
@@ -50,6 +81,8 @@ public class MathGen implements Gen {
     public int getRoot2() {
         return root2;
     }
+    
+    
     
 
     @Override
