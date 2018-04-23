@@ -63,11 +63,14 @@ public class MathGen implements Gen {
         }
         if (xAmount > 0) {
             string += "+" + xAmount + "X";
-        } if (xAmount < 0) {
+        } 
+        if (xAmount < 0) {
             string += xAmount + "X";
-        } if (cTerm > 0) {
+        } 
+        if (cTerm > 0) {
             string += "+" + cTerm;
-        } if (cTerm < 0) {
+        } 
+        if (cTerm < 0) {
             string += cTerm;
         }
         string += ". Ilmoita vastaus muodossa: " + "n ja n, siten, että pienempi luku aluksi";
