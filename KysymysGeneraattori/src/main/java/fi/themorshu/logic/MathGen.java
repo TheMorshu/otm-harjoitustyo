@@ -5,6 +5,7 @@
  */
 package fi.themorshu.logic;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -47,20 +48,11 @@ public class MathGen implements Gen {
             this.answer = root2 + " ja " + root1;
         }
         return trimRootsQuestion(x2Amount, xAmount, cTerm);
-//        return "Laske nollakohdat: " + x2Amount + "X^2+" + xAmount + "X+" + cTerm + ". Ilmoita vastaus muodossa: " + "n ja n, siten, että pienempi luku aluksi";
     }
 
     public String trimRootsQuestion(int x2Amount, int xAmount, int cTerm) {
         String string = "Laske nollakohdat: ";
-        if (x2Amount != 1 && x2Amount != -1) {
-            string += x2Amount + "X^2";
-        } else {
-            if (x2Amount == 1) {
-                string += "X^2";
-            } else {
-                string += "-X^2";
-            }
-        }
+        string += x2Amount + "X^2";
         if (xAmount > 0) {
             string += "+" + xAmount + "X";
         } 
@@ -76,6 +68,7 @@ public class MathGen implements Gen {
         string += ". Ilmoita vastaus muodossa: " + "n ja n, siten, että pienempi luku aluksi";
         return string;
     }
+    
 
     public int getRoot1() {
         return root1;
