@@ -17,5 +17,5 @@ kuleen yhteenlasketun ajan (kaikkien sovellusten konfigurointeineen) karkeasti 4
 | 12.4    | 2,5  | koodia parannettu järkevämmäksi, luokkakaavio tehty, koodin hiontaa, uusi tehtävätyyppi lisätty (auton alkunopeus jarrutuksessa), checkstyle fixes | 
 | 17.4   | 2  | Käyttöliittymäkoodin parantelu ja järkevöinti (lisää tätä myöhemmin vielä!) Määrittelydokumentissa olevien toiminnallisuuksien lisäämistä (mm. yksittäienn käyttäjä voi nyt nollata tuloksensa tai vaihtaa salasanansa). Lisäksi pieniä lisäyksiä UsersDaoon  | 
 | 23.4    | 1,5  | Testien kansiorakenne korjattu. Ongelma generator luokan yhteensopivuuden kanssa (duplicate class parien sovellusasennuksien jälkeen) korjattu --> Generator --> GeneratorCore. Muutenkin paljon kuvaavampi nimi. Funktion nollakohdat tehtävää paranneltu. Kysymyskäyttöliittymää paranneltu (kysymyksen vastauksen jälkeen ohjelma antaa palautetta käyttäjälle) + muita korjauksia | 
-| yht    | 1  | Sekvenssikaavioita luotu parista toiminnallisuudesta (kysymykseen vastaus + uusen kysymyksen haku). Sovelluslogiikkaa siirretty pois UI:sta  | 
+| 24.4   | 1  | Sekvenssikaavioita luotu parista toiminnallisuudesta (kysymykseen vastaus + uusen kysymyksen haku). Sovelluslogiikkaa siirretty pois UI:sta. Ensimmäinen (pre)release  | 
 | yht    | 27  |   | 
