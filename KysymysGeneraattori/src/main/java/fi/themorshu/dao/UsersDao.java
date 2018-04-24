@@ -124,10 +124,10 @@ public class UsersDao implements Dao<User> {
     
     public String printAllUsersScores() throws SQLException {
         String string = "";
-        ArrayList list = (ArrayList)this.findAll();
-        for (int i=0; i<list.size(); i++) {
-                    User user = (User) list.get(i);
-                    string += user.toString()+"\n";
+        ArrayList list = (ArrayList) this.findAll();
+        for (int i = 0; i < list.size(); i++) {
+            User user = (User) list.get(i);
+            string += user.toString() + "\n";
         }
         return string;
     }
