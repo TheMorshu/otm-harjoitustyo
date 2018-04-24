@@ -20,14 +20,23 @@ public class MathGen implements Gen {
     int root1;
     int root2;
     int multipier;
+    BasicValues values;
 
     public MathGen(Random random) {
         this.random = random;
+        this.values = new BasicValues();
     }
 
     @Override
     public String question() {
-        return rootsOfFunction(); //yksi monista, jatkossa randomilla
+        int choice = this.random.nextInt(2);
+        if (choice == 0) {
+            return rootsOfFunction();
+        } else if (choice == 1) {
+            return interestOfLoan();
+        } else {
+            return "ERROR!";
+        }
     }
 
     
@@ -38,7 +47,6 @@ public class MathGen implements Gen {
         while (multipier == 0) {
             multipier = this.random.nextInt(5) - 2;
         }
-        System.out.println(multipier);
         int xAmount = multipier * (-root2 - root1);
         int x2Amount = multipier;
         int cTerm = multipier * root1 * root2;
@@ -49,7 +57,6 @@ public class MathGen implements Gen {
         }
         return trimRootsQuestion(x2Amount, xAmount, cTerm);
     }
-
     public String trimRootsQuestion(int x2Amount, int xAmount, int cTerm) {
         String string = "Laske nollakohdat: ";
         string += x2Amount + "X^2";
@@ -68,16 +75,22 @@ public class MathGen implements Gen {
         string += ". Ilmoita vastaus muodossa: " + "n ja n, siten, että pienempi luku aluksi";
         return string;
     }
-    
-
     public int getRoot1() {
         return root1;
     }
-
     public int getRoot2() {
         return root2;
     }
     
+    public String interestOfLoan() {
+        double originalLoan = 1.0*(this.random.nextInt(901) + 100); //100-1000e laina
+        double interestPercent = 1.0*(this.random.nextInt(10) + 1); //1-10% korko
+        double amountOfWeeks = 1.0*(this.random.nextInt(8) + 3); //3-10 viikkoa
+        double interestMultipier = 1.0 + interestPercent/100;
+        double finalLoan = 1.0 * originalLoan * Math.pow(1.0*interestMultipier, 1.0*amountOfWeeks);
+        this.answer = "" + String.format("%.2f", (this.values.round(finalLoan, 2))) + "e";
+        return "Kalle lainaa penalta " + originalLoan + " euroa ja he sopivat viikkokoroksi " + interestPercent + " %. Kuinka paljon Kalle on Penalle velkaa " + amountOfWeeks + " viikon päästä? Anna vastaus sentin tarkkuudella esim 265,44e";
+    }
     
     
 

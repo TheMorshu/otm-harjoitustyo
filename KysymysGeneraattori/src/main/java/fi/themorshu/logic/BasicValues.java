@@ -31,6 +31,11 @@ public class BasicValues {
     }
     
     
+    public double molarGasConstantJMolKelvin() {
+        return 8.31451;
+    }
+    
+    
     
     
     
