@@ -83,11 +83,11 @@ public class MathGen implements Gen {
     }
     
     public String interestOfLoan() {
-        double originalLoan = 1.0*(this.random.nextInt(901) + 100); //100-1000e laina
-        double interestPercent = 1.0*(this.random.nextInt(10) + 1); //1-10% korko
-        double amountOfWeeks = 1.0*(this.random.nextInt(8) + 3); //3-10 viikkoa
-        double interestMultipier = 1.0 + interestPercent/100;
-        double finalLoan = 1.0 * originalLoan * Math.pow(1.0*interestMultipier, 1.0*amountOfWeeks);
+        double originalLoan = 1.0 * (this.random.nextInt(901) + 100); //100-1000e laina
+        double interestPercent = 1.0 * (this.random.nextInt(10) + 1); //1-10% korko
+        double amountOfWeeks = 1.0 * (this.random.nextInt(8) + 3); //3-10 viikkoa
+        double interestMultipier = 1.0 + interestPercent / 100;
+        double finalLoan = 1.0 * originalLoan * Math.pow(1.0 * interestMultipier, 1.0 * amountOfWeeks);
         this.answer = "" + String.format("%.2f", (this.values.round(finalLoan, 2))) + "e";
         return "Kalle lainaa penalta " + originalLoan + " euroa ja he sopivat viikkokoroksi " + interestPercent + " %. Kuinka paljon Kalle on Penalle velkaa " + amountOfWeeks + " viikon päästä? Anna vastaus sentin tarkkuudella esim 265,44e";
     }
