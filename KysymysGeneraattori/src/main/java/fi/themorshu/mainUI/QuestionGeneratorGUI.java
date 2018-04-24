@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -47,6 +48,8 @@ public class QuestionGeneratorGUI extends Application {
         Label userToBeRemovedText = new Label("Poistettava käyttäjä: ");
         TextField userToBeRemovedLabel = new TextField();
         Label feedbackText = new Label("");
+        TextArea usersAndPasswords = new TextArea();
+        TextArea hiScoresArea = new TextArea();
         
         //Napit
         Button newUser = new Button("Uusi käyttäjä");
@@ -68,6 +71,7 @@ public class QuestionGeneratorGUI extends Application {
         Button resetScore = new Button("Nollaa tulokset");
         Button changePassword = new Button("Vaihda salasana");
         Button removeUser = new Button("Poista käyttäjä!");
+        Button listUsernamesAndPasswords = new Button("Listaa käyttäjänimet ja salasanat");
         
         //Asettelut
         GridPane loginGUI = new GridPane();
@@ -87,11 +91,14 @@ public class QuestionGeneratorGUI extends Application {
         loginGUI.add(quit, 1, 3);
         loginGUI.add(message, 0, 4);
         hiScoreGUI.add(backToLogin, 0, 0);
+        hiScoreGUI.add(hiScoresArea, 0, 1);
         adminGUI.add(clearDatabase, 0, 0);
         adminGUI.add(backToLogin2, 0, 1);
         adminGUI.add(removeUser, 0, 2);
-        adminGUI.add(userToBeRemovedText, 1, 2);
-        adminGUI.add(userToBeRemovedLabel, 2, 2);
+        adminGUI.add(userToBeRemovedText, 0, 3);
+        adminGUI.add(userToBeRemovedLabel, 1, 3);
+        adminGUI.add(listUsernamesAndPasswords, 0, 4);
+        adminGUI.add(usersAndPasswords, 0, 5);
         questionGUI.add(question, 0, 0);
         questionGUI.add(answer, 0, 1);
         questionGUI.add(sendAnswer, 0, 2);
@@ -116,15 +123,9 @@ public class QuestionGeneratorGUI extends Application {
         });
         hiScores.setOnAction((event) -> {
             message.setText("");
-            hiScoreGUI.getChildren().clear();
-            hiScoreGUI.add(backToLogin, 0, 0);
+            String hiScoresText = "";
             try {
-                ArrayList lista = (ArrayList) usersDao.findAll();
-                for (int i=0; i<lista.size(); i++) {
-                    User kayttaja = (User) lista.get(i);
-                    Label name = new Label(kayttaja.toString());
-                    hiScoreGUI.add(name, 0, i+1);
-                }
+                hiScoresArea.setText(usersDao.printAllUsersScores());
             } catch (SQLException ex) {}
             window.setScene(hiScoreScene);
         });
@@ -267,7 +268,19 @@ public class QuestionGeneratorGUI extends Application {
                 window.setTitle("Login");
                 window.setScene(loginScene);
         });
-
+        listUsernamesAndPasswords.setOnAction((event) -> {
+            usersAndPasswords.clear();
+            String teksti = "";
+            try {
+                ArrayList dataList = (ArrayList) usersDao.findAll();
+                for (int i=0; i<dataList.size(); i++) {
+                    User kayttaja = (User) dataList.get(i);
+                    teksti += "username: " + kayttaja.getUsername() + " password: " + kayttaja.getPassword() + "\n";
+                    usersAndPasswords.setText(teksti);
+                }
+            } catch (SQLException ex) {}
+            usersAndPasswords.setText(teksti);
+        });
         window.setTitle("Login");
         window.setScene(loginScene);
         window.show();

@@ -122,6 +122,16 @@ public class UsersDao implements Dao<User> {
         this.database.closeConnection();
     }
     
+    public String printAllUsersScores() throws SQLException {
+        String string = "";
+        ArrayList list = (ArrayList)this.findAll();
+        for (int i=0; i<list.size(); i++) {
+                    User user = (User) list.get(i);
+                    string += user.toString()+"\n";
+        }
+        return string;
+    }
+    
     public User verifyLogin(String username, String password) throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("SELECT name, password, questions, right FROM Users WHERE name = ? AND password = ?;");
         statement.setString(1, username);
