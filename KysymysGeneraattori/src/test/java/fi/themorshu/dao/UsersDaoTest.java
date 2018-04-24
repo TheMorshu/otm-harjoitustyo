@@ -90,6 +90,26 @@ public class UsersDaoTest {
     }
     
     @Test
+    public void saveEiTeeMitaanJosTyhjatTiedot() throws SQLException {
+        User user = new User("", "", 0, 0);
+        User returningUser = this.dao.save(user);
+        database.closeConnection();
+        assertEquals(returningUser, null);
+    }
+    
+    
+    @Test
+    public void saveFeedbackPalauttaaOikeanKommentinKunUusiKayttaja() throws SQLException {
+        User user = new User("nakkiAri", "salasana", 0, 0);
+        User returningUser = this.dao.save(user);
+        database.closeConnection();
+        assertEquals("Käyttäjä lisätty! Voit nyt kirjautua sisään tiedoilla.", dao.getSaveFeedBack());
+    }
+    
+    
+    
+    
+    @Test
     public void loytaaDatabasestaHalutunHenkilon() throws SQLException {
         assertEquals(true, this.dao.checkContainsName("test"));
     }
