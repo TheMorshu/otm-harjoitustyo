@@ -41,7 +41,8 @@ public class ChemGen implements Gen {
         double volumeInLitres = volumeInCubicCentiMeters / 1000;
         double molarAmountOfGas = (1.0 * (pressurePascal) * volumeInCubicMeters) / (temperatureKelvin * this.values.molarGasConstantJMolKelvin());
         this.answer = "" + String.format("%.2f", this.values.round(molarAmountOfGas, 2)) + " mol";
-        return "Laske ideaalikaasun ainemäärä kahden desimaalin tarkkuudella. Vastaus muotoa 10,22 mol. Kaasun lämpötila: " + temperatureKelvin + " K, paine: " + pressurePascal + " Pa, tilavuus: " + volumeInLitres + " litraa.";
+        return "Laske ideaalikaasun ainemäärä kahden desimaalin tarkkuudella. Vastaus muotoa 10,22 mol. "
+                + "\nKaasun lämpötila: " + temperatureKelvin + " K, paine: " + pressurePascal + " Pa, tilavuus: " + volumeInLitres + " litraa.";
     }
     
 }

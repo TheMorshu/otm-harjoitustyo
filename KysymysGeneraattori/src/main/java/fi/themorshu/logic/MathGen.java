@@ -72,7 +72,7 @@ public class MathGen implements Gen {
         if (cTerm < 0) {
             string += cTerm;
         }
-        string += ". Ilmoita vastaus muodossa: " + "n ja n, siten, että pienempi luku aluksi";
+        string += ". \nIlmoita vastaus muodossa: " + "n ja n, siten, että pienempi luku aluksi";
         return string;
     }
     public int getRoot1() {
@@ -89,7 +89,7 @@ public class MathGen implements Gen {
         double interestMultipier = 1.0 + interestPercent / 100;
         double finalLoan = 1.0 * originalLoan * Math.pow(1.0 * interestMultipier, 1.0 * amountOfWeeks);
         this.answer = "" + String.format("%.2f", (this.values.round(finalLoan, 2))) + "e";
-        return "Kalle lainaa penalta " + originalLoan + " euroa ja he sopivat viikkokoroksi " + interestPercent + " %. Kuinka paljon Kalle on Penalle velkaa " + amountOfWeeks + " viikon päästä? Anna vastaus sentin tarkkuudella esim 265,44e";
+        return "Kalle lainaa penalta " + originalLoan + " euroa ja he sopivat viikkokoroksi " + interestPercent + " %. \nKuinka paljon Kalle on Penalle velkaa " + amountOfWeeks + " viikon päästä? Anna vastaus sentin tarkkuudella esim 265,44e";
     }
     
     

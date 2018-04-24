@@ -42,7 +42,8 @@ public class PhysGen implements Gen {
         double nopeus = sqrt(2 * kitkakerroin * jarrutusmatka * this.values.droppingAccerlation());
         this.answer = "" + String.format("%.2f", (this.values.round(nopeus, 2)));
         System.out.println("Vastaus: " + this.answer);
-        return "Laske auton alkunopeus ennen jarrutusta, kun kitkakerroin on " + kitkakerroin + " ja auton jarrutusmatka " + jarrutusmatka + " m. Anna vastaus m/s 2 desimaalin tarkkuudella (esim kirjoita 32.22)";
+        return "Laske auton alkunopeus ennen jarrutusta, kun kitkakerroin on " + kitkakerroin + " ja auton jarrutusmatka " + jarrutusmatka + " m. "
+                + "\nAnna vastaus m/s 2 desimaalin tarkkuudella (esim kirjoita 32.22)";
     }
     
 
