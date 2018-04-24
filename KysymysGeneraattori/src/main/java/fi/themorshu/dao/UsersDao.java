@@ -18,9 +18,11 @@ import java.util.List;
 public class UsersDao implements Dao<User> {
     
     Database database;
+    String feedback;
 
     public UsersDao(Database database) {
         this.database = database;
+        this.feedback = "";
     }
     
     @Override
@@ -173,12 +175,21 @@ public class UsersDao implements Dao<User> {
     @Override
     public User save(User user) throws SQLException {
         System.out.println("1");
-        if (!checkContainsName(user.getUsername())) { //Jos ei sisällä haluttua nimeä, luo tilin
+        if (user.getUsername().equals("") || user.getPassword().equals("")) {
+            this.feedback = "Kirjoita kunnolliset tiedot!";
+            return null;
+        } else if (!checkContainsName(user.getUsername())) { //Jos ei sisällä haluttua nimeä, luo tilin
+            this.feedback = "Käyttäjä lisätty! Voit nyt kirjautua sisään tiedoilla.";
             directInsertToDatabase(user);
             return user;
         } else { //jos nimi on jo varattu ei tee mitään ja palauuttaa null
+            this.feedback = "Käyttäjänimi on jo käytössä!";
             return null;
         }
+    }
+    
+    public String getSaveFeedBack() {
+        return this.feedback;
     }
 
     @Override

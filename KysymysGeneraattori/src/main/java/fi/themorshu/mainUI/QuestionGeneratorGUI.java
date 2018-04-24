@@ -130,21 +130,13 @@ public class QuestionGeneratorGUI extends Application {
         });
         newUser.setOnAction((event) -> {
             message.setText("");
-            if (!nameInput.getText().equals("") && !passInput.getText().equals("")) {
-                User user = new User(nameInput.getText(), passInput.getText(), 0, 0);
-                try {
-                    nameInput.clear();
-                    passInput.clear();
-                    if (usersDao.checkContainsName(user.getUsername())) {
-                        message.setText("Käyttäjänimi on jo käytössä!");
-                    } else {
-                        usersDao.save(user);
-                        message.setText("Käyttäjä lisätty! Voit nyt kirjautua sisään tiedoilla.");
-                    }
-                } catch (SQLException ex) {}
-            } else {
-                message.setText("Kirjoita kunnolliset tiedot!");
-            }    
+            User user = new User(nameInput.getText(), passInput.getText(), 0, 0);
+            try {
+                usersDao.save(user);
+            } catch (SQLException ex) {}
+            nameInput.clear();
+            passInput.clear();
+            message.setText(usersDao.getSaveFeedBack());  
         });
         existingUser.setOnAction((event) -> {
             message.setText("");
