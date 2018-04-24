@@ -2,6 +2,8 @@
 
 Kysymysgeneraattori generoi automaattisesti lukiotason kysymyksiä matematiikasta, fysiikasta ja kemiasta käyttäjälleen. Käyttäjiä on useita ja jokaisen käyttäjän tulee rekisteröityä palveluun. Tehdyistä tehtävistä saa pisteitä ohjelmassa.
 
+**Releaset**
+
 [Lataa ensimmäinen (pre)release täältä!](https://github.com/TheMorshu/otm-harjoitustyo/releases)
 
 **Hakemisto**
