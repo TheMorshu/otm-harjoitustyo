@@ -1,10 +1,3 @@
-//OK!
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fi.themorshu.dao;
 
 import java.sql.PreparedStatement;
@@ -13,18 +6,32 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * UsersDao luokka sisältää erilaisia metodeja Usereiden (käyttäjien) käsittelyyn tietokannassa.
+ * UsersDao on siis eräänlainen data access object. UsersDao käyttää Database oliota vuorovaikutukseen
+ * tietokantatiedostoon.
+ */
 
 public class UsersDao implements Dao<User> {
-    
     Database database;
     String feedback;
 
+    /**
+     * Kontruktorissa määritellään käytettävä tietokantaolio, sekä alustetaan tyhjäksi tietokantatiedoston
+     * käytöstä palautetta antava feedback String.
+     * @param database Database olio, jonka kautta muutokset tehdään tietokantaan.
+     */
     public UsersDao(Database database) {
         this.database = database;
         this.feedback = "";
     }
     
+    /**
+     * Metodia käytetään yksittäisen User olion etsimiseen tietokannasta. Uniikkina id:nä toimii käyttäjänimi.
+     * @param username Etsittävän käyttäjän käyttäjänimi
+     * @return Palauttaa etsityn käyttäjän User oliona
+     * @throws SQLException 
+     */
     @Override
     public User findOne(String username) throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("SELECT name, password, questions, right FROM Users WHERE name = ?");
@@ -45,7 +52,12 @@ public class UsersDao implements Dao<User> {
         }
     }
     
-    //extra
+    /**
+     * Metodin avulla tarkistetaan, onko käyttäjä jo olemassa
+     * @param etsittävän käyttäjän käyttäjänimi
+     * @return Palauttaa totuusarvon siitä, onko käyttäjää listattu tietokantaan (onko sitä olemassa)
+     * @throws SQLException 
+     */
     public Boolean checkContainsName(String name) throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("SELECT name FROM Users WHERE name = ?");
         statement.setString(1, name);
@@ -60,6 +72,11 @@ public class UsersDao implements Dao<User> {
         return false;
     }
 
+    /**
+     * Metodin avulla "napataan" kaikki käyttäjät User oliona listassa.
+     * @return Palauttaa listan kaikista tietokannan User oliosta listana
+     * @throws SQLException 
+     */
     @Override
     public List<User> findAll() throws SQLException {
         List<User> userList = new ArrayList<>();
@@ -77,6 +94,11 @@ public class UsersDao implements Dao<User> {
         return userList;
     }
     
+    /**
+     * Metodi luo tietokantataulun käyttäjille tietokantaan. Voidaan suorittaa sen jälkeen,
+     * kun tietokanta on luotu tai tyhjennetty. On siis osa alustusprosessia.
+     * @see fi.themorshu.dao.UsersDao#clearDatabase() 
+     */
     @Override
     public void setUpTableOnDatabase() {
         PreparedStatement statement;
@@ -95,22 +117,23 @@ public class UsersDao implements Dao<User> {
         }
     }
     
+    /**
+     * Metodi tyhjentää tietokannan, ja luo tietokantaan uudelleen siinä käytetyn tietokantataulun
+     * @throws SQLException 
+     */
     @Override
     public void clearDatabase() throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("DROP TABLE Users;");
         int changes = statement.executeUpdate();
-        statement = database.getConnection().prepareStatement("CREATE TABLE users (\n" +
-        "id integer PRIMARY KEY,\n" +
-        "name varchar(200),\n" +
-        "password varchar (200),\n" +
-        "questions integer,\n" +
-        "right integer\n" +
-        ");");
-        changes = statement.executeUpdate();
         statement.close();
         this.database.closeConnection();
+        setUpTableOnDatabase();
     }
     
+    /**
+     * metodi tulostaa kaikkien tietokannassa olevien käyttäjien nimet. Metodia käytetään lähinnä debuggaukseen, eikä sillä ole juuri merkitystä tavalliselle käyttäjälle.
+     * @throws SQLException 
+     */
     public void printUsers() throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("SELECT name FROM Users");
         ResultSet resultSet = statement.executeQuery();
@@ -122,6 +145,11 @@ public class UsersDao implements Dao<User> {
         this.database.closeConnection();
     }
     
+    /**
+     * Metodin avulla saadaan käyttäjät pisteineen merkkijonona. Voidaan hyödyntää mm. HiScoreissa.
+     * @return Käyttäjän tehtävineen ja pisteineen merkkijonona (HiScoreja varten)
+     * @throws SQLException 
+     */
     public String printAllUsersScores() throws SQLException {
         String string = "";
         ArrayList list = (ArrayList) this.findAll();
@@ -132,6 +160,15 @@ public class UsersDao implements Dao<User> {
         return string;
     }
     
+    /**
+     * Tätä metodia käytetään sisäänkirjautumisen vahvistamiseen. Mikäli parametrina annetun käyttäjänimen salasana
+     * on sama kuin parametrina annettu salasana, on kirjautuminen onnistunut ja metodi palauttaa kyseisen käyttäjän
+     * User oliona. Muussa tapauksessa metodi palauttaa null
+     * @param username Kirjautumista yrttävän käyttäjän käyttäjänimi
+     * @param password Kirjausta yrittävän käytäjän salasana
+     * @return Kirjautumisonnistumisesta riippuen joko käyttäjä User oliona (onnistunut) tai null (kirjautuminen epäonnistunut)
+     * @throws SQLException 
+     */
     public User verifyLogin(String username, String password) throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("SELECT name, password, questions, right FROM Users WHERE name = ? AND password = ?;");
         statement.setString(1, username);
@@ -149,6 +186,11 @@ public class UsersDao implements Dao<User> {
         return null;
     }
     
+    /**
+     * Lisää vastattuihin kysymyksiin yhden kerran lisää halutulle käyttäjälle
+     * @param name Halutun käyttäjän käyttäjänimi
+     * @throws SQLException 
+     */
     public void addQuestionsForUser(String name) throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("UPDATE Users SET questions = questions + 1 WHERE name = ?;");
         statement.setString(1, name);
@@ -157,6 +199,11 @@ public class UsersDao implements Dao<User> {
         this.database.closeConnection();
     }
     
+    /**
+     * Lisää pisteen halutulle käyttäjälle
+     * @param name Halutun käyttäjän käyttäjänimi
+     * @throws SQLException 
+     */
     public void addRightForUser(String name) throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("UPDATE Users SET right = right + 1 WHERE name = ?;");
         statement.setString(1, name);
@@ -165,6 +212,11 @@ public class UsersDao implements Dao<User> {
         this.database.closeConnection();
     }
     
+    /**
+     * Nollaa halutun käyttäjän pistetulokset ja vastatut kysymysket
+     * @param name Halutun käyttäjän käyttäjänimi
+     * @throws SQLException 
+     */
     public void resetScore(String name) throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("UPDATE Users SET right = 0, questions = 0 WHERE name = ?;");
         statement.setString(1, name);
@@ -173,6 +225,12 @@ public class UsersDao implements Dao<User> {
         this.database.closeConnection();
     }
     
+    /**
+     * Vaihtaa halutun käyttäjän salasanan uuteen salasanaan
+     * @param name Käyttäjänimi, jolle salasana vaihdetaan
+     * @param newpass Uusi salasana
+     * @throws SQLException 
+     */
     public void changePassword(String name, String newpass) throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("UPDATE Users SET password = ? WHERE name = ?;");
         statement.setString(1, newpass);
@@ -182,6 +240,12 @@ public class UsersDao implements Dao<User> {
         this.database.closeConnection();
     }
 
+    /**
+     * Lisää uuden käyttäjän tietokantaan, mikäli syötetyt tiedot ovat kunnolliset ja kyseisen nimistä käyttäjää ei vielä ole
+     * @param user Uusi tallennettava käyttäjä User oliona
+     * @return Mikäli tallennus onnistuu, palauttaa metodi parametrina annetun User olion takaisin, muussa tapauksessa palauttaa null.
+     * @throws SQLException 
+     */
     @Override
     public User save(User user) throws SQLException {
         System.out.println("1");
@@ -198,10 +262,22 @@ public class UsersDao implements Dao<User> {
         }
     }
     
+    /**
+     * Metodi palauttaa palaute Stringin (liittyy kirjautumisen onnistumiseen)
+     * @return UserDao:n palaute String, määritellään kirjautumisvaiheessa
+     * @see fi.themorshu.UsersDao#save()
+     */
     public String getSaveFeedBack() {
         return this.feedback;
     }
 
+    /**
+     * Tämän metodin avulla voidaan yksittäisen käyttäjän mitä tahansa tietoja muokata.
+     * @param user Käyttäjän uudet tiedot User oliona
+     * @param usernameOfPreviousVersion käyttäjän vanha nimi (toimii id:nä). Tämän avulla käyttäjä etsitään tietokannasta ja uudet tiedot tallennetaa päälle.
+     * @return
+     * @throws SQLException 
+     */
     @Override
     public User update(User user, String usernameOfPreviousVersion) throws SQLException {
         if (checkContainsName(usernameOfPreviousVersion) && !checkContainsName(user.getUsername())) {             
@@ -213,6 +289,11 @@ public class UsersDao implements Dao<User> {
         }
     }
 
+    /**
+     * Poistaa yksittäisen käyttäjän tietoineen kokonaan tietokannasta
+     * @param username Poistettavan käyttäjän nimi (id)
+     * @throws SQLException 
+     */
     @Override
     public void delete(String username) throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("DELETE FROM Users WHERE name = ?;");
@@ -222,7 +303,11 @@ public class UsersDao implements Dao<User> {
         this.database.closeConnection();
     }
 
-    
+    /**
+     * Tallentaa käyttäjän suoraan tietokantaan tutkimatta, onko kyseisen nimistä oliota jo tallennettu. Käytetään vain, jos etukäteen on jo varmistettu, että samannimistä äyttäjää ei ole.
+     * @param user Tallennettava käyttäjä User oliona
+     * @throws SQLException 
+     */
     @Override
     public void directInsertToDatabase(User user) throws SQLException {
         PreparedStatement statement;
