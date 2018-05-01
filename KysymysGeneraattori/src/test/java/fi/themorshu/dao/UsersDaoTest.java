@@ -101,12 +101,65 @@ public class UsersDaoTest {
     @Test
     public void saveFeedbackPalauttaaOikeanKommentinKunUusiKayttaja() throws SQLException {
         User user = new User("nakkiAri", "salasana", 0, 0);
-        User returningUser = this.dao.save(user);
+        this.dao.save(user);
         database.closeConnection();
         assertEquals("Käyttäjä lisätty! Voit nyt kirjautua sisään tiedoilla.", dao.getSaveFeedBack());
     }
     
+    @Test
+    public void salasananVaihtoToimii() throws SQLException {
+        User user = new User("testUser", "passOriginal", 0, 0);
+        this.dao.save(user);
+        database.closeConnection();
+        this.dao.changePassword("testUser", "passNew");
+        assertEquals(this.dao.findOne("testUser").getPassword(),"passNew");
+    }
     
+    @Test
+    public void resetScoreNollaaKysymykset() throws SQLException {
+        User user = new User("testUser", "pass", 10, 10);
+        this.dao.save(user);
+        database.closeConnection();
+        this.dao.resetScore("testUser");
+        assertEquals(this.dao.findOne("testUser").getQuestions(), 0);
+    }
+    
+    @Test
+    public void resetScoreNollaaPisteet() throws SQLException {
+        User user = new User("testUser", "pass", 10, 10);
+        this.dao.save(user);
+        database.closeConnection();
+        this.dao.resetScore("testUser");
+        assertEquals(this.dao.findOne("testUser").getRight(), 0);
+    }
+    
+    @Test
+    public void updateMetodiKykeneeMuuttamaanKaikkiaTietoja() throws SQLException {
+        User user = new User("testUser", "pass", 10, 10);
+        this.dao.save(user);
+        database.closeConnection();
+        User newUser = new User("testUser123", "pass123", 100, 100);
+        this.dao.update(newUser, "testUser");
+        assertEquals(this.dao.findOne("testUser123"), newUser);
+    }
+    
+    @Test
+    public void updateMetodiPalauttaaNullJosUusiNimiJoOlemassa() throws SQLException {
+        User user = new User("testUser", "pass", 10, 10);
+        this.dao.save(user);
+        database.closeConnection();
+        User newUser = new User("testUser123", "pass123", 100, 100);
+        this.dao.save(newUser);
+        database.closeConnection();
+        this.dao.update(newUser, "testUser");
+        assertEquals(null, this.dao.update(newUser, "testUser"));
+    }
+    
+    @Test
+    public void updateMetodiPalauttaaNullJosMuokattavaaOliotaEiOlemassa() throws SQLException {
+        User newUser = new User("testUser123", "pass123", 100, 100);
+        assertEquals(null, this.dao.update(newUser, "testUser"));
+    }
     
     
     @Test

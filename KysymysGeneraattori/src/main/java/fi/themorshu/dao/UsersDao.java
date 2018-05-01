@@ -54,7 +54,7 @@ public class UsersDao implements Dao<User> {
     
     /**
      * Metodin avulla tarkistetaan, onko käyttäjä jo olemassa
-     * @param etsittävän käyttäjän käyttäjänimi
+     * @param name etsittävän käyttäjän käyttäjänimi
      * @return Palauttaa totuusarvon siitä, onko käyttäjää listattu tietokantaan (onko sitä olemassa)
      * @throws SQLException 
      */
