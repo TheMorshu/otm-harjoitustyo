@@ -96,8 +96,15 @@ Raporttia voidaan tarkastella avaamalla tiedosto _/target/site/checkstyle.html_
 
 ### JavaDoc
 
-Kesken!
+JavaDocin generointu onnistuu suorittamalla seuraava komento maven projektin kansiopolussa:
+```
+mvn javadoc:javadoc
+```
+Tämän jälkeen JavaDoc HTML dokumentit löytyvät hakemistosta 
 
+_target/site/apidocs/_
+
+Avaa tiedosto _index_ avataksesi JavaDocin
 
 
 
