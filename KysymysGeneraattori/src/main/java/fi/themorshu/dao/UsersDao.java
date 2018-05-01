@@ -248,7 +248,6 @@ public class UsersDao implements Dao<User> {
      */
     @Override
     public User save(User user) throws SQLException {
-        System.out.println("1");
         if (user.getUsername().equals("") || user.getPassword().equals("")) {
             this.feedback = "Kirjoita kunnolliset tiedot!";
             return null;
@@ -275,7 +274,7 @@ public class UsersDao implements Dao<User> {
      * Tämän metodin avulla voidaan yksittäisen käyttäjän mitä tahansa tietoja muokata.
      * @param user Käyttäjän uudet tiedot User oliona
      * @param usernameOfPreviousVersion käyttäjän vanha nimi (toimii id:nä). Tämän avulla käyttäjä etsitään tietokannasta ja uudet tiedot tallennetaa päälle.
-     * @return
+     * @return Mikäli tallennus onnistuu, niin palauttaa user parametrin, jos tallennus ei onnistu, palauttaa null
      * @throws SQLException 
      */
     @Override

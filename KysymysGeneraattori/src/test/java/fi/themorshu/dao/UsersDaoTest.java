@@ -180,7 +180,6 @@ public class UsersDaoTest {
     public void findOnePalauttaaVastaavanOlion() throws SQLException { //KESKEN 
         User foundOne = this.dao.findOne("test");
         database.closeConnection();
-        System.out.println(foundOne.getUsername());
         if (foundOne.getUsername().equals("test") && foundOne.getPassword().equals("password") && foundOne.getQuestions() == 100 && foundOne.getRight() == 50) {
             assertEquals(true, true);
         } else {
