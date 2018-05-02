@@ -19,5 +19,22 @@ Lisäksi ainakin windows tietokoneilla voi jar tiedoston käynnistää suoraan t
 
 **HUOM! Tiedostonimi voi poiketa releasesta riippuen. Järjenkäyttö on tässä sallittua**
 
+### Aloitusnäkymä ja kirjautuminen
+
+
+<img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/login.png" width="400">
+<img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/hiscores.png" width="400">
+
+### Sisäänkirjautumisen jälkeen
+
+<img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/logedin.png" width="400">
+<img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/usersettings.png" width="400">
+<img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/question.png" width="400">
+
+
+### Admin työkalut
+
+<img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/admin.png" width="400">
+
 
 
