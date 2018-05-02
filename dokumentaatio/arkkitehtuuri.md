@@ -30,7 +30,7 @@ Sovelluksen esittämät kysymykset haetaan GeneratorCore (vanha nimi Generator) 
 
 Sovelluslogiikan datamallin muodostaa luokka User, sekä luokka GeneratorCore, joka vastaa kysymyksien generoimisesta. Erillistä luokkaa kysymyksille ei ole.
 
-<img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/datamodel.png" width="400">
+<img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/datamodel.png" width="800">
 
 Kysymyksiä on siis näennäisesti ääretön määrä. Käyttäjän tekemien vastsausten pohjalta tallennetaan tuloksia tietokantaan UsersDao luokan avulla. Ydintoiminnallisuuksista vastaa pääosin luokka GeneratorCore (logiikka), jolla löytyy seuraavat kysymystenhallintaan liittyvät metodit:
 
