@@ -18,10 +18,9 @@ public class Database {
     /**
      * Konstruktorissa määritellään tietokantatiedoston osoite
      * @param databaseAddress Tietokantatiedoston osoite ja nimi
-     * @throws ClassNotFoundException
-     * @throws SQLException 
+     * @throws SQLException Heittää virheen, jos SQL yhteys ei jostain syystä toimi oikein
      */
-    public Database(String databaseAddress) throws ClassNotFoundException, SQLException {
+    public Database(String databaseAddress) throws SQLException {
         this.databaseAddress = databaseAddress;
     }
 

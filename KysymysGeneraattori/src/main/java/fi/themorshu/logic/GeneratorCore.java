@@ -89,22 +89,6 @@ public class GeneratorCore {
         this.question = this.genLista.get(n).question();
         this.answer = this.genLista.get(n).answer();
         return true;
-//        if (n == 1) {
-//            this.question = math.question();
-//            this.answer = math.answer();
-//            return true;
-//        }
-//        if (n == 2) {
-//            this.question = phys.question();
-//            this.answer = phys.answer();
-//            return true;
-//        }
-//        if (n == 3) {
-//            this.question = chem.question();
-//            this.answer = chem.answer();
-//            return true;
-//        }
-//        return false;
     }
     
 
