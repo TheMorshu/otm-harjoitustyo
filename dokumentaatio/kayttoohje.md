@@ -17,7 +17,7 @@ java -jar tiedostonimi.jar
 ```
 Lisäksi ainakin windows tietokoneilla voi jar tiedoston käynnistää suoraan tuplaklikkaamalla
 
-** HUOM! Tiedostonimi voi poiketa releasesta riippuen. Järjenkäyttö on tässä sallittua **
+**HUOM! Tiedostonimi voi poiketa releasesta riippuen. Järjenkäyttö on tässä sallittua**
 
 
 
