@@ -4,6 +4,8 @@ Kysymysgeneraattori generoi automaattisesti lukiotason kysymyksiä matematiikast
 
 ### Dokumentaatio
 
+[Käyttöohje](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/dokumentaatio/kayttoohje.md)
+
 [Alusatava määrittelydokumentti](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/dokumentaatio/maarittelydokumentti.md)
 
 [Arkkitehtuuri](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/dokumentaatio/arkkitehtuuri.md)
