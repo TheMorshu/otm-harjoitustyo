@@ -23,12 +23,12 @@ Lisäksi ainakin windows tietokoneilla voi jar tiedoston käynnistää suoraan t
 
 Kun ohjelma käynnistyy, on sisäänkirjausnäkymä seuraavanlainen:
 
-<img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/login.png" width="400">
+<img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/login.png" width="600">
 
 tässä näkymässä voi käyttäjä luoda itselleen tilin salasanoineen, tai kirjautua sisään jo vanhoilla tunnuksillaan.
 Ennen varsinaista sisäänkirjautumista tai tilin luomista voi käyttäjä kuitenkin katsoa hiscoreja, jonne on listattuna kaikki käyttäjät pisteineen:
 
-<img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/hiscore.png" width="400">
+<img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/hiscore.png" width="600">
 
 Tässä esimerkissä kukaan käyttäjistä ei ole kuitenkaan vastannut kysymyksiin.
 
@@ -36,15 +36,15 @@ Tässä esimerkissä kukaan käyttäjistä ei ole kuitenkaan vastannut kysymyksi
 
 Sisäänkirjautumisen jälkeen näyttää näkymä seuraavalta:
 
-<img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/loggedin.png" width="400">
+<img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/loggedin.png" width="600">
 
 Mikäli käyttäjä haluaa vaihtaa esimerkiksi salasanaansa tai nollata tuloksensa, voi hän muuttaa asetuksiaan painamalla sopivaa nappia, jolloin käyttäjä siirtyy seuraavanlaiseen valikkonäkymään:
 
-<img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/usersettings.png" width="400">
+<img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/usersettings.png" width="600">
 
 Oletetaan nyt kuitenkin, että käyttäjä on tullut tekemään fysiikan harjoituksia. hän valitsee tehtäviksi fysiikan kysymykset, jolloin ohjelma generoi hänelle automaattisesti fysiikkaan liittyviä kysymyksiä:
 
-<img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/question.png" width="400">
+<img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/question.png" width="600">
 
 Käyttäjä saa pisteitä sitä mukaa, kun hän vastaa oiekin kysymyksiin. Kaikista vastatuista kysymyksistä merkataan myös tieto ylös.
 
@@ -53,7 +53,7 @@ Käyttäjä saa pisteitä sitä mukaa, kun hän vastaa oiekin kysymyksiin. Kaiki
 
 Joskus voi tulla tilanne, että käyttäjä on esimerkiksi ollut vilpillinen tai vaikkapa koko tietokanta joudutaan nollaamaan. Tätä varten on olemassa pääkäyttäjän (admin) työkalut. Admin työkalut saadaan käyttöön normaalisti kirjautumalla käyttäjänimellä admin ja salasanalla admin. Huom! Admin ei ole normaali käyttäjä, joten admin tilillä ei voi tehdä tehtäviä.
 
-<img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/admin.png" width="400">
+<img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/admin.png" width="600">
 
 
 
