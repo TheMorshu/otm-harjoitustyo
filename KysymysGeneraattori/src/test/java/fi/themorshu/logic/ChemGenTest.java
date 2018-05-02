@@ -21,6 +21,7 @@ import static org.junit.Assert.*;
 public class ChemGenTest {
     
     ChemGen gen;
+    BasicValues values;
     
     public ChemGenTest() {
     }
@@ -30,6 +31,7 @@ public class ChemGenTest {
     @Before
     public void setUp() {
         this.gen = new ChemGen(new Random());
+        this.values = new BasicValues();
     }
     
     @After
@@ -38,19 +40,25 @@ public class ChemGenTest {
     
     
     @Test
-    public void tyhjaKyssari() {
-        assertEquals(true, true); //KESKEN!
+    public void questionPalauttaaMerkkijonon() {
+        assertEquals(this.gen.question().length() > 0, true); //KESKEN!
     }
-    
     
     @Test
-    public void tyhjaVastaus() {
-        assertEquals(true, true); //KESKEN!
+    public void answerOnNullJosEiKysymystä() {
+        assertEquals(this.gen.answer(), null);
+    }
+    
+    @Test
+    public void answerPalauttaaMerkkijononJosOnKysymys() {
+        this.gen.question();
+        assertEquals(this.gen.answer().length() > 0, true);
+    }
+    
+    @Test
+    public void molarAmountOfIdealGasToimii() {
+        String kysymys = this.gen.molarAmountOfIdealGas();
+        assertEquals(this.gen.answer(), "" + String.format("%.2f", this.values.round(this.gen.getMolarAmountOfGas(), 2)) + " mol");
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }

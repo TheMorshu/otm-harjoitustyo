@@ -101,7 +101,69 @@ public class GeneratorCoreTest {
         assertEquals(true, gen.sendAnswer(vastaus));
     }
     
+    @Test
+    public void sendAnswerToimiiVaarallaVastauksellaMatikka() throws SQLException {
+        gen.setMode("maths");
+        String kysymys = gen.getQuestion();
+        String vastaus = gen.getAnswer()+"nakki";
+        assertEquals(false, gen.sendAnswer(vastaus));
+    }
     
+    @Test
+    public void sendAnswerToimiiOikeallaVastauksellaKemia() throws SQLException {
+        gen.setMode("chem");
+        String kysymys = gen.getQuestion();
+        String vastaus = gen.getAnswer();
+        assertEquals(true, gen.sendAnswer(vastaus));
+    }
+    
+    @Test
+    public void sendAnswerToimiiVaarallaVastauksellaKemia() throws SQLException {
+        gen.setMode("chem");
+        String kysymys = gen.getQuestion();
+        String vastaus = gen.getAnswer()+"nakki";
+        assertEquals(false, gen.sendAnswer(vastaus));
+    }
+    
+    @Test
+    public void sendAnswerToimiiOikeallaVastauksellaFysiikka() throws SQLException {
+        gen.setMode("phys");
+        String kysymys = gen.getQuestion();
+        String vastaus = gen.getAnswer();
+        assertEquals(true, gen.sendAnswer(vastaus));
+    }
+    
+    @Test
+    public void sendAnswerToimiiVaarallaVastauksellaFysiikka() throws SQLException {
+        gen.setMode("phys");
+        String kysymys = gen.getQuestion();
+        String vastaus = gen.getAnswer()+"nakki";
+        assertEquals(false, gen.sendAnswer(vastaus));
+    }
+    
+    @Test
+    public void sendAnswerToimiiOikeallaVastauksellaAll() throws SQLException {
+        gen.setMode("all");
+        String kysymys = gen.getQuestion();
+        String vastaus = gen.getAnswer();
+        assertEquals(true, gen.sendAnswer(vastaus));
+    }
+    
+    @Test
+    public void sendAnswerToimiiVaarallaVastauksellaAll() throws SQLException {
+        gen.setMode("all");
+        String kysymys = gen.getQuestion();
+        String vastaus = gen.getAnswer()+"nakki";
+        assertEquals(false, gen.sendAnswer(vastaus));
+    }
+    
+    @Test
+    public void getQuestionPalauttaaNullJosModeEpakelpo() throws SQLException {
+        gen.setMode("nonValid");
+        assertEquals(null, this.gen.getQuestion());
+    }
+    
+
     @After
     public void tearDown() throws SQLException {
         database.closeConnection();

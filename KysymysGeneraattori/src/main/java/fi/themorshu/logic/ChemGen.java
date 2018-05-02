@@ -17,6 +17,7 @@ public class ChemGen implements Gen {
     String question;
     Random random;
     BasicValues values;
+    double molarAmountOfGas;
 
     /**
      * Konstruktorissa otetaan vastaan Random olio, sekä luodaan käyttään BasicValues olio, josta voidaan
@@ -54,10 +55,18 @@ public class ChemGen implements Gen {
         double volumeInCubicCentiMeters = 1.0 * (this.random.nextInt(100001) + 100); // 100-1000100 kuutiosenttiö = 0,1-100,1 litraa
         double volumeInCubicMeters = volumeInCubicCentiMeters / 1000000;
         double volumeInLitres = volumeInCubicCentiMeters / 1000;
-        double molarAmountOfGas = (1.0 * (pressurePascal) * volumeInCubicMeters) / (temperatureKelvin * this.values.molarGasConstantJMolKelvin());
+        this.molarAmountOfGas = (1.0 * (pressurePascal) * volumeInCubicMeters) / (temperatureKelvin * this.values.molarGasConstantJMolKelvin());
         this.answer = "" + String.format("%.2f", this.values.round(molarAmountOfGas, 2)) + " mol";
         return "Laske ideaalikaasun ainemäärä kahden desimaalin tarkkuudella. Vastaus muotoa 10,22 mol. "
                 + "\nKaasun lämpötila: " + temperatureKelvin + " K, paine: " + pressurePascal + " Pa, tilavuus: " + volumeInLitres + " litraa.";
+    }
+    
+    /**
+     * Tätä metodia käytetään testejä varten
+     * @return palauttaa lyhentämättömän versio molarAmountOfIdealGas() metodin oikeasta vastauksesta
+     */
+    public double getMolarAmountOfGas() {
+        return this.molarAmountOfGas;
     }
     
 }

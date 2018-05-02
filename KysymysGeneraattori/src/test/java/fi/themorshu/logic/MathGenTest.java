@@ -55,10 +55,4 @@ public class MathGenTest {
         assertEquals(this.gen.question().length() > 0, true);
     }
     
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }
