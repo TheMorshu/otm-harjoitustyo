@@ -19,4 +19,5 @@ kuleen yhteenlasketun ajan (kaikkien sovellusten konfigurointeineen) karkeasti 4
 | 23.4    | 1,5  | Testien kansiorakenne korjattu. Ongelma generator luokan yhteensopivuuden kanssa (duplicate class parien sovellusasennuksien jälkeen) korjattu --> Generator --> GeneratorCore. Muutenkin paljon kuvaavampi nimi. Funktion nollakohdat tehtävää paranneltu. Kysymyskäyttöliittymää paranneltu (kysymyksen vastauksen jälkeen ohjelma antaa palautetta käyttäjälle) + muita korjauksia | 
 | 24.4   | 3  | Sekvenssikaavioita luotu parista toiminnallisuudesta (kysymykseen vastaus + uusen kysymyksen haku). Sovelluslogiikkaa siirretty pois UI:sta. Ensimmäinen (pre)release. Uusia generoituja kysymyksiä lisätty. CheckSyle korjauksia tehty. Lopulta uudempi viikko 5 release lisätty. Sovelluslogiikkaa (hiScorejen suhteen) siirretty UI:n luovasta luokasta UsersDaoon. HiScorejenulkoasua parannettu. Admin toolboxiin lisätty vaihtoehto listata käyttäjät salasanoineen. Kysymykset annetaan nyt useammalla rivillä jolloin kysymysten ulkoasu järkevämpi. Viikko5 release päivitetty versioon v0.1.2 | 
 | 1.5   | 1,5  | JavaDoc aloitettu. Kaksi ensimmäistä luokkaa käyty läpi JavaDocin suhteen. Myös pientä hiemosta suoritettu. Uusia testejä lisätty   | 
-| yht    | 30,5  |   | 
+| 2.5   | 1  | JavaDocia laajennettu. Pientä hiomista koodissa siellä sun täällä  | 
+| yht    | 31,5  |   | 
