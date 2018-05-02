@@ -27,7 +27,7 @@ public class Database {
     /**
      * Metodi luo yhteyden kontruktorissa määriteltyyn tietokantaan
      * @return Connection olio databaseen
-     * @throws SQLException 
+     * @throws SQLException Heittää virheen, jos SQL yhteys ei jostain syystä toimi oikein
      */
     public Connection getConnection() throws SQLException {
         this.connection = DriverManager.getConnection(this.databaseAddress);
@@ -36,7 +36,7 @@ public class Database {
 
     /**
      * Metodi sulkee yhteyden (Connection) konstruktorissa määriteltyyn tietokantaan
-     * @throws SQLException 
+     * @throws SQLException Heittää virheen, jos SQL yhteys ei jostain syystä toimi oikein
      */
     public void closeConnection() throws SQLException {
         this.connection.close();

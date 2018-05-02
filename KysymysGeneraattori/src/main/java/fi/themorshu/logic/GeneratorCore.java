@@ -11,8 +11,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *
- * @author ilmar
+ * Tätä luokkaa käytetään kysymysgeneraattorin hallintaan. Generaattorin avulla valitaan sopivat kysymyskategoriat.
+ * Ja noudetaan generoituja kysymyksiä vastauksineen nihiin sopivista generaattoreista. Generaattorin avulla myls varmistetaan käytäjien
+ * antamien vastausten oikeellisuus ja annetaan tarvittaessa UsersDao:lle käsky asntaa pisteitä
+ * 
  */
 public class GeneratorCore {
     
@@ -27,6 +29,11 @@ public class GeneratorCore {
     ChemGen chem;
     ArrayList<Gen> genLista;
 
+    /**
+     * Konstruktorissa alustetaan generaattorinhallinta käyttävalmiuteen
+     * @param userName Tämä parametri määrittelee käyttäjän nimen, kuka sillä hetkellä käyttää sovellusta. Voidaan vaihtaa myöhemmin
+     * @param userDao Toisena parametrina annetaan UsersDao olio, jolla tarvittaessa tehdään muutoksia tietokantaan
+     */
     public GeneratorCore(String userName, UsersDao userDao) {
         this.userName = userName;
         this.userDao = userDao;
@@ -49,9 +56,6 @@ public class GeneratorCore {
         return mode;
     }
     
-    
-    
-    
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -60,6 +64,11 @@ public class GeneratorCore {
         return this.userName;
     }
     
+    /**
+     * Tällä metodilla generoidaan automaattisesti sekä kysymys, että kysymykseen oikea vastaus ja molemmat taltioidaan.
+     * Ennen generointia tarkastaa menetelmä "moden" eli tilan, minkä mukaan kysymyskategoria valitaan
+     * @return Palauttaa generoidun kysymyksen merkkijonona
+     */
     public String getQuestion() {
         if (mode.equals("maths")) {
             this.question = math.question();
@@ -77,18 +86,19 @@ public class GeneratorCore {
             return this.question;
         }
         if (mode.equals("all")) {
-            if (selectRandomQuestionType()) {
-                return this.question;
-            }         
+            selectRandomQuestionType();
+            return this.question;
         } 
         return null;
     }
 
-    public boolean selectRandomQuestionType() {
+    /**
+     * Tämä metodi suoritetaan, jos käyttäjä on valinnut kysymystyypiksi satunnaisen. Metodin sisällä hoidetaan kysymyksen ja vastauksen generointi ja taltiointi.
+     */
+    public void selectRandomQuestionType() {
         int n = random.nextInt(3);
         this.question = this.genLista.get(n).question();
         this.answer = this.genLista.get(n).answer();
-        return true;
     }
     
 
@@ -96,6 +106,13 @@ public class GeneratorCore {
         return this.answer;
     }
 
+    /**
+     * Metodin avulla tarkistetaan, onko käyttäjän esittämä vastaus oikea. Hyödynnetään käyttöliittymäkoodissa. Mikäli vastaus on oikea
+     * lisätään kyseiselle käyttäjälle oikea vastaus tietokantaan. Riippumatta siitä, oliko vastaus oikea vai ei, lisätään tietokantaan myös tieto siitä, että yhteen kysymykseen on vastattu jotain (kysymysten kokonaismäärä)
+     * @param vastaus Käyttäjän antama vastaus merkkijonona, jota verrataan oikeaan generoituun vastaukseen
+     * @return totuusarvo siitä, vastattiinko kysymykseen oikein
+     * @throws SQLException Heittää virheen, jos SWL yhteydessä on vikaa
+     */
     public boolean sendAnswer(String vastaus) throws SQLException {
         if (vastaus.equals(this.answer)) {
             this.userDao.addRightForUser(this.userName);
