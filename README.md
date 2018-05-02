@@ -2,23 +2,21 @@
 
 Kysymysgeneraattori generoi automaattisesti lukiotason kysymyksiä matematiikasta, fysiikasta ja kemiasta käyttäjälleen. Käyttäjiä on useita ja jokaisen käyttäjän tulee rekisteröityä palveluun. Tehdyistä tehtävistä saa pisteitä ohjelmassa.
 
-**Releaset**
-
-[Lataa ensimmäinen (pre)release täältä!](https://github.com/TheMorshu/otm-harjoitustyo/releases)
-
-**Hakemisto**
-
-[Harjoitustyön hakemisto](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/KysymysGeneraattori)
-
-**Tuntikirjanpito**
-
-[Tuntikirjanpito](https://github.com/TheMorshu/otm-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
-
-**Dokumentaatio**
+### Dokumentaatio
 
 [Alusatava määrittelydokumentti](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/dokumentaatio/maarittelydokumentti.md)
 
 [Arkkitehtuuri](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/dokumentaatio/arkkitehtuuri.md)
+
+[Tuntikirjanpito](https://github.com/TheMorshu/otm-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
+
+### Releaset
+
+[Lataa ensimmäinen (pre)release täältä!](https://github.com/TheMorshu/otm-harjoitustyo/releases)
+
+### Ohjelman hakemisto
+
+[Harjoitustyön hakemisto](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/KysymysGeneraattori)
 
 ## Ohjelman suoritus
 
@@ -33,7 +31,6 @@ Jarin generoinnin jälkeen (lue ohjeet alempana) voidaan jar tiedosto suorittaa 
 ```
 java -jar KysymysGeneraattori-1.0-SNAPSHOT.jar
 ```
-
 
 ### Maven
 
