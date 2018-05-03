@@ -60,5 +60,11 @@ public class ChemGenTest {
         String kysymys = this.gen.molarAmountOfIdealGas();
         assertEquals(this.gen.answer(), "" + String.format("%.2f", this.values.round(this.gen.getMolarAmountOfGas(), 2)) + " mol");
     }
-
+    
+    @Test
+    public void liquidPreparationToimii() {
+        String kysymys = this.gen.liquidPreparation();
+        double correctAnswerDouble = this.gen.getLiquidParameters().get(0) * this.gen.getLiquidParameters().get(1) * this.gen.getLiquidParameters().get(2);
+        assertEquals(this.gen.answer(), "" + String.format("%.1f", this.values.round(correctAnswerDouble, 1)) + " g");
+    }
 }

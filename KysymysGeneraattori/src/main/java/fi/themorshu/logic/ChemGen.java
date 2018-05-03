@@ -5,6 +5,7 @@
  */
 package fi.themorshu.logic;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -13,11 +14,14 @@ import java.util.Random;
  */
 public class ChemGen implements Gen {
     
-    String answer;
-    String question;
-    Random random;
-    BasicValues values;
-    double molarAmountOfGas;
+    private String answer;
+    private String question;
+    private Random random;
+    private BasicValues values;
+    private double molarAmountOfGas;
+    private double molarity;
+    private double liters;
+    private double molarMass;
 
     /**
      * Konstruktorissa otetaan vastaan Random olio, sekä luodaan käyttään BasicValues olio, josta voidaan
@@ -36,7 +40,14 @@ public class ChemGen implements Gen {
      */
     @Override
     public String question() {
-        return molarAmountOfIdealGas();
+        int choice = this.random.nextInt(2);
+        if (choice == 0) {
+            return molarAmountOfIdealGas();
+        } else if (choice == 1) {
+            return liquidPreparation();
+        } else {
+            return "ERROR!";
+        }
     }
 
     @Override
@@ -67,6 +78,36 @@ public class ChemGen implements Gen {
      */
     public double getMolarAmountOfGas() {
         return this.molarAmountOfGas;
+    }
+    
+    
+    /**
+     * Tämä metodi palauttaa perus liuoskemiaan liittyvän laskutehtävän String oliona, ja generoi samalla automaattisesti oikean mallivastauksen ja tallentaa sen olion sisäiseksi muuttujaksi this.answer
+     * @return Kysymys String oliona
+     */
+    public String liquidPreparation() {
+        int molarMassTimesOneHundred = this.random.nextInt(10100) + 2000; //arpoo moolimasan väliltä 20-120 g/mol
+        this.molarMass = (1.0 * molarMassTimesOneHundred) / 100;
+        int deciLiters = this.random.nextInt(41) + 10; //arpoo tilavuuden desilitroina 10-50 (eli 1.0-5.0 Litraa)
+        this.liters = 1.0 * deciLiters / 10;
+        this.molarity = 1.0 * (this.random.nextInt(20) + 1) / 10; //arpoo molaarisuuden väliltä 0.1-2M
+        String question = "Sinun tulee valmistaa " + liters + " litraa " + molarity + " M liuosta vesiliukoisesta yhdisteestä, jonka moolimassa on " + molarMass + " g/mol. Kuinka monta \n"
+                + "grammaa sinun tulee punnita kyseistä yhdistettä, jotta liuoksesta tulee oikeav vahvuista? Vastaa desimaalin tarkkuudella (esim. 103.1 g)";
+        double answerInDouble = this.molarity * this.liters * this.molarMass; //=grammoina
+        this.answer = String.format("%.1f", this.values.round(answerInDouble, 1)) + " g";
+        return question;
+    }
+    
+    /**
+     * Tämä metodi on olemassa vain liquidPreparation() metodin testausta varten
+     * @return liquidPreparationissa arvotut arvot listana, joiden pohjalta oikea vastaus voidaan laskea
+     */
+    public ArrayList<Double> getLiquidParameters() {
+        ArrayList<Double> list = new ArrayList<>();
+        list.add(this.molarity);
+        list.add(this.liters);
+        list.add(this.molarMass);
+        return list;
     }
     
 }

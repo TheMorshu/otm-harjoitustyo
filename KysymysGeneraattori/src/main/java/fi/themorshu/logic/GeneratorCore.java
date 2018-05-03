@@ -73,23 +73,19 @@ public class GeneratorCore {
         if (mode.equals("maths")) {
             this.question = math.question();
             this.answer = math.answer();
-            return this.question;
         }
         if (mode.equals("phys")) {
             this.question = phys.question();
             this.answer = phys.answer();
-            return this.question;
         }
         if (mode.equals("chem")) {
             this.question = chem.question();
             this.answer = chem.answer();
-            return this.question;
         }
         if (mode.equals("all")) {
             selectRandomQuestionType();
-            return this.question;
-        } 
-        return null;
+        }
+        return this.question;
     }
 
     /**

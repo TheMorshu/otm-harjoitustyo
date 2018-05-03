@@ -112,11 +112,11 @@ public class QuestionGeneratorGUI extends Application {
         userSettingsGUI.add(backToLogin3, 0, 3);
 
         //Näkymät
-        Scene hiScoreScene = new Scene(hiScoreGUI, 640, 320);
-        Scene loginScene = new Scene(loginGUI, 640, 320);
-        Scene adminScene = new Scene(adminGUI, 640, 320);
-        Scene questionScene = new Scene(questionGUI, 900, 320);
-        Scene userSettingsScene = new Scene(userSettingsGUI, 640, 320);
+        Scene hiScoreScene = new Scene(hiScoreGUI, 800, 400);
+        Scene loginScene = new Scene(loginGUI, 800, 400);
+        Scene adminScene = new Scene(adminGUI, 800, 400);
+        Scene questionScene = new Scene(questionGUI, 800, 400);
+        Scene userSettingsScene = new Scene(userSettingsGUI, 800, 400);
         
         quit.setOnAction((event) -> {
             window.close();

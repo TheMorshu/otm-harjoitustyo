@@ -264,7 +264,6 @@ public class UsersDao implements Dao<User> {
     /**
      * Metodi palauttaa palaute Stringin (liittyy kirjautumisen onnistumiseen)
      * @return UserDao:n palaute String, määritellään kirjautumisvaiheessa
-     * @see fi.themorshu.UsersDao#save()
      */
     public String getSaveFeedBack() {
         return this.feedback;
