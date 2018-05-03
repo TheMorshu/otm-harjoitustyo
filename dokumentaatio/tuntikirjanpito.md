@@ -20,4 +20,5 @@ kuleen yhteenlasketun ajan (kaikkien sovellusten konfigurointeineen) karkeasti 4
 | 24.4   | 3  | Sekvenssikaavioita luotu parista toiminnallisuudesta (kysymykseen vastaus + uusen kysymyksen haku). Sovelluslogiikkaa siirretty pois UI:sta. Ensimmäinen (pre)release. Uusia generoituja kysymyksiä lisätty. CheckSyle korjauksia tehty. Lopulta uudempi viikko 5 release lisätty. Sovelluslogiikkaa (hiScorejen suhteen) siirretty UI:n luovasta luokasta UsersDaoon. HiScorejenulkoasua parannettu. Admin toolboxiin lisätty vaihtoehto listata käyttäjät salasanoineen. Kysymykset annetaan nyt useammalla rivillä jolloin kysymysten ulkoasu järkevämpi. Viikko5 release päivitetty versioon v0.1.2 | 
 | 1.5   | 1,5  | JavaDoc aloitettu. Kaksi ensimmäistä luokkaa käyty läpi JavaDocin suhteen. Myös pientä hiemosta suoritettu. Uusia testejä lisätty   | 
 | 2.5   | 3  | JavaDocia laajennettu. Pientä hiomista koodissa siellä sun täällä. Testejä lisätty ja paranneltu. Käyttöohjeet luotu. Arkkitehtuurikuvauksen parantaminen  | 
-| yht    | 32,5  |   | 
+| 3.5   | 1,5  | Uusi kysymystyyppi lisätty (liuoslasku kemiaan), samalle kysymykselle testi lisätty. Yleisiä parannuksia ja bugien korjauksia.  | 
+| yht    | 34  |   | 
