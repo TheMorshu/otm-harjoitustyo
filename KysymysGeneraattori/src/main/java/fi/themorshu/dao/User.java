@@ -92,7 +92,7 @@ public class User implements Comparable<User> {
 
     @Override
     public int compareTo(User o) {
-        return o.getRight()-this.getRight();
+        return o.getRight() - this.getRight();
     }
 
 

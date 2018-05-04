@@ -157,7 +157,7 @@ public class UsersDao implements Dao<User> {
         Collections.sort(list); //new
         for (int i = 0; i < list.size(); i++) {
             User user = (User) list.get(i);
-            string += "#" + (i+1) + ": " + user.toString() + "\n";
+            string += "#" + (i + 1) + ": " + user.toString() + "\n";
         }
         return string;
     }

@@ -144,12 +144,12 @@ public class GeneratorCore {
             if (!answered) {
                 correctAnswer = checkAnswer(ans);
             }
-        } catch (SQLException ex) {}
+        } catch (SQLException ex) { }
         if (correctAnswer) {
             setAnswered(true);
             return "Vastaus oikein! Sait pisteen!";
         }
         setAnswered(true);
-        return "Väärin! Oikea vastaus oli: "+getAnswer();
+        return "Väärin! Oikea vastaus oli: " + getAnswer();
     } 
 }
