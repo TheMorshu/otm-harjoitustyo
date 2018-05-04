@@ -244,11 +244,9 @@ public class QuestionGeneratorGUI extends Application {
         resetScore.setOnAction((event) -> {
             try {
                 usersDao.resetScore(userNameLogged);
-            } catch (SQLException ex) {}
-                userNameLogged = "";
-                window.setTitle("Login");
                 window.setScene(loginScene);
-                loginGUI.getChildren().remove(9, 14);
+                message.setText("Käyttäjän tulokset nollattu!");
+            } catch (SQLException ex) {}
         });
         changePassword.setOnAction((event) -> {
             if (!newPassInput.getText().equals("")) {
