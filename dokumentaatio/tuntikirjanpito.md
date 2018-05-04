@@ -21,4 +21,5 @@ kuleen yhteenlasketun ajan (kaikkien sovellusten konfigurointeineen) karkeasti 4
 | 1.5   | 1,5  | JavaDoc aloitettu. Kaksi ensimmäistä luokkaa käyty läpi JavaDocin suhteen. Myös pientä hiemosta suoritettu. Uusia testejä lisätty   | 
 | 2.5   | 3  | JavaDocia laajennettu. Pientä hiomista koodissa siellä sun täällä. Testejä lisätty ja paranneltu. Käyttöohjeet luotu. Arkkitehtuurikuvauksen parantaminen  | 
 | 3.5   | 1,5  | Uusi kysymystyyppi lisätty (liuoslasku kemiaan), samalle kysymykselle testi lisätty. Yleisiä parannuksia ja bugien korjauksia.  | 
-| yht    | 34  |   | 
+| 4.5   | 1  | Käyttöliittymästä siirretty sovelluslogiikkaa GeneratorCoreen. Käyttöliittymään (kysymysnäkymä) lisätty uusia nappeja ja toiminnallisuuksia koodikatselmoinnissa annetun palauutteen pohjalta. Osa napeista ei ole vielä toiminnassa | 
+| yht    | 35  |   | 
