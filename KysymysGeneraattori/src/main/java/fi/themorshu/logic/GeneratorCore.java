@@ -9,6 +9,8 @@ import fi.themorshu.dao.UsersDao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Tätä luokkaa käytetään kysymysgeneraattorin hallintaan. Generaattorin avulla valitaan sopivat kysymyskategoriat.
@@ -28,6 +30,7 @@ public class GeneratorCore {
     PhysGen phys;
     ChemGen chem;
     ArrayList<Gen> genLista;
+    Boolean answered;
 
     /**
      * Konstruktorissa alustetaan generaattorinhallinta käyttävalmiuteen
@@ -55,6 +58,14 @@ public class GeneratorCore {
     public String getMode() {
         return mode;
     }
+
+    public Boolean getAnswered() {
+        return answered;
+    }
+
+    public void setAnswered(Boolean answered) {
+        this.answered = answered;
+    }
     
     public void setUserName(String userName) {
         this.userName = userName;
@@ -67,6 +78,7 @@ public class GeneratorCore {
     /**
      * Tällä metodilla generoidaan automaattisesti sekä kysymys, että kysymykseen oikea vastaus ja molemmat taltioidaan.
      * Ennen generointia tarkastaa menetelmä "moden" eli tilan, minkä mukaan kysymyskategoria valitaan
+     * Samalla kun GeneratorCore noutaa uuden kysymyksen, asettaa se kysymykseen liittyvät "answered" totuusarvon falseksi.
      * @return Palauttaa generoidun kysymyksen merkkijonona
      */
     public String getQuestion() {
@@ -85,6 +97,7 @@ public class GeneratorCore {
         if (mode.equals("all")) {
             selectRandomQuestionType();
         }
+        this.answered = false;
         return this.question;
     }
 
@@ -109,7 +122,7 @@ public class GeneratorCore {
      * @return totuusarvo siitä, vastattiinko kysymykseen oikein
      * @throws SQLException Heittää virheen, jos SWL yhteydessä on vikaa
      */
-    public boolean sendAnswer(String vastaus) throws SQLException {
+    public boolean checkAnswer(String vastaus) throws SQLException {
         if (vastaus.equals(this.answer)) {
             this.userDao.addRightForUser(this.userName);
             this.userDao.addQuestionsForUser(this.userName);
@@ -119,6 +132,24 @@ public class GeneratorCore {
         return false;
     }
     
-    
-    
+    /**
+     * Hyödynnetään käyttöliittymäkoodissa. Metodi ottaa vastaan vastauksen, tarkistaa sen oikeellosuuden checkAnswer() metodilla,
+     * joka antaa mahdolliset pisteet käyttäjälle (vain jos ei ole vielä vastattu). Tämä metodi palauttaa käyttäjälle näytettävän palautteen Strigninä.
+     * @param ans Käyttäjän antama vastaus
+     * @return Käyttäjälle annettava palaute Stringinä
+     */
+    public String sendAnswer(String ans) {
+        Boolean correctAnswer = false;
+        try {
+            if (!answered) {
+                correctAnswer = checkAnswer(ans);
+            }
+        } catch (SQLException ex) {}
+        if (correctAnswer) {
+            setAnswered(true);
+            return "Vastaus oikein! Sait pisteen!";
+        }
+        setAnswered(true);
+        return "Väärin! Oikea vastaus oli: "+getAnswer();
+    } 
 }

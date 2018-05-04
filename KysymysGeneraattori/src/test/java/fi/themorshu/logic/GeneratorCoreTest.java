@@ -98,7 +98,7 @@ public class GeneratorCoreTest {
         gen.setMode("maths");
         String kysymys = gen.getQuestion();
         String vastaus = gen.getAnswer();
-        assertEquals(true, gen.sendAnswer(vastaus));
+        assertEquals(true, gen.checkAnswer(vastaus));
     }
     
     @Test
@@ -106,7 +106,7 @@ public class GeneratorCoreTest {
         gen.setMode("maths");
         String kysymys = gen.getQuestion();
         String vastaus = gen.getAnswer()+"nakki";
-        assertEquals(false, gen.sendAnswer(vastaus));
+        assertEquals(false, gen.checkAnswer(vastaus));
     }
     
     @Test
@@ -114,7 +114,7 @@ public class GeneratorCoreTest {
         gen.setMode("chem");
         String kysymys = gen.getQuestion();
         String vastaus = gen.getAnswer();
-        assertEquals(true, gen.sendAnswer(vastaus));
+        assertEquals(true, gen.checkAnswer(vastaus));
     }
     
     @Test
@@ -122,7 +122,7 @@ public class GeneratorCoreTest {
         gen.setMode("chem");
         String kysymys = gen.getQuestion();
         String vastaus = gen.getAnswer()+"nakki";
-        assertEquals(false, gen.sendAnswer(vastaus));
+        assertEquals(false, gen.checkAnswer(vastaus));
     }
     
     @Test
@@ -130,7 +130,7 @@ public class GeneratorCoreTest {
         gen.setMode("phys");
         String kysymys = gen.getQuestion();
         String vastaus = gen.getAnswer();
-        assertEquals(true, gen.sendAnswer(vastaus));
+        assertEquals(true, gen.checkAnswer(vastaus));
     }
     
     @Test
@@ -138,7 +138,7 @@ public class GeneratorCoreTest {
         gen.setMode("phys");
         String kysymys = gen.getQuestion();
         String vastaus = gen.getAnswer()+"nakki";
-        assertEquals(false, gen.sendAnswer(vastaus));
+        assertEquals(false, gen.checkAnswer(vastaus));
     }
     
     @Test
@@ -146,7 +146,7 @@ public class GeneratorCoreTest {
         gen.setMode("all");
         String kysymys = gen.getQuestion();
         String vastaus = gen.getAnswer();
-        assertEquals(true, gen.sendAnswer(vastaus));
+        assertEquals(true, gen.checkAnswer(vastaus));
     }
     
     @Test
@@ -154,7 +154,7 @@ public class GeneratorCoreTest {
         gen.setMode("all");
         String kysymys = gen.getQuestion();
         String vastaus = gen.getAnswer()+"nakki";
-        assertEquals(false, gen.sendAnswer(vastaus));
+        assertEquals(false, gen.checkAnswer(vastaus));
     }
     
     @Test

@@ -75,6 +75,10 @@ public class QuestionGeneratorGUI extends Application {
         Button removeUser = new Button("Poista käyttäjä!");
         Button listUsernamesAndPasswords = new Button("Listaa käyttäjänimet ja salasanat");
         
+        //Kesken
+        Button nextQuestion = new Button("Seuraava kysymys");
+        Button returnToQuestionSelection = new Button("Palaa tehtävävalintaan");
+        
         //Asettelut
         GridPane loginGUI = new GridPane();
         GridPane hiScoreGUI = new GridPane();
@@ -103,9 +107,11 @@ public class QuestionGeneratorGUI extends Application {
         adminGUI.add(usersAndPasswords, 0, 5);
         questionGUI.add(question, 0, 0);
         questionGUI.add(answer, 0, 1);
-        questionGUI.add(sendAnswer, 0, 2);
-        questionGUI.add(saveAndQuit, 0, 3);
-        questionGUI.add(feedbackText, 0, 4);
+        questionGUI.add(sendAnswer, 0, 3);
+        questionGUI.add(nextQuestion, 0, 4);
+        questionGUI.add(returnToQuestionSelection, 0, 5);
+        questionGUI.add(saveAndQuit, 0, 6);
+        questionGUI.add(feedbackText, 0, 2);
         userSettingsGUI.add(deleteAccount, 0, 0);
         userSettingsGUI.add(resetScore, 1, 0);
         userSettingsGUI.add(changePassword, 2, 0);
@@ -206,15 +212,13 @@ public class QuestionGeneratorGUI extends Application {
             window.setScene(questionScene);
         });
         sendAnswer.setOnAction((event) -> {
-            try {
-                if (gene.sendAnswer(answer.getText())) {
-                    feedbackText.setText("Vastaus oikein! Sait pisteen!");
-                } else {
-                    feedbackText.setText("Väärin! Oikea vastaus oli: " + gene.getAnswer());
-                }
-            } catch (SQLException ex) {}
+            feedbackText.setText(gene.sendAnswer(answer.getText())); //lähettää vastauksen GeneratorCorelle, tekee muutokset tietokantaan ja antaa palautetta totuusarvon perusteella käyttäjälle
+        });
+        nextQuestion.setOnAction((event) -> {
+            feedbackText.setText("");
             question.setText(gene.getQuestion());
             answer.clear();
+            gene.setAnswered(false);
         });
         
         //USER SETTINGS BUTTONS
