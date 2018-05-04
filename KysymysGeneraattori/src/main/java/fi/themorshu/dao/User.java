@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author ilmar
  */
-public class User {
+public class User implements Comparable<User> {
     
     private String username;
     private String password;
@@ -85,12 +85,14 @@ public class User {
         return true;
     }
 
-
-    
-
     @Override
     public String toString() {
         return this.username + ", " + this.questions + " tehtävää tehty joista " + this.right + " on vastattu oikein.";
+    }
+
+    @Override
+    public int compareTo(User o) {
+        return o.getRight()-this.getRight();
     }
 
 

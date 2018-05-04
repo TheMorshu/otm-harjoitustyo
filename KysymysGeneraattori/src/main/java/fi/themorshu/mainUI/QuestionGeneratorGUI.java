@@ -220,7 +220,14 @@ public class QuestionGeneratorGUI extends Application {
             answer.clear();
             gene.setAnswered(false);
         });
-        
+        returnToQuestionSelection.setOnAction((event) -> {
+            feedbackText.setText("");
+            question.setText(gene.getQuestion());
+            answer.clear();
+            gene.setAnswered(false);
+            message.setText("");
+            window.setScene(loginScene);
+        });
         //USER SETTINGS BUTTONS
         userSettings.setOnAction((event) -> {
             window.setScene(userSettingsScene);

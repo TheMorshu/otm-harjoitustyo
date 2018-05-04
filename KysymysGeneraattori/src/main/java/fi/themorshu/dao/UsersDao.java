@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -153,9 +154,10 @@ public class UsersDao implements Dao<User> {
     public String printAllUsersScores() throws SQLException {
         String string = "";
         ArrayList list = (ArrayList) this.findAll();
+        Collections.sort(list); //new
         for (int i = 0; i < list.size(); i++) {
             User user = (User) list.get(i);
-            string += user.toString() + "\n";
+            string += "#" + (i+1) + ": " + user.toString() + "\n";
         }
         return string;
     }
