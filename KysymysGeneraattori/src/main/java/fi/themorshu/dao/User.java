@@ -25,9 +25,6 @@ public class User implements Comparable<User> {
         this.right = right;
     }
 
-    
-    
-
     public String getUsername() {
         return username;
     }

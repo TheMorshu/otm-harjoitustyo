@@ -1,4 +1,3 @@
-//OK!
 package fi.themorshu.dao;
 
 import java.sql.*;
