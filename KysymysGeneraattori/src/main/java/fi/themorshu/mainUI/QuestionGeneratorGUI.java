@@ -26,15 +26,17 @@ public class QuestionGeneratorGUI extends Application {
     GeneratorCore gene;
 
     @Override
-    public void init() throws ClassNotFoundException, SQLException {
-        usersDao = new UsersDao(new Database("jdbc:sqlite:users.db"));
+    public void init() {
+        try {
+            usersDao = new UsersDao(new Database("jdbc:sqlite:users.db"));
+        } catch (SQLException ex) {}
         userNameLogged = "";
         gene = new GeneratorCore("", usersDao);
         usersDao.setUpTableOnDatabase(); //Luo Users tablen databaseen, jos sitä ei jo ole (välttämätön, jso ohjelam käynnistetään 1. kertaa!)
     }
 
     @Override
-    public void start(Stage window) throws ClassNotFoundException, SQLException {
+    public void start(Stage window) {
         //Teksielementit ja kentät
         Label nameText = new Label("Nimi: ");
         TextField nameInput = new TextField();
@@ -286,7 +288,7 @@ public class QuestionGeneratorGUI extends Application {
         window.show();
     }
 
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+    public static void main(String[] args) {
         launch(QuestionGeneratorGUI.class);
     }
 }
