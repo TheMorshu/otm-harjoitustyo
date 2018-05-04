@@ -6,8 +6,6 @@ import fi.themorshu.logic.GeneratorCore;
 import fi.themorshu.dao.User;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.scene.Scene;
@@ -74,8 +72,6 @@ public class QuestionGeneratorGUI extends Application {
         Button changePassword = new Button("Vaihda salasana");
         Button removeUser = new Button("Poista käyttäjä!");
         Button listUsernamesAndPasswords = new Button("Listaa käyttäjänimet ja salasanat");
-        
-        //Kesken
         Button nextQuestion = new Button("Seuraava kysymys");
         Button returnToQuestionSelection = new Button("Palaa tehtävävalintaan");
         
