@@ -22,4 +22,5 @@ kuleen yhteenlasketun ajan (kaikkien sovellusten konfigurointeineen) karkeasti 4
 | 2.5   | 3  | JavaDocia laajennettu. Pientä hiomista koodissa siellä sun täällä. Testejä lisätty ja paranneltu. Käyttöohjeet luotu. Arkkitehtuurikuvauksen parantaminen  | 
 | 3.5   | 1,5  | Uusi kysymystyyppi lisätty (liuoslasku kemiaan), samalle kysymykselle testi lisätty. Yleisiä parannuksia ja bugien korjauksia.  | 
 | 4.5   | 1  | Käyttöliittymästä siirretty sovelluslogiikkaa GeneratorCoreen. Käyttöliittymään (kysymysnäkymä) lisätty uusia nappeja ja toiminnallisuuksia koodikatselmoinnissa annetun palauutteen pohjalta. HiScore järjestää nyt Userit oikeiden vastausten mukaan parhaimmuusjärjestykseen, Userista tehty Comparable<User> rajapinnan toteuttava luokka | 
-| yht    | 35  |   | 
+| 6.5   | 1  | JavaDoc:ia laajennettu, koodia siistitty, refraktorointia tehty. Hiscoreihin lisätty tarkkuusprosentti | 
+| yht    | 36  |   | 
