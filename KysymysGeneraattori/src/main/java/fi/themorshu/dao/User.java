@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fi.themorshu.dao;
 
 import java.util.Objects;
 
 /**
- *
- * @author ilmar
+ * Luokan tarkoituksena on edustaa User oliota, eli käytäjiä. User oliolla on username, password, questions ja right parametrit. User oliot tallennetaan UserDao luokan avulla tietokantaan.
+ * 
  */
 public class User implements Comparable<User> {
     
@@ -18,6 +13,14 @@ public class User implements Comparable<User> {
     private int questions;
     private int right;
 
+    
+    /**
+     * 
+     * @param name Käyttäjän nimi (uniikki)
+     * @param password Käyttäjän salasana
+     * @param questions Käyttäjän vastattujen kysymysten määrä
+     * @param right Käyttäjän oikein vastattujen kysymysten määrä
+     */
     public User(String name, String password, int questions, int right) {
         this.username = name;
         this.password = password;
@@ -82,9 +85,14 @@ public class User implements Comparable<User> {
         return true;
     }
 
+    /**
+     * toString metodi on räätälöity hiscore listausta varten. Ilmaisee myös vastaustarkkuuden prosentteina.
+     * @return Palauttaa käyttäjän oleelliset tiedot hiscorejen kannalta Stringinä
+     */
     @Override
     public String toString() {
-        return this.username + ", " + this.questions + " tehtävää tehty joista " + this.right + " on vastattu oikein.";
+        double percentWithOneDecimal = 1.0 * Math.round(1000.0 * this.right / this.questions) / 10;
+        return this.username + ", " + this.questions + " tehtävää tehty joista " + this.right + " on vastattu oikein. (" + percentWithOneDecimal + " % tarkkuus)";
     }
 
     @Override
