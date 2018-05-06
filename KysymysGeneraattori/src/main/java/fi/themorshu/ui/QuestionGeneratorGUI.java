@@ -1,4 +1,4 @@
-package fi.themorshu.mainUI;
+package fi.themorshu.ui;
 
 import fi.themorshu.dao.Database;
 import fi.themorshu.dao.UsersDao;

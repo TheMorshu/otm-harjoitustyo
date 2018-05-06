@@ -3,4 +3,4 @@
  * Käyttöliittymän koodi
  */
 
-package fi.themorshu.mainUI;
+package fi.themorshu.ui;
