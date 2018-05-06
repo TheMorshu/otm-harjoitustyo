@@ -77,7 +77,8 @@ public class UserTest {
     
     @Test
     public void toStringToimiiOikeinNykyisillaTiedoilla() {
-        assertEquals(user.toString(), user.getUsername()+", "+user.getQuestions()+" tehtävää tehty joista "+user.getRight()+" on vastattu oikein.");
+        double percentWithOneDecimal = 1.0 * Math.round(1000.0 * user.getRight() / user.getQuestions()) / 10;
+        assertEquals(user.toString(), user.getUsername()+", "+user.getQuestions()+" tehtävää tehty joista "+user.getRight()+" on vastattu oikein. (" + percentWithOneDecimal + " % tarkkuus)");
     }
 
     
