@@ -1,6 +1,6 @@
 
 /**
- * Sovelluslogiikkaan liittyv‰t luokat, sek‰ generaattorit
+ * Sovelluslogiikkaan liittyv√§t luokat, sek√§ generaattorit
  */
 
 package fi.themorshu.logic;

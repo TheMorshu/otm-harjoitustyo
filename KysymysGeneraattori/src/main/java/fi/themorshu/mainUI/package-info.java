@@ -1,6 +1,6 @@
 
 /**
- * Käyttöliittymän koodi
+ * KÃ¤yttÃ¶liittymÃ¤n koodi
  */
 
 package fi.themorshu.mainUI;
