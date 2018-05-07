@@ -16,7 +16,10 @@ Kysymysgeneraattori generoi automaattisesti lukiotason kysymyksiä matematiikast
 
 ### Releaset
 
-[Releaset löytyvät täältä](https://github.com/TheMorshu/otm-harjoitustyo/releases)
+[Kaikki releaset](https://github.com/TheMorshu/otm-harjoitustyo/releases)
+[v 1.0 (loppupalautus)](https://github.com/TheMorshu/otm-harjoitustyo/releases/tag/loppupalautus)
+[v 0.1.3 (viikko 6)](https://github.com/TheMorshu/otm-harjoitustyo/releases/tag/viikko6)
+[v 0.1.2 (viikko 5)](https://github.com/TheMorshu/otm-harjoitustyo/releases/tag/viikko5)
 
 ### Ohjelman hakemisto
 
