@@ -245,7 +245,7 @@ public class QuestionGeneratorGUI extends Application {
         deleteAccount.setOnAction((event) -> {
             try {
                 usersDao.delete(userNameLogged);
-                message.setText(userNameLogged + "poistettu!");
+                message.setText(userNameLogged + " poistettu!");
             } catch (SQLException ex) {}
                 window.setTitle("Login");
                 window.setScene(loginScene);
