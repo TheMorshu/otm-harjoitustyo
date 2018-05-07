@@ -23,4 +23,5 @@ kuleen yhteenlasketun ajan (kaikkien sovellusten konfigurointeineen) karkeasti 4
 | 3.5   | 1,5  | Uusi kysymystyyppi lisätty (liuoslasku kemiaan), samalle kysymykselle testi lisätty. Yleisiä parannuksia ja bugien korjauksia.  | 
 | 4.5   | 1  | Käyttöliittymästä siirretty sovelluslogiikkaa GeneratorCoreen. Käyttöliittymään (kysymysnäkymä) lisätty uusia nappeja ja toiminnallisuuksia koodikatselmoinnissa annetun palauutteen pohjalta. HiScore järjestää nyt Userit oikeiden vastausten mukaan parhaimmuusjärjestykseen, Userista tehty Comparable<User> rajapinnan toteuttava luokka | 
 | 6.5   | 1  | JavaDoc:ia laajennettu, koodia siistitty, refraktorointia tehty. Hiscoreihin lisätty tarkkuusprosentti | 
-| yht    | 36  |   | 
+| 7.5   | 1,5  | Testejä lisätty paljon lisää | 
+| yht    | 37,5  |   | 
