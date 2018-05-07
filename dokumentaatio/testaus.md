@@ -38,4 +38,7 @@ Kaikki määrittelydokumentissa[LINK] esitellyt ominaisuudet on testattu manuaal
 
 ## Sovellukseen jääneet laatuongelmat
 
+### Käyttäjän vaihtaminen kirjautumisvalikossa hieman sekavaa
+
+Toiselle käyttäjälle pystyy kirjautumaan alkuvalikossa (ja nykyiseltä ulos), vaikka olisi jo kirjautunut yhdelle. Tämä tapahtuu kirjoittamalla kirjautumistiedot kenttiin ja painamalla "vanha käyttäjä" nappia. Tämä saattaa olla hieman epäselvää, ja voisi olla käyttäjän kannalta suoraviivaisempaa, jos ohjelmassa olisi erikseen vielä uloskirjautumisnappi.
 
