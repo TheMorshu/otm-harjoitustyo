@@ -187,11 +187,25 @@ public class UsersDaoTest {
         }
     }
     
+    @Test
+    public void findOnePalauttaaNullJosEiOlemassa() throws SQLException { //KESKEN 
+        assertEquals(null, this.dao.findOne("doesntExist"));
+    }
     
+    @Test
+    public void verifyLoginPalauttaaNullVaarillaTiedoilla() throws SQLException { //KESKEN 
+        assertEquals(null, this.dao.verifyLogin("eiOle", "eiOle"));
+    }
     
+    @Test
+    public void verifyLoginPalauttaaNullVaarallaSalasanalla() throws SQLException { //KESKEN 
+        assertEquals(null, this.dao.verifyLogin("test", "wrongPass"));
+    }
     
-    
-    
+    @Test
+    public void verifyLoginPalauttaaOikeanOlionOikeillaTiedoilla() throws SQLException { //KESKEN 
+        assertEquals(new User("test", "password", 100, 50), this.dao.verifyLogin("test", "password"));
+    }
 
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:

@@ -94,7 +94,7 @@ public class GeneratorCoreTest {
     
     
     @Test
-    public void sendAnswerToimiiOikeallaVastauksellaMatikka() throws SQLException {
+    public void checkAnswerToimiiOikeallaVastauksellaMatikka() throws SQLException {
         gen.setMode("maths");
         String kysymys = gen.getQuestion();
         String vastaus = gen.getAnswer();
@@ -102,7 +102,7 @@ public class GeneratorCoreTest {
     }
     
     @Test
-    public void sendAnswerToimiiVaarallaVastauksellaMatikka() throws SQLException {
+    public void checkAnswerToimiiVaarallaVastauksellaMatikka() throws SQLException {
         gen.setMode("maths");
         String kysymys = gen.getQuestion();
         String vastaus = gen.getAnswer()+"nakki";
@@ -110,7 +110,7 @@ public class GeneratorCoreTest {
     }
     
     @Test
-    public void sendAnswerToimiiOikeallaVastauksellaKemia() throws SQLException {
+    public void checkAnswerToimiiOikeallaVastauksellaKemia() throws SQLException {
         gen.setMode("chem");
         String kysymys = gen.getQuestion();
         String vastaus = gen.getAnswer();
@@ -118,7 +118,7 @@ public class GeneratorCoreTest {
     }
     
     @Test
-    public void sendAnswerToimiiVaarallaVastauksellaKemia() throws SQLException {
+    public void checkAnswerToimiiVaarallaVastauksellaKemia() throws SQLException {
         gen.setMode("chem");
         String kysymys = gen.getQuestion();
         String vastaus = gen.getAnswer()+"nakki";
@@ -126,7 +126,7 @@ public class GeneratorCoreTest {
     }
     
     @Test
-    public void sendAnswerToimiiOikeallaVastauksellaFysiikka() throws SQLException {
+    public void checkAnswerToimiiOikeallaVastauksellaFysiikka() throws SQLException {
         gen.setMode("phys");
         String kysymys = gen.getQuestion();
         String vastaus = gen.getAnswer();
@@ -134,7 +134,7 @@ public class GeneratorCoreTest {
     }
     
     @Test
-    public void sendAnswerToimiiVaarallaVastauksellaFysiikka() throws SQLException {
+    public void checkAnswerToimiiVaarallaVastauksellaFysiikka() throws SQLException {
         gen.setMode("phys");
         String kysymys = gen.getQuestion();
         String vastaus = gen.getAnswer()+"nakki";
@@ -142,7 +142,7 @@ public class GeneratorCoreTest {
     }
     
     @Test
-    public void sendAnswerToimiiOikeallaVastauksellaAll() throws SQLException {
+    public void checkAnswerToimiiOikeallaVastauksellaAll() throws SQLException {
         gen.setMode("all");
         String kysymys = gen.getQuestion();
         String vastaus = gen.getAnswer();
@@ -150,7 +150,7 @@ public class GeneratorCoreTest {
     }
     
     @Test
-    public void sendAnswerToimiiVaarallaVastauksellaAll() throws SQLException {
+    public void checkAnswerToimiiVaarallaVastauksellaAll() throws SQLException {
         gen.setMode("all");
         String kysymys = gen.getQuestion();
         String vastaus = gen.getAnswer()+"nakki";
@@ -161,6 +161,45 @@ public class GeneratorCoreTest {
     public void getQuestionPalauttaaNullJosModeEpakelpo() throws SQLException {
         gen.setMode("nonValid");
         assertEquals(null, this.gen.getQuestion());
+    }
+    
+    @Test
+    public void sendAnswerToimiiOikeallaVastauksellaAll() throws SQLException {
+        gen.setMode("all");
+        String kysymys = gen.getQuestion();
+        String vastaus = gen.getAnswer();
+        assertEquals("Vastaus oikein! Sait pisteen!", gen.sendAnswer(vastaus));
+    }
+    
+    @Test
+    public void sendAnswerToimiiVaarallaVastauksellaAll() throws SQLException {
+        gen.setMode("all");
+        String kysymys = gen.getQuestion();
+        String vastaus = gen.getAnswer()+"nakki";
+        assertEquals("Väärin! Oikea vastaus oli: " + gen.getAnswer(), gen.sendAnswer(vastaus));
+    }
+    
+    @Test
+    public void getAnsweredToimiiKunUusiKysymysLuotu() throws SQLException {
+        gen.setMode("all");
+        gen.getQuestion();
+        assertEquals(false, gen.getAnswered());
+    }
+    
+    @Test
+    public void getAnsweredToimiiKunKysymykseenVastattu() throws SQLException {
+        gen.setMode("all");
+        gen.getQuestion();
+        gen.sendAnswer("answer");
+        assertEquals(true, gen.getAnswered());
+    }
+    
+    @Test
+    public void setAnsweredToimii() throws SQLException {
+        gen.setMode("all");
+        gen.getQuestion();
+        gen.setAnswered(true);
+        assertEquals(true, gen.getAnswered());
     }
     
 
