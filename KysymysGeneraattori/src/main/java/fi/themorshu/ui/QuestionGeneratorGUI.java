@@ -1,5 +1,4 @@
 package fi.themorshu.ui;
-
 import fi.themorshu.dao.Database;
 import fi.themorshu.dao.UsersDao;
 import fi.themorshu.logic.GeneratorCore;
@@ -16,13 +15,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
 public class QuestionGeneratorGUI extends Application {
     String userNameLogged;
     Boolean neverLogged;
     UsersDao usersDao;
     GeneratorCore gene;
-
     @Override
     public void init() {
         try {
@@ -32,7 +29,6 @@ public class QuestionGeneratorGUI extends Application {
         gene = new GeneratorCore("", usersDao);
         usersDao.setUpTableOnDatabase(); //Luo Users tablen databaseen, jos sitä ei jo ole (välttämätön, jso ohjelam käynnistetään 1. kertaa!)
     }
-
     @Override
     public void start(Stage window) {
         //Teksielementit ja kentät
@@ -44,13 +40,12 @@ public class QuestionGeneratorGUI extends Application {
         Label question = new Label("Kysymys: ");
         TextField answer = new TextField();
         Label newPassText = new Label("Uusi salasana: ");
-        TextField newPassInput = new TextField();
+        PasswordField newPassInput = new PasswordField();
         Label userToBeRemovedText = new Label("Poistettava käyttäjä: ");
         TextField userToBeRemovedLabel = new TextField();
         Label feedbackText = new Label("");
         TextArea usersAndPasswords = new TextArea();
         TextArea hiScoresArea = new TextArea();
-        
         //Napit
         Button newUser = new Button("Uusi käyttäjä");
         Button existingUser = new Button("Vanha käyttäjä");
@@ -74,14 +69,12 @@ public class QuestionGeneratorGUI extends Application {
         Button listUsernamesAndPasswords = new Button("Listaa käyttäjänimet ja salasanat");
         Button nextQuestion = new Button("Seuraava kysymys");
         Button returnToQuestionSelection = new Button("Palaa tehtävävalintaan");
-        
         //Asettelut
         GridPane loginGUI = new GridPane();
         GridPane hiScoreGUI = new GridPane();
         GridPane adminGUI = new GridPane();
         GridPane questionGUI = new GridPane();
         GridPane userSettingsGUI = new GridPane();
-        
         //Asettelujen määrittely
         loginGUI.add(nameText, 0, 0);
         loginGUI.add(nameInput, 1, 0);
@@ -114,14 +107,12 @@ public class QuestionGeneratorGUI extends Application {
         userSettingsGUI.add(newPassText, 2, 1);
         userSettingsGUI.add(newPassInput, 2, 2);
         userSettingsGUI.add(backToLogin3, 0, 3);
-
         //Näkymät
         Scene hiScoreScene = new Scene(hiScoreGUI, 800, 400);
         Scene loginScene = new Scene(loginGUI, 800, 400);
         Scene adminScene = new Scene(adminGUI, 800, 400);
         Scene questionScene = new Scene(questionGUI, 800, 400);
         Scene userSettingsScene = new Scene(userSettingsGUI, 800, 400);
-        
         quit.setOnAction((event) -> {
             window.close();
         });
@@ -231,11 +222,13 @@ public class QuestionGeneratorGUI extends Application {
         deleteAccount.setOnAction((event) -> {
             try {
                 usersDao.delete(userNameLogged);
+                message.setText(userNameLogged + "poistettu!");
             } catch (SQLException ex) {}
                 userNameLogged = "";
                 window.setTitle("Login");
                 window.setScene(loginScene);
                 loginGUI.getChildren().remove(9, 14);
+                neverLogged = true;
         });
         resetScore.setOnAction((event) -> {
             try {
@@ -252,17 +245,21 @@ public class QuestionGeneratorGUI extends Application {
                     window.setTitle("Login");
                     window.setScene(loginScene);
                     loginGUI.getChildren().remove(9, 14);
+                    message.setText("Salasana vaihdettu! Ole hyvä ja uudelleenkirjaudu!");
                 } catch (SQLException ex) {}   
             }
+            neverLogged = true;
         });
-        
         //TÄSTÄ ALASPÄIN NAPPEJA ADMIN KÄYTTÄJÄLLE! (DATABASEN CLEARAAMISEEN, DEBUGGAAMISEEN YMS)
-
         clearDatabase.setOnAction((event) -> {
             message.setText("");
             try {
                 usersDao.clearDatabase();
+                window.setTitle("Login");
                 window.setScene(loginScene);
+                userNameLogged = "";
+                loginGUI.getChildren().remove(9, 14);
+                neverLogged = true;
             } catch (SQLException ex) {
                 window.setScene(loginScene);
             }
@@ -270,10 +267,14 @@ public class QuestionGeneratorGUI extends Application {
         removeUser.setOnAction((event) -> {
             try {
                 usersDao.delete(userToBeRemovedLabel.getText());
+                message.setText(userToBeRemovedLabel.getText() + " poistettu!");
             } catch (SQLException ex) {}
                 userNameLogged = "";
                 window.setTitle("Login");
                 window.setScene(loginScene);
+                userNameLogged = "";
+                loginGUI.getChildren().remove(9, 14);
+                neverLogged = true;
         });
         listUsernamesAndPasswords.setOnAction((event) -> {
             usersAndPasswords.clear();
@@ -292,7 +293,6 @@ public class QuestionGeneratorGUI extends Application {
         window.setScene(loginScene);
         window.show();
     }
-
     public static void main(String[] args) {
         launch(QuestionGeneratorGUI.class);
     }
