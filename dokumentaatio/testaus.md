@@ -11,6 +11,7 @@ Sovellusta on testattu sekä automatisoiduin yksikkö- ja integraatiotestein, se
 
 ### Testauskattavuus
 
+<img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/tests.png" width="800">
 
 ## Järjestelmätestaus
 
