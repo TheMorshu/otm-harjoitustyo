@@ -6,7 +6,7 @@ Sovellusta on testattu sekä automatisoiduin yksikkö- ja integraatiotestein, se
 
 ### sovelluslogiikka
 
-Automatisoitujen testien sovelluslogiikkaa (fi.themorshu.logic) testaavasta osuudesta vastasivat testiluokat BasicValuesTest, ChemGentest, GeneratorCoreTest, MathGentest ja PhysGenTest. Automatisoitujen testien pysyväistallennusta (fi.themorshu.dao) testaavasta osuudesta vastasivat testiluokat DatabaseTest, UserTest ja UsersDaoTest. Kukin testiluokka jäljitteli vastaavannimisen luokan tominnallisuutta mahdollisimman aidosti ja testien tarkoituksena on suorittaa yksikkötestejä erilaisilla simuloiduilla tilanteilla.
+Automatisoitujen testien sovelluslogiikkaa [(fi.themorshu.logic)](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/KysymysGeneraattori/src/main/java/fi/themorshu/logic) testaavasta osuudesta vastasivat testiluokat BasicValuesTest, ChemGentest, GeneratorCoreTest, MathGentest ja PhysGenTest. Automatisoitujen testien pysyväistallennusta [(fi.themorshu.dao)](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/KysymysGeneraattori/src/main/java/fi/themorshu/dao) testaavasta osuudesta vastasivat testiluokat DatabaseTest, UserTest ja UsersDaoTest. Kukin testiluokka jäljitteli vastaavannimisen luokan tominnallisuutta mahdollisimman aidosti ja testien tarkoituksena on suorittaa yksikkötestejä erilaisilla simuloiduilla tilanteilla.
 
 Pysyväistallennuksen testaamisessa käytetään erilillistä tietokantaa testien tekemiseen (test.db)
 
@@ -27,13 +27,13 @@ Järjestelmätestaus onsuoritettu täysin manuaalisesti.
 
 ### Asennus ja kanfigurointi
 
-Sovellus on ladattu ja sitä käytetään käyttöohjeen[LINK] mukaisesti Windows 10 ja Debian 9 (Linux) ympäristöissä.
+Sovellus on ladattu ja sitä käytetään [käyttöohjeen](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/dokumentaatio/kayttoohje.md) mukaisesti Windows 10 ja Debian 9 (Linux) ympäristöissä.
 
 Sovellusta on testattu käyttää ensimmäistä kertaa (jolloin sovellus luo ja alustaa uuden tyhjän tietokannan), sekä uudestaan tietokannalla, jossa on jo tietoa) ja sovellus on toiminut normaalisti näissä tilanteissa, sekä tiedon tallentaminen ja lukeminen on onnistunut.
 
 ### Toiminnallisuudet
 
-Kaikki määrittelydokumentissa[LINK] esitellyt ominaisuudet on testattu manuaalisesti läpi, eikä ongelmia ole havaittu. Mahdollisia virheellisiä syöttäjä on kokeiltu, eikä ohjelman toiminnallisuus häiriintynyt.
+Kaikki [määrittelydokumentissa](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/dokumentaatio/maarittelydokumentti.md) esitellyt ominaisuudet on testattu manuaalisesti läpi, eikä ongelmia ole havaittu. Mahdollisia virheellisiä syöttäjä on kokeiltu, eikä ohjelman toiminnallisuus häiriintynyt.
 
 
 ## Sovellukseen jääneet laatuongelmat
