@@ -16,7 +16,7 @@ UsersDao-luokan toiminnallisuus testattiin JUnitin avulla käyttämällä erilil
 
 ### Testauskattavuus
 
-Käyttöliittymän muodostava koodi poislukien automatisoitujen testien rivikattavuus oli 98% ja haarautumakattavuus 89%.
+Käyttöliittymän muodostava koodi poislukien automatisoitujen testien rivikattavuus oli 97% ja haarautumakattavuus 85%.
 
 <img src="https://raw.githubusercontent.com/TheMorshu/otm-harjoitustyo/master/dokumentaatio/tests.png" width="800">
 
