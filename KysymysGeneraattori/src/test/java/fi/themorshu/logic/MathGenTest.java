@@ -1,10 +1,5 @@
 package fi.themorshu.logic;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 import fi.themorshu.logic.MathGen;
 import java.util.Random;
@@ -20,6 +15,7 @@ import static org.junit.Assert.*;
 public class MathGenTest {
     
     MathGen gen;
+    BasicValues values;
     
     public MathGenTest() {
     }
@@ -28,6 +24,7 @@ public class MathGenTest {
     @Before
     public void setUp() {
         this.gen = new MathGen(new Random());
+        this.values = new BasicValues();
     }
     
     @After
@@ -40,7 +37,13 @@ public class MathGenTest {
     }
     
     @Test
-    public void rootsOfFunctionToimii() { //jokin vialla välillä
+    public void answerPalauttaaMerkkijononJosOnKysymys() {
+        this.gen.question();
+        assertEquals(this.gen.answer().length() > 0, true);
+    }
+    
+    @Test
+    public void rootsOfFunctionToimii() {
         String kysymys = this.gen.rootsOfFunction();
         if (this.gen.getRoot1() <= this.gen.getRoot2()) {
             assertEquals(this.gen.answer(), "" + this.gen.getRoot1() + " ja " + this.gen.getRoot2());
@@ -53,6 +56,12 @@ public class MathGenTest {
     @Test
     public void questionPalauttaaMerkkijonon() {
         assertEquals(this.gen.question().length() > 0, true);
+    }
+    
+    @Test
+    public void interestOfLoanToimii() {
+        String kysymys = this.gen.interestOfLoan();
+        assertEquals(this.gen.answer(), "" + String.format("%.2f", (this.values.round(this.gen.getFinalLoan(), 2))) + "e");
     }
     
 }

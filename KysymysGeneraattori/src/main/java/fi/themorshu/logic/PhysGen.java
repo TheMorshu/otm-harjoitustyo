@@ -17,6 +17,7 @@ public class PhysGen implements Gen {
     String question;
     Random random;
     BasicValues values;
+    double originalSpeed;
 
     /**
      * Konstruktorissa otetaan vastaan Random olio, sekä luodaan käyttään BasicValues olio, josta voidaan
@@ -53,13 +54,19 @@ public class PhysGen implements Gen {
         int jarrutus = this.random.nextInt(910) + 100;
         double kitkakerroin = 1.0 * kitka / 100;
         double jarrutusmatka = 1.0 * jarrutus / 10;
-        double nopeus = sqrt(2 * kitkakerroin * jarrutusmatka * this.values.droppingAccerlation());
-        this.answer = "" + String.format("%.2f", (this.values.round(nopeus, 2)));
-        System.out.println("Vastaus: " + this.answer);
+        originalSpeed = sqrt(2 * kitkakerroin * jarrutusmatka * this.values.droppingAccerlation());
+        this.answer = "" + String.format("%.2f", (this.values.round(originalSpeed, 2)));
         return "Laske auton alkunopeus ennen jarrutusta, kun kitkakerroin on " + kitkakerroin + " ja auton jarrutusmatka " + jarrutusmatka + " m. "
                 + "\nAnna vastaus m/s 2 desimaalin tarkkuudella (esim kirjoita 32.22)";
     }
     
+    /**
+     * Tämä metodi on vain testejä varten (speedOfvehicle testaus)
+     * @return Palauttaa alkuperäisen nopeuden pyöristämättömänä
+     */
+    public double getOriginalSpeed() {
+        return this.originalSpeed;
+    }
 
     
 }

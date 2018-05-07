@@ -21,6 +21,7 @@ public class MathGen implements Gen {
     int root2;
     int multipier;
     BasicValues values;
+    double finalLoan;
 
     /**
      * Konstruktorissa otetaan vastaan Random olio, sekä luodaan käyttään BasicValues olio, josta voidaan
@@ -119,9 +120,18 @@ public class MathGen implements Gen {
         double interestPercent = 1.0 * (this.random.nextInt(10) + 1); //1-10% korko
         double amountOfWeeks = 1.0 * (this.random.nextInt(8) + 3); //3-10 viikkoa
         double interestMultipier = 1.0 + interestPercent / 100;
-        double finalLoan = 1.0 * originalLoan * Math.pow(1.0 * interestMultipier, 1.0 * amountOfWeeks);
+        finalLoan = 1.0 * originalLoan * Math.pow(1.0 * interestMultipier, 1.0 * amountOfWeeks);
         this.answer = "" + String.format("%.2f", (this.values.round(finalLoan, 2))) + "e";
         return "Kalle lainaa penalta " + originalLoan + " euroa ja he sopivat viikkokoroksi " + interestPercent + " %. \nKuinka paljon Kalle on Penalle velkaa " + amountOfWeeks + " viikon päästä? Anna vastaus sentin tarkkuudella esim 265,44e";
+    }
+    
+    
+    /**
+     * Tämä metodi on olemassa vain testejä varten, ei muuta käyttötarkoitusta. Testataan interestOfLoanToimivuutta
+     * @return palauttaa interestOfLoan():in lopullisen velkasumman ilman pyöristystä doublena.
+     */
+    public double getFinalLoan() {
+        return finalLoan;
     }
     
     

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package fi.themorshu.logic;
 
 import org.junit.After;
@@ -18,28 +14,48 @@ import static org.junit.Assert.*;
  */
 public class BasicValuesTest {
     
+    BasicValues values;
+    
     public BasicValuesTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
     }
     
     @Before
     public void setUp() {
+        this.values = new BasicValues();
     }
     
     @After
     public void tearDown() {
     }
+    
+    @Test
+    public void droppingAccerlationPalauttaaOikeanArvon() {
+        assertEquals(9.81 == this.values.droppingAccerlation(), true);
+    }
+    
+    @Test
+    public void molarGasConstantOikea() {
+        assertEquals(8.31451 == this.values.molarGasConstantJMolKelvin(), true);
+    }
+    
+    @Test
+    public void roundToimiiOikein() {
+        assertEquals(4.333 == this.values.round(4.3333, 3), true);
+    }
+    
+    @Test
+    public void roundToimiiOikeinKaksi() {
+        assertEquals(4.35 == this.values.round(4.3500, 3), true);
+    }
+    
+    @Test
+    public void roundToimiiOikeinKolme() {
+        assertEquals(4.36 == this.values.round(4.3555, 2), true);
+    }
+    
+    @Test
+    public void roundToimiiOikeinNelja() {
+        assertEquals(4.311 == this.values.round(4.3111, 3), true);
+    }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }

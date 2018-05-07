@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package fi.themorshu.logic;
 
 import fi.themorshu.logic.PhysGen;
@@ -21,6 +17,7 @@ import static org.junit.Assert.*;
 public class PhysGenTest {
     
     PhysGen gen;
+    BasicValues values;
     
     public PhysGenTest() {
     }
@@ -29,17 +26,34 @@ public class PhysGenTest {
     @Before
     public void setUp() {
         this.gen = new PhysGen(new Random());
+        this.values = new BasicValues();
     }
     
     @After
     public void tearDown() {
     }
     
+    @Test
+    public void questionPalauttaaMerkkijonon() {
+        assertEquals(this.gen.question().length() > 0, true); //KESKEN!
+    }
+    
+    @Test
+    public void answerOnNullJosEiKysymystä() {
+        assertEquals(this.gen.answer(), null);
+    }
+    
+    @Test
+    public void answerPalauttaaMerkkijononJosOnKysymys() {
+        this.gen.question();
+        assertEquals(this.gen.answer().length() > 0, true);
+    }
+    
+    @Test
+    public void speedOfVehicleToimii() {
+        String kysymys = this.gen.speedOfVehicle();
+        assertEquals(this.gen.answer(), "" + String.format("%.2f", (this.values.round(this.gen.getOriginalSpeed(), 2))));
+    }
+    
 
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }

@@ -1,10 +1,5 @@
 package fi.themorshu.logic;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 import fi.themorshu.dao.Database;
 import fi.themorshu.dao.UsersDao;
@@ -207,13 +202,4 @@ public class GeneratorCoreTest {
     public void tearDown() throws SQLException {
         database.closeConnection();
     }
-    
-    
-    
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }
