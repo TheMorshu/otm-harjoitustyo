@@ -135,15 +135,18 @@ public class UsersDao implements Dao<User> {
      * metodi tulostaa kaikkien tietokannassa olevien käyttäjien nimet. Metodia käytetään lähinnä debuggaukseen, eikä sillä ole juuri merkitystä tavalliselle käyttäjälle.
      * @throws SQLException Heittää SQL virheen, jos SQL yhteydessö on jotain vikaa
      */
-    public void printUsers() throws SQLException {
+    public String printUsers() throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("SELECT name FROM Users");
         ResultSet resultSet = statement.executeQuery();
+        String returningString = "";
         while (resultSet.next()) {
             String name = resultSet.getString("name");
             System.out.println(name);
+            returningString += name + "\n";
         }
         statement.close();
         this.database.closeConnection();
+        return returningString;
     }
     
     /**

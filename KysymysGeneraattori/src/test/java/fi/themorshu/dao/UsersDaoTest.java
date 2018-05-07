@@ -12,6 +12,9 @@ import fi.themorshu.dao.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -206,10 +209,79 @@ public class UsersDaoTest {
     public void verifyLoginPalauttaaOikeanOlionOikeillaTiedoilla() throws SQLException { //KESKEN 
         assertEquals(new User("test", "password", 100, 50), this.dao.verifyLogin("test", "password"));
     }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    
+    @Test
+    public void saveEiKelpuutaTyhjiatietoja() throws SQLException { //KESKEN 
+        assertEquals(null, this.dao.save(new User("","",0,0)));
+    }
+    
+    @Test
+    public void saveEiKelpuutaTyhjiatietojaJaPalauttaaOikeanFeedbackin() throws SQLException { //KESKEN 
+        this.dao.save(new User("","",0,0));
+        assertEquals("Kirjoita kunnolliset tiedot!", this.dao.getSaveFeedBack());
+    }
+    
+    @Test
+    public void clearDatabaseTyhjentaaDatabasen() throws SQLException { //KESKEN 
+        this.dao.clearDatabase();
+        assertEquals(this.dao.findAll().isEmpty(), true);
+    }
+    
+    @Test
+    public void findAllPalauttaaAlustuksessaLisatynOlion() throws SQLException { //KESKEN 
+        ArrayList list = (ArrayList) this.dao.findAll();
+        for (int i = 0; i<list.size(); i++) {
+            if (i >= 1) {
+                assertEquals(true, false);
+            }
+        }
+        assertEquals(this.dao.findAll().get(0).equals(new User("test", "password", 100, 50)), true);
+    }
+    
+    @Test
+    public void findAllPalauttaaUseammanOlion() throws SQLException { //KESKEN 
+        this.dao.save(new User("asd", "asd", 0, 0));
+        this.dao.save(new User("asda", "asd", 0, 0));
+        this.dao.save(new User("asdaa", "asd", 0, 0));
+        ArrayList list = (ArrayList) this.dao.findAll();
+        assertEquals(this.dao.findAll().size() == 4, true);
+    }
+    
+    
+    @Test
+    public void printAllUsersScoresToimiiYhdellaKayttajalla() throws SQLException { //KESKEN 
+        ArrayList list = (ArrayList) this.dao.findAll();
+        String string = "#1: " + list.get(0).toString() + "\n";
+        assertEquals(string, this.dao.printAllUsersScores());
+    }
+    
+    @Test
+    public void printAllUsersScoresToimiiUseammallaKayttajalla() throws SQLException { //KESKEN 
+        this.dao.save(new User("asd", "asd", 10, 3));
+        this.dao.save(new User("asda", "asd", 10, 4));
+        this.dao.save(new User("asdaa", "asd", 10, 5));
+        ArrayList list = (ArrayList) this.dao.findAll();
+        Collections.sort(list);
+        String string = "";
+        for (int i = 0; i < list.size(); i++) {
+            User user = (User) list.get(i);
+            string += "#" + (i + 1) + ": " + user.toString() + "\n";
+        }
+        assertEquals(string, this.dao.printAllUsersScores());
+    }
+    
+    @Test
+    public void printusersToimiiYhdellaKayttajalla() throws SQLException { //KESKEN 
+        assertEquals("test" + "\n", this.dao.printUsers());
+    }
+    
+    @Test
+    public void printusersToimiUseallaKayttajalla() throws SQLException { //KESKEN 
+        this.dao.save(new User("asd", "asd", 10, 3));
+        this.dao.save(new User("asda", "asd", 10, 4));
+        this.dao.save(new User("asdaa", "asd", 10, 5));
+        assertEquals("test" + "\n" + "asd" + "\n" + "asda" + "\n" + "asdaa" + "\n", this.dao.printUsers());
+    }
+    
+    
 }

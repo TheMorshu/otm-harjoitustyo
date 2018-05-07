@@ -80,6 +80,43 @@ public class UserTest {
         double percentWithOneDecimal = 1.0 * Math.round(1000.0 * user.getRight() / user.getQuestions()) / 10;
         assertEquals(user.toString(), user.getUsername()+", "+user.getQuestions()+" tehtävää tehty joista "+user.getRight()+" on vastattu oikein. (" + percentWithOneDecimal + " % tarkkuus)");
     }
+    
+    @Test
+    public void compareToToimiiOikeinPain() {
+        User userOne = new User("asd", "asd", 100, 50);
+        User userTwo = new User("asd", "asd", 100, 51);
+        assertEquals(true, userOne.compareTo(userTwo) >= 0);
+    }
+    
+    public void equalsToimiiSamoillaOlioilla() {
+        User userOne = new User("asd", "asd", 100, 50);
+        User userTwo = new User("asd", "asd", 100, 50);
+        assertEquals(true, userOne.equals(userTwo));
+    }
+    
+    public void equalsToimiiSamannimisillaOlioilla() {
+        User userOne = new User("asd", "asd", 100, 50);
+        User userTwo = new User("asd", "asdasdasd", 0, 0);
+        assertEquals(true, userOne.equals(userTwo));
+    }
+    
+    public void equalsToimiiEriOlioilla() {
+        User userOne = new User("asd", "asd", 100, 50);
+        User userTwo = new User("asdy", "asd", 100, 50);
+        assertEquals(false, userOne.equals(userTwo));
+    }
+    
+    public void equalsToimiiEriObjekteilla() {
+        User userOne = new User("asd", "asd", 100, 50);
+        String userTwo = "eiUser";
+        assertEquals(false, userOne.equals(userTwo));
+    }
+    
+    public void equalsToimiiNullilla() {
+        User userOne = new User("asd", "asd", 100, 50);
+        String userTwo = null;
+        assertEquals(false, userOne.equals(userTwo));
+    }
 
     
 }
