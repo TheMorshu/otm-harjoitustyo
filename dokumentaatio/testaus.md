@@ -25,7 +25,7 @@ Käyttöliittymän muodostava koodi poislukien automatisoitujen testien rivikatt
 
 Järjestelmätestaus onsuoritettu täysin manuaalisesti.
 
-### Asennus ja kanfigurointi
+### Asennus ja konfigurointi
 
 Sovellus on ladattu ja sitä käytetään [käyttöohjeen](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/dokumentaatio/kayttoohje.md) mukaisesti Windows 10 ja Debian 9 (Linux) ympäristöissä.
 
