@@ -18,8 +18,7 @@ import javafx.stage.Stage;
 
 public class QuestionGeneratorGUI extends Application {
     
-    String userNameLogged;
-    Boolean neverLogged;
+    Boolean questionButtonsNotYetAdded;
     UsersDao usersDao;
     GeneratorCore gene;
     GridPane loginGUI;
@@ -29,15 +28,16 @@ public class QuestionGeneratorGUI extends Application {
         try {
             usersDao = new UsersDao(new Database("jdbc:sqlite:users.db"));
         } catch (SQLException ex) {}
-        userNameLogged = "";
         gene = new GeneratorCore("", usersDao);
         usersDao.setUpTableOnDatabase(); //Luo Users tablen databaseen, jos sitä ei jo ole (välttämätön, jso ohjelam käynnistetään 1. kertaa!)
     }
     
     public void resetBackOriginalLogin() {
-        userNameLogged = "";
-        loginGUI.getChildren().remove(9, 15);
-        neverLogged = true;
+        gene.setUserName("");
+        try {
+            loginGUI.getChildren().remove(9, 15);
+        } catch (IndexOutOfBoundsException e) {}
+        questionButtonsNotYetAdded = true;
     }
     
     @Override
@@ -163,17 +163,17 @@ public class QuestionGeneratorGUI extends Application {
                 if (loggedUser == null) {
                     message.setText("Käyttäjänimi ja salasana eivät täsmää!");
                 } else {
-                    userNameLogged = loggedUser.getUsername();
-                    if (neverLogged == null || neverLogged == true) {
+                    gene.setUserName(loggedUser.getUsername());
+                    if (questionButtonsNotYetAdded == null || questionButtonsNotYetAdded == true) {
                         loginGUI.add(maths, 0, 5);
                         loginGUI.add(phys, 1, 5);
                         loginGUI.add(chem, 2, 5);
                         loginGUI.add(all, 3, 5);
                         loginGUI.add(userSettings, 3, 0);
                         loginGUI.add(logout, 3, 1);
-                        neverLogged = false;
+                        questionButtonsNotYetAdded = false;
                     }
-                    window.setTitle("Kirjautuneena sisään: " + userNameLogged);
+                    window.setTitle("Kirjautuneena sisään: " + gene.getUserName());
                 }
             }
         });
@@ -193,25 +193,21 @@ public class QuestionGeneratorGUI extends Application {
             window.close();
         });
         maths.setOnAction((event) -> {
-            gene.setUserName(userNameLogged);
             gene.setMode("maths");
             question.setText(gene.getQuestion());
             window.setScene(questionScene);
         });
         phys.setOnAction((event) -> {
-            gene.setUserName(userNameLogged);
             gene.setMode("phys");
             question.setText(gene.getQuestion());
             window.setScene(questionScene);
         });
         chem.setOnAction((event) -> {
-            gene.setUserName(userNameLogged);
             gene.setMode("chem");
             question.setText(gene.getQuestion());
             window.setScene(questionScene);
         });
         all.setOnAction((event) -> {
-            gene.setUserName(userNameLogged);
             gene.setMode("all");
             question.setText(gene.getQuestion());
             window.setScene(questionScene);
@@ -244,8 +240,8 @@ public class QuestionGeneratorGUI extends Application {
         });
         deleteAccount.setOnAction((event) -> {
             try {
-                usersDao.delete(userNameLogged);
-                message.setText(userNameLogged + " poistettu!");
+                usersDao.delete(gene.getUserName());
+                message.setText(gene.getUserName() + " poistettu!");
             } catch (SQLException ex) {}
                 window.setTitle("Login");
                 window.setScene(loginScene);
@@ -253,7 +249,7 @@ public class QuestionGeneratorGUI extends Application {
         });
         resetScore.setOnAction((event) -> {
             try {
-                usersDao.resetScore(userNameLogged);
+                usersDao.resetScore(gene.getUserName());
                 window.setScene(loginScene);
                 message.setText("Käyttäjän tulokset nollattu!");
             } catch (SQLException ex) {}
@@ -261,7 +257,7 @@ public class QuestionGeneratorGUI extends Application {
         changePassword.setOnAction((event) -> {
             if (!newPassInput.getText().equals("")) {
                 try {
-                    usersDao.changePassword(userNameLogged, newPassInput.getText());
+                    usersDao.changePassword(gene.getUserName(), newPassInput.getText());
                     resetBackOriginalLogin();
                     window.setTitle("Login");
                     window.setScene(loginScene);
