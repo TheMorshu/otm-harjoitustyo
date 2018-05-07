@@ -29,7 +29,7 @@ Järjestelmätestaus onsuoritettu täysin manuaalisesti.
 
 Sovellus on ladattu ja sitä käytetään [käyttöohjeen](https://github.com/TheMorshu/otm-harjoitustyo/tree/master/dokumentaatio/kayttoohje.md) mukaisesti Windows 10 ja Debian 9 (Linux) ympäristöissä.
 
-Sovellusta on testattu käyttää ensimmäistä kertaa (jolloin sovellus luo ja alustaa uuden tyhjän tietokannan), sekä uudestaan tietokannalla, jossa on jo tietoa) ja sovellus on toiminut normaalisti näissä tilanteissa, sekä tiedon tallentaminen ja lukeminen on onnistunut.
+Sovellusta on testattu käyttää ensimmäistä kertaa (jolloin sovellus luo ja alustaa uuden tyhjän tietokannan), sekä uudestaan tietokannalla, jossa on jo tietoa. Sovellus on toiminut normaalisti näissä tilanteissa. Tiedon tallentaminen ja lukeminen on onnistunut ongelmitta.
 
 ### Toiminnallisuudet
 
