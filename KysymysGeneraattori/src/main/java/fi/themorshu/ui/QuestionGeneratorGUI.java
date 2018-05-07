@@ -20,6 +20,8 @@ public class QuestionGeneratorGUI extends Application {
     Boolean neverLogged;
     UsersDao usersDao;
     GeneratorCore gene;
+    GridPane loginGUI;
+    
     @Override
     public void init() {
         try {
@@ -29,6 +31,13 @@ public class QuestionGeneratorGUI extends Application {
         gene = new GeneratorCore("", usersDao);
         usersDao.setUpTableOnDatabase(); //Luo Users tablen databaseen, jos sitä ei jo ole (välttämätön, jso ohjelam käynnistetään 1. kertaa!)
     }
+    
+    public void resetBackOriginalLogin() {
+        userNameLogged = "";
+        loginGUI.getChildren().remove(9, 15);
+        neverLogged = true;
+    }
+    
     @Override
     public void start(Stage window) {
         //Teksielementit ja kentät
@@ -46,6 +55,7 @@ public class QuestionGeneratorGUI extends Application {
         Label feedbackText = new Label("");
         TextArea usersAndPasswords = new TextArea();
         TextArea hiScoresArea = new TextArea();
+        
         //Napit
         Button newUser = new Button("Uusi käyttäjä");
         Button existingUser = new Button("Vanha käyttäjä");
@@ -69,12 +79,15 @@ public class QuestionGeneratorGUI extends Application {
         Button listUsernamesAndPasswords = new Button("Listaa käyttäjänimet ja salasanat");
         Button nextQuestion = new Button("Seuraava kysymys");
         Button returnToQuestionSelection = new Button("Palaa tehtävävalintaan");
+        Button logout = new Button("Kirjaudu ulos!");
+        
         //Asettelut
-        GridPane loginGUI = new GridPane();
+        loginGUI = new GridPane();
         GridPane hiScoreGUI = new GridPane();
         GridPane adminGUI = new GridPane();
         GridPane questionGUI = new GridPane();
         GridPane userSettingsGUI = new GridPane();
+        
         //Asettelujen määrittely
         loginGUI.add(nameText, 0, 0);
         loginGUI.add(nameInput, 1, 0);
@@ -107,12 +120,14 @@ public class QuestionGeneratorGUI extends Application {
         userSettingsGUI.add(newPassText, 2, 1);
         userSettingsGUI.add(newPassInput, 2, 2);
         userSettingsGUI.add(backToLogin3, 0, 3);
+        
         //Näkymät
         Scene hiScoreScene = new Scene(hiScoreGUI, 800, 400);
         Scene loginScene = new Scene(loginGUI, 800, 400);
         Scene adminScene = new Scene(adminGUI, 800, 400);
         Scene questionScene = new Scene(questionGUI, 800, 400);
         Scene userSettingsScene = new Scene(userSettingsGUI, 800, 400);
+        
         quit.setOnAction((event) -> {
             window.close();
         });
@@ -153,6 +168,7 @@ public class QuestionGeneratorGUI extends Application {
                         loginGUI.add(chem, 2, 5);
                         loginGUI.add(all, 3, 5);
                         loginGUI.add(userSettings, 3, 0);
+                        loginGUI.add(logout, 3, 1);
                         neverLogged = false;
                     }
                     window.setTitle("Kirjautuneena sisään: " + userNameLogged);
@@ -215,6 +231,11 @@ public class QuestionGeneratorGUI extends Application {
             message.setText("");
             window.setScene(loginScene);
         });
+        logout.setOnAction((event) -> {
+            window.setTitle("Login");
+            resetBackOriginalLogin();
+        });
+        
         //USER SETTINGS BUTTONS
         userSettings.setOnAction((event) -> {
             window.setScene(userSettingsScene);
@@ -224,11 +245,9 @@ public class QuestionGeneratorGUI extends Application {
                 usersDao.delete(userNameLogged);
                 message.setText(userNameLogged + "poistettu!");
             } catch (SQLException ex) {}
-                userNameLogged = "";
                 window.setTitle("Login");
                 window.setScene(loginScene);
-                loginGUI.getChildren().remove(9, 14);
-                neverLogged = true;
+                resetBackOriginalLogin();
         });
         resetScore.setOnAction((event) -> {
             try {
@@ -241,15 +260,14 @@ public class QuestionGeneratorGUI extends Application {
             if (!newPassInput.getText().equals("")) {
                 try {
                     usersDao.changePassword(userNameLogged, newPassInput.getText());
-                    userNameLogged = "";
+                    resetBackOriginalLogin();
                     window.setTitle("Login");
                     window.setScene(loginScene);
-                    loginGUI.getChildren().remove(9, 14);
                     message.setText("Salasana vaihdettu! Ole hyvä ja uudelleenkirjaudu!");
                 } catch (SQLException ex) {}   
             }
-            neverLogged = true;
         });
+        
         //TÄSTÄ ALASPÄIN NAPPEJA ADMIN KÄYTTÄJÄLLE! (DATABASEN CLEARAAMISEEN, DEBUGGAAMISEEN YMS)
         clearDatabase.setOnAction((event) -> {
             message.setText("");
@@ -257,9 +275,7 @@ public class QuestionGeneratorGUI extends Application {
                 usersDao.clearDatabase();
                 window.setTitle("Login");
                 window.setScene(loginScene);
-                userNameLogged = "";
-                loginGUI.getChildren().remove(9, 14);
-                neverLogged = true;
+                resetBackOriginalLogin();
             } catch (SQLException ex) {
                 window.setScene(loginScene);
             }
@@ -269,12 +285,9 @@ public class QuestionGeneratorGUI extends Application {
                 usersDao.delete(userToBeRemovedLabel.getText());
                 message.setText(userToBeRemovedLabel.getText() + " poistettu!");
             } catch (SQLException ex) {}
-                userNameLogged = "";
                 window.setTitle("Login");
                 window.setScene(loginScene);
-                userNameLogged = "";
-                loginGUI.getChildren().remove(9, 14);
-                neverLogged = true;
+                resetBackOriginalLogin();
         });
         listUsernamesAndPasswords.setOnAction((event) -> {
             usersAndPasswords.clear();
@@ -293,6 +306,7 @@ public class QuestionGeneratorGUI extends Application {
         window.setScene(loginScene);
         window.show();
     }
+    
     public static void main(String[] args) {
         launch(QuestionGeneratorGUI.class);
     }
